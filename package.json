@@ -1,0 +1,43 @@
+{
+  "name": "react-crypto-app",
+  "version": "1.0.0",
+  "description": "React cryptocurrency app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app",
+    "build": "webpack --config ./--mode production",
+    "dev": "webpack --open --mode development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deVolpe/react-crypto-app.git"
+  },
+  "keywords": [
+    "react",
+    "crypto",
+    "webpack4",
+    "express",
+    "mongodb"
+  ],
+  "author": "Vladimir Chekel (vladimir.chekel@yandex.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/deVolpe/react-crypto-app/issues"
+  },
+  "homepage": "https://github.com/deVolpe/react-crypto-app#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.2.1"
+  }
+}
