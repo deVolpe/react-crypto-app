@@ -8,7 +8,7 @@ const prodWebpackConfig = merge(baseWebpackConfig, {
   plugins: [
     new HtmlWebpackPlugin({
       hash: false,
-      template: `${baseWebpackConfig.externals.paths.src}index.html`,
+      template: `${baseWebpackConfig.externals.paths.public}index.html`,
       filename: './index.html'
     }),
   ]

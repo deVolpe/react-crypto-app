@@ -4,8 +4,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const PATHS = {
   src: path.join(__dirname, '../../src/'),
-  dist: path.join(__dirname, '../../public/'),
+  dist: path.join(__dirname, '../../dist/'),
   config: path.join(__dirname, '../../config/'),
+  public: path.join(__dirname, '../../public/'),
   assets: 'assets/'
 };
 
@@ -27,13 +28,6 @@ module.exports = {
         test: /\.(jsx?)$/,
         loader: 'babel-loader',
         exclude: '/node_modules/'
-      },
-      {
-        test: /\.(png|jpe?g|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]'
-        }
       },
       {
         test: /\.(s?css)$/,
@@ -63,6 +57,24 @@ module.exports = {
           }
         ]
       },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          outputPath: `${PATHS.assets}img`,
+          publicPath: '/'
+        }
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          outputPath: `${PATHS.assets}fonts`,
+          publicPath: '/'
+        }
+      }
     ]
   },
   plugins: [
@@ -70,8 +82,7 @@ module.exports = {
       filename: `${PATHS.assets}css/[name].css`,
     }),
     new CopyWebpackPlugin([
-      {from: `${PATHS.src}img`, to: `${PATHS.assets}img`},
-      {from: `${PATHS.src}static`, to: ``},
+      {from: `${PATHS.public}${PATHS.assets}icons`, to: `${PATHS.assets}icons/[name].[ext]`},
     ])
   ],
 };
