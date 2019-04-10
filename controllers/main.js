@@ -1,9 +1,7 @@
 module.exports = {
-  getAllNews(req,res) {
+  getAllCryptoCards(req, res) {
     res.status(200).json({
-      New: true
+      Cards: true
     });
   },
-
-  
 }

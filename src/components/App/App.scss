@@ -1,5 +1,5 @@
-.main {
-  color: red;
-  font-size: 15px;
-  text-transform: uppercase;
+@import 'styleVariables';
+
+.app {
+  display: grid;  
 }

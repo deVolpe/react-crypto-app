@@ -15,10 +15,11 @@ module.exports = {
     paths: PATHS
   },
   entry: {
+    polyfill: 'babel-polyfill',
     app: PATHS.src
   },
   output: {
-    filename: `${PATHS.assets}js/[name].js`,
+    filename: `${PATHS.assets}js/[name].bundle.js`,
     path: PATHS.dist,
     publicPath: '/'
   },
@@ -28,6 +29,24 @@ module.exports = {
         test: /\.(jsx?)$/,
         loader: 'babel-loader',
         exclude: '/node_modules/'
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          outputPath: `${PATHS.assets}img`,
+          publicPath: '/'
+        }
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          outputPath: `${PATHS.assets}fonts`,
+          publicPath: '/'
+        }
       },
       {
         test: /\.(s?css)$/,
@@ -56,33 +75,18 @@ module.exports = {
             }
           }
         ]
-      },
-      {
-        test: /\.(png|jpe?g|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]',
-          outputPath: `${PATHS.assets}img`,
-          publicPath: '/'
-        }
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]',
-          outputPath: `${PATHS.assets}fonts`,
-          publicPath: '/'
-        }
       }
     ]
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: `${PATHS.assets}css/[name].css`,
+      filename: `${PATHS.assets}css/[name].bundle.css`
     }),
     new CopyWebpackPlugin([
-      {from: `${PATHS.public}${PATHS.assets}icons`, to: `${PATHS.assets}icons/[name].[ext]`},
+      {
+        from: `${PATHS.public}${PATHS.assets}icons`,
+        to: `${PATHS.assets}icons/[name].[ext]`
+      }
     ])
-  ],
+  ]
 };
