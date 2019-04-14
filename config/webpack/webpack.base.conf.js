@@ -56,7 +56,8 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              sourceMap: true
+              modules: true,
+              sourceMap: true,
             }
           },
           {
@@ -71,6 +72,7 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
+              modules: true,
               sourceMap: true
             }
           }
