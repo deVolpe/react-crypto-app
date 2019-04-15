@@ -72,7 +72,8 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               modules: true,
-              sourceMap: true
+              sourceMap: true,
+              url: true
             }
           }
         ]

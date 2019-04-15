@@ -6,7 +6,7 @@ const baseWebpackConfig = require('./webpack.base.conf');
 const prodWebpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
   output: {
-    filename: `${baseWebpackConfig.externals.paths.assets}js/[name].[hash].bundle.js`,
+    filename: `${baseWebpackConfig.externals.paths.assets}js/[name].[hash:base64:5].bundle.js`,
     path: baseWebpackConfig.externals.paths.dist,
     publicPath: '/'
   },
