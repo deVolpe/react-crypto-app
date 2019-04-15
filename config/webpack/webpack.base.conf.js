@@ -18,11 +18,6 @@ module.exports = {
     polyfill: 'babel-polyfill',
     app: PATHS.src
   },
-  output: {
-    filename: `${PATHS.assets}js/[name].bundle.js`,
-    path: PATHS.dist,
-    publicPath: '/'
-  },
   module: {
     rules: [
       {
@@ -34,7 +29,7 @@ module.exports = {
         test: /\.(png|jpe?g|gif|svg)$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[ext]',
+          name: '[name].[hash].[ext]',
           outputPath: `${PATHS.assets}img`,
           publicPath: '/'
         }
@@ -43,7 +38,7 @@ module.exports = {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[ext]',
+          name: '[name].[hash].[ext]',
           outputPath: `${PATHS.assets}fonts`,
           publicPath: '/'
         }
@@ -82,7 +77,7 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: `${PATHS.assets}css/[name].bundle.css`
+      filename: `${PATHS.assets}css/[name].[hash].bundle.css`
     }),
     new CopyWebpackPlugin([
       {
