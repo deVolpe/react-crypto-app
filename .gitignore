@@ -10,3 +10,5 @@ node_modules
 test
 dist
 
+# Db config
+config/database/keys.js
