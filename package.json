@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server",
-    "start:dev": "nodemon server",
+    "server": "nodemon server",
     "build": "webpack --config ./config/webpack/webpack.prod.conf.js --progress",
     "dev": "webpack-dev-server --config ./config/webpack/webpack.dev.conf.js --open"
   },
@@ -33,12 +33,29 @@
   "dependencies": {
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "bootstrap": "^4.3.1",
+    "chart.js": "^2.8.0",
+    "classnames": "^2.2.6",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
+    "gravatar": "^1.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.11",
+    "moment": "^2.24.0",
+    "mongoose": "^5.5.0",
+    "morgan": "^1.9.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
+    "react-chartjs-2": "^2.7.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.1",
-    "redux": "^4.0.1"
+    "react-router-dom": "^5.0.0",
+    "redux": "^4.0.1",
+    "validator": "^10.11.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",

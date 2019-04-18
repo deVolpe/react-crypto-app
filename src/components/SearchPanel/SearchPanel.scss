@@ -1,0 +1,17 @@
+.search-panel {
+  border-left: 1px solid #d2e4ed;
+  grid-area: 2 / 3 / span 1 / -1;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+@media (max-width: 479px) {
+  .search-panel {
+    grid-row-start: 3;
+    grid-column-start: 1;
+    margin-top: -16px;
+  }
+}

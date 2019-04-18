@@ -18,6 +18,11 @@ module.exports = {
     polyfill: 'babel-polyfill',
     app: PATHS.src
   },
+  output: {
+    filename: `${PATHS.assets}js/[name].bundle.js`,
+    path: PATHS.dist,
+    publicPath: '/'
+  },
   module: {
     rules: [
       {
@@ -29,7 +34,7 @@ module.exports = {
         test: /\.(png|jpe?g|gif|svg)$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[hash:base64:5].[ext]',
+          name: '[name].[ext]',
           outputPath: `${PATHS.assets}img`,
           publicPath: '/'
         }
@@ -38,7 +43,7 @@ module.exports = {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[hash:base64:5].[ext]',
+          name: '[name].[ext]',
           outputPath: `${PATHS.assets}fonts`,
           publicPath: '/'
         }
@@ -52,11 +57,6 @@ module.exports = {
             loader: 'css-loader',
             options: {
               sourceMap: true,
-              url: true,
-              import: true,
-              modules: true,
-              importLoaders: 2,
-              localIdentName: '[name]_[local]__[hash:base64:5]'
             }
           },
           {
@@ -71,9 +71,7 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              modules: true,
               sourceMap: true,
-              url: true
             }
           }
         ]
@@ -82,7 +80,7 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: `${PATHS.assets}css/[name].[hash:base64:5].bundle.css`
+      filename: `${PATHS.assets}css/[name].bundle.css`
     }),
     new CopyWebpackPlugin([
       {
