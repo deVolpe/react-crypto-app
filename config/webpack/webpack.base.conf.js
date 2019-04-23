@@ -23,11 +23,19 @@ module.exports = {
     path: PATHS.dist,
     publicPath: '/'
   },
+  resolve: {
+    extensions: ['.js', '.json', '.jsx'],
+    modules: ['node_modules']
+  },
+  resolveLoader: {
+    extensions: ['.js', '.json'],
+    modules: ['node_modules']
+  },
   module: {
     rules: [
       {
         test: /\.(jsx?)$/,
-        loader: 'babel-loader',
+        use: [{ loader: 'babel-loader' }, { loader: 'eslint-loader' }],
         exclude: '/node_modules/'
       },
       {
@@ -56,7 +64,7 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              sourceMap: true,
+              sourceMap: true
             }
           },
           {
@@ -71,7 +79,7 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: true,
+              sourceMap: true
             }
           }
         ]

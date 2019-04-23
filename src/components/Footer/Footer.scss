@@ -1,0 +1,18 @@
+.footer {
+  grid-area: 5 / 1 / -1 / -1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background: #c59dd8;
+  .logo {
+    display: flex;
+    margin: 5px;
+    font-size: 40px;
+  }
+  @media (max-width: 479px) {
+    .logo {
+      font-size: 25px;
+      padding: 0;
+    }
+  }
+}

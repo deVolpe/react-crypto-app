@@ -3,7 +3,7 @@ import data from './data';
 
 class CryptoCompareService {
   /**
-   * Returns all coins that are available with full info about them
+   * Returns all coins that are available with full info about them.
    * See details: 'https://min-api.cryptocompare.com/documentation?key=Other&cat=allCoinsWithContentEndpoint'
    *
    * @return {object}
@@ -16,7 +16,7 @@ class CryptoCompareService {
 
   /**
    * Returns all exchanges that are available
-   * See details: 'https://min-api.cryptocompare.com/documentation?key=Other&cat=allExchangesStaticInfoEndpoint'
+   * See details: 'https://min-api.cryptocompare.com/documentation?key=Other&cat=allExchangesStaticInfoEndpoint'.
    *
    * @return {array}
    *
@@ -27,7 +27,7 @@ class CryptoCompareService {
   };
 
   /**
-   * Returns the fiat currencies of passed coin
+   * Returns the fiat currencies of passed coin.
    * See details: 'https://min-api.cryptocompare.com/documentation?key=Price&cat=SingleSymbolPriceEndpoint'
    *
    * @param {string} coin
@@ -39,13 +39,9 @@ class CryptoCompareService {
     return res;
   };
 
-  getAllCoinsPrices = async (coin, market) => {
-    const res = await api(`pricemulti?fsyms=${coin}&tsyms=${data.currencies.join(',')}&e=${market}`);
-    return res;
-  };
-
   /**
-   * Return full info about passed coin on passed market
+   * Return full info about passed coin on passed market.
+   * See details: 'https://min-api.cryptocompare.com/data/generateAvg?fsym=BTC&tsym=USD&e=Kraken'
    * 
    * @param {string} coin
    * @param {string} market
@@ -53,12 +49,12 @@ class CryptoCompareService {
    * @return {object}
    */
   getCoinMarketInfo = async (coin, market) => {
-    const res = await api(`generateAvg?fsym=${coin}&tsym=USD&e=${market}`);
+    const res = await api(`pricemulti?fsyms=${coin}&tsyms=USD&e=${market}`);
     if (res.data['Response']) {
       throw new Error(res.data['Message']);
     }
     return res.data['Data'];
   };
-}
+};
 
 export default new CryptoCompareService();

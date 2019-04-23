@@ -1,15 +1,4 @@
 .logo {
   text-transform: uppercase;
-  display: flex;
   padding: 10px 60px;
-  align-items: center;
-  font-size: 50px;
-}
-
-@media (max-width: 479px) {
-  .logo {
-    align-items: flex-start;
-    font-size: 45px;
-    padding: 0;
-  }
 }

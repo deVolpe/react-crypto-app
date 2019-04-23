@@ -5,13 +5,30 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  .search-input {
+    padding: 0.6rem 1.6rem;
+    border: 1px solid #d2e4ed;
+    border-radius: 0.4rem;
+    line-height: 10px;
+    outline: none;
+    &::placeholder {
+      opacity: 0.4;
+    }
+    &:focus {
+      box-shadow: 1px 1px 3px #c59dd8;
+    }
+  }
 }
-
 
 @media (max-width: 479px) {
   .search-panel {
     grid-row-start: 3;
     grid-column-start: 1;
-    margin-top: -16px;
+    margin: {
+      top: -16px;
+      bottom: 16px;
+    }
+    border: none;
+    border-top: 1px solid #d2e4ed;
   }
 }

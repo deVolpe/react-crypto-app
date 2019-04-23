@@ -19,7 +19,6 @@ mongoose
 app.use(passport.initialize());
 require('./middleware/passport')(passport);
 
-app.use(require('morgan')('dev'));
 app.use(bodyParse.urlencoded({ extended: true }));
 app.use(bodyParse.json());
 app.use(require('cors')());

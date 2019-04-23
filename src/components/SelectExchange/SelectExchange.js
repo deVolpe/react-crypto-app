@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import styles from'./SelectExchange.scss';
+import './SelectExchange.scss';
 import service from '../../services/cryptocompare-service';
 
 export default class SelectExchange extends Component {

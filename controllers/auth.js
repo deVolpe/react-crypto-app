@@ -3,19 +3,28 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/User');
 const keys = require('../config/database/keys');
+const validateRegisterInput = require('../validators/register');
+const validateLoginInput = require('../validators/login');
 
 module.exports = {
   async login(req, res) {
+    const { errors, isValid } = validateLoginInput(req.body);
+
+    if (!isValid) {
+      res.status(401).json({ errors });
+    }
+
     const user = await User.findOne({
       email: req.body.email
     });
 
     if (user) {
-      const isValidPassword = bcrypt.compareSync(
+      const isComparePassword = await bcrypt.compare(
         req.body.password,
         user.password
       );
-      if (isValidPassword) {
+
+      if (isComparePassword) {
         const token = jwt.sign(
           {
             email: user.email,
@@ -40,6 +49,12 @@ module.exports = {
   },
 
   async register(req, res) {
+    const { errors, isValid } = validateRegisterInput(req.body);
+
+    if (!isValid) {
+      res.status(401).json({ errors });
+    }
+
     const candidate = await User.findOne({
       email: req.body.email
     });
@@ -49,16 +64,18 @@ module.exports = {
         message: 'Email already exists'
       });
     } else {
-      const salt = bcrypt.genSaltSync(10);
+      const salt = await bcrypt.genSalt(10);
 
       const user = new User({
         email: req.body.email,
-        password: bcrypt.hashSync(req.body.password, salt)
+        password: await bcrypt.hash(req.body.password, salt)
       });
       try {
         await user.save();
         res.status(201).json(user);
-      } catch (e) {}
+      } catch (e) {
+        console.error(e);
+      }
     }
   }
 };

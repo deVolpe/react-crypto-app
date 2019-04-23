@@ -8,9 +8,8 @@
 .links-list {
   display: flex;
   justify-content: space-around;
-  align-items: stretch;
   flex: 1;
-  align-self: stretch;
+  font-size: 15px;
   @for $i from 1 through 3 {
     .link-#{$i} {
       display: inline-block;
@@ -44,5 +43,8 @@
 @media (max-width: 479px) {
   .navbar {
     grid-column: 1 / -1;
+  }
+  .links-list {
+    font-size: 12px;
   }
 }

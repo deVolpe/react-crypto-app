@@ -151,14 +151,14 @@ a:active {
   text-decoration: none;
 }
 
-.app {
+.App {
   max-width: 2400px;
   min-width: 320px;
   min-height: 100vh;
   display: grid;
   grid: {
-    template-columns: 1fr 1fr 1fr 1fr;
-    template-rows: 2fr 1fr 1fr 5fr 1fr;
+    template-columns: repeat(4, 1fr);
+    template-rows: minmax(100px, 2fr) 5fr minmax(50px, 1fr);
     row-gap: 16px;
   }
   background: #d1ceced9;

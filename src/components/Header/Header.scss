@@ -3,4 +3,16 @@
   display: flex;
   justify-content: center;
   background-color: #c59dd8;
+  .logo {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+    font-size: 50px;
+  }
+  @media (max-width: 479px) {
+    .logo {
+      font-size: 30px;
+      padding: 0;
+    }
+  }
 }

@@ -1,14 +1,17 @@
 import React from 'react';
-import Logo from '../Logo';
+import PropTypes from 'prop-types';
 
 import './Header.scss';
 
-const Header = () => {
+const Header = ({ children }) => {
   return (
     <header className="header">
-      <Logo />
+      <div className="logo">{children}</div>
     </header>
-  );
+    );
 };
+
+Header.defaultProps = { children: null };
+Header.propTypes = { children: PropTypes.element };
 
 export default Header;
