@@ -11,7 +11,7 @@ module.exports = {
     const { errors, isValid } = validateLoginInput(req.body);
 
     if (!isValid) {
-      res.status(401).json({ errors });
+      res.status(401).json(errors);
     }
 
     const user = await User.findOne({
@@ -19,12 +19,12 @@ module.exports = {
     });
 
     if (user) {
-      const isComparePassword = await bcrypt.compare(
+      const isMatchPassword = await bcrypt.compare(
         req.body.password,
         user.password
       );
 
-      if (isComparePassword) {
+      if (isMatchPassword) {
         const token = jwt.sign(
           {
             email: user.email,
@@ -37,14 +37,12 @@ module.exports = {
           token: `Bearer ${token}`
         });
       } else {
-        res.status(404).json({
-          message: 'Password is not correct'
-        });
+        errors.password = 'Password is incorrect';
+        res.status(404).json(errors);
       }
     } else {
-      res.status(404).json({
-        message: 'User not found'
-      });
+      errors.email = 'User not found';
+      res.status(404).json(errors);
     }
   },
 
@@ -52,7 +50,7 @@ module.exports = {
     const { errors, isValid } = validateRegisterInput(req.body);
 
     if (!isValid) {
-      res.status(401).json({ errors });
+      res.status(401).json(errors);
     }
 
     const candidate = await User.findOne({
@@ -60,22 +58,27 @@ module.exports = {
     });
 
     if (candidate) {
-      res.status(409).json({
-        message: 'Email already exists'
-      });
+      errors.email = 'Email already exists';
+      res.status(409).json(errors);
     } else {
-      const salt = await bcrypt.genSalt(10);
-
-      const user = new User({
-        email: req.body.email,
-        password: await bcrypt.hash(req.body.password, salt)
-      });
-      try {
-        await user.save();
-        res.status(201).json(user);
-      } catch (e) {
-        console.error(e);
-      }
+      bcrypt
+        .genSalt(10)
+        .then(salt => {
+          bcrypt
+            .hash(req.body.password, salt)
+            .then(hash => {
+              const user = new User({
+                email: req.body.email,
+                password: hash
+              });
+              user
+                .save()
+                .then(res => res.status(201).json(user))
+                .catch(console.error);
+            })
+            .catch(console.error);
+        })
+        .catch(console.error);
     }
   }
 };
