@@ -1,8 +1,9 @@
 import axios from 'axios';
 
-import { GET_ERROR } from './types';
+import setAuthToken from '../../utils/setAuthToken';
+import { GET_ERROR, SET_CURRENT_USER } from './types';
 
-export const register = (user, history) => {
+export const register = (user, history) => dispatch => {
   axios
     .post('/auth/register', user)
     .then(() => history.push('/login'))
@@ -14,13 +15,14 @@ export const register = (user, history) => {
     });
 };
 
-export const login = user => {
+export const login = user => dispatch => {
   axios
     .post('/auth/login', user)
     .then(res => {
       const { token } = res.data;
       localStorage.setItem('jwtToken', token);
-      setUser();
+      setAuthToken(token);
+      dispatch(setCurrentUser(decode));
     })
     .catch(err => {
       dispatch({
@@ -30,4 +32,7 @@ export const login = user => {
     });
 };
 
-export const setUser = decode => ({ type: 'SET_USER', payload: decode });
+export const setCurrentUser = decode => ({
+  type: SET_CURRENT_USER,
+  payload: decode
+});
