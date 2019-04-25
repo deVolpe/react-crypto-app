@@ -11,7 +11,7 @@ export const getAllCryptoCards = () => dispatch => {
   axios
     .get('/main/cards')
     .then(res => {
-      dispatch(getAllCards(res.body));
+      dispatch(getAllCards(res.data));
     })
     .catch(err => {
       dispatch({
@@ -23,9 +23,9 @@ export const getAllCryptoCards = () => dispatch => {
 
 export const createCard = card => dispatch => {
   axios
-    .post('/main/cards/', card)
+    .post('/api/main/cards/', card)
     .then(res => {
-      dispatch(setNewCard(res.body));
+      dispatch(setNewCard(res.data));
     })
     .catch(err => {
       dispatch({ type: GET_ERROR, payload: err.response.data });
@@ -34,9 +34,9 @@ export const createCard = card => dispatch => {
 
 export const deleteCard = card => dispatch => {
   axios
-    .delete('/main/cards/', card)
+    .delete('/api/main/cards/', card)
     .then(res => {
-      dispatch(deleteSelectedCard(res.body.id));
+      dispatch(deleteSelectedCard(res.data.id));
     })
     .catch(err => {
       dispatch({ type: GET_ERROR, payload: err.response.data });

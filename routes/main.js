@@ -5,8 +5,8 @@ const controller = require('../controllers/main');
 
 const router = express.Router();
 
-router.get('/cards', passport.authenticate('jwt', { session: false }), controller.getAllCryptoCards);
+router.get('/cards', passport.authenticate('jwt', { session: false }), controller.getAll);
 router.post('/cards/', passport.authenticate('jwt', { session: false }), controller.create);
-router.delete('/cards/:id', passport.authenticate('jwt', { session: false }), controller.delete);
+router.delete('/cards/', passport.authenticate('jwt', { session: false }), controller.delete);
 
 module.exports = router;

@@ -13,8 +13,19 @@ module.exports = {
       .catch(console.error);
   },
 
-  // Checking for double
-  create(req, res) {
+  async create(req, res) {
+    const candidate = await Crypto.findOne({
+      name: req.body.coin,
+      exchange: req.body.exchange,
+      user: req.user.id
+    });
+    
+    if (candidate) {
+      res.status(409).json({
+        error: 'Card has already created'
+      });
+    }
+    
     const card = new Crypto({
       name: req.body.coin,
       exchange: req.body.exchange,

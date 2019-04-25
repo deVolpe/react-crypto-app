@@ -23,9 +23,9 @@ app.use(bodyParse.urlencoded({ extended: true }));
 app.use(bodyParse.json());
 app.use(require('cors')());
 
-app.use('/auth', authRoutes);
-app.use('/main', mainRoutes);
-app.use('/news', newsRoutes);
-app.use('/top', topRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/main', mainRoutes);
+app.use('/api/news', newsRoutes);
+app.use('/api/top', topRoutes);
 
 module.exports = app;

@@ -4,17 +4,21 @@ import PropTypes from 'prop-types';
 import SelectExchange from '../SelectExchange';
 import SelectCoin from '../SelectCoin';
 
-const SelectForm = ({ addNewCrypto }) => {
-  const [coin, setCoin] = useState('');
+const SelectForm = ({ errors, createCard }) => {
+  const [name, setName] = useState('');
   const [market, setMarket] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
-    addNewCrypto(coin, market);
+    const coin = {
+      name,
+      market
+    };
+    createCard(coin);
   };
 
-  const handleCoinChange = coin => {
-    setCoin(coin);
+  const handleCoinChange = name => {
+    setName(name);
   };
 
   const handleMarketChange = market => {
@@ -32,12 +36,8 @@ const SelectForm = ({ addNewCrypto }) => {
   );
 };
 
-SelectForm.defaultPops = {
-  addNewCrypto: () => {}
-};
-
 SelectForm.propTypes = {
-  addNewCrypto: PropTypes.func.isRequired
+  createCard: PropTypes.func.isRequired
 };
 
 export default SelectForm;

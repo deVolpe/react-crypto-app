@@ -1,5 +1,5 @@
 import React from 'react';
-import SelectForm from '../SelectForm';
+import SelectForm from '../SelectForm/SelectFormContainer';
 import Label from '../Label';
 
 const SideBar = () => {

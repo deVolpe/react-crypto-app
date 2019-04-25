@@ -1,3 +1,8 @@
 .Main {
-  grid-area: 3 / 1 / span 2 / -1;
+  grid-area: 2 / 1 / span 1 / -1;
+  display: grid;
+  grid: {
+    template-columns: repeat(5, 1fr);
+    template-rows: minmax(10px, 1fr) minmax(10px, 1fr) 5fr;
+  }
 }
