@@ -25,8 +25,12 @@ const SelectForm = ({ errors, createCard }) => {
     setMarket(market);
   };
 
+
+  const errorMessage = errors ? <div className="error-block">{errors}</div> : null;
+
   return (
     <div className="select">
+      {errorMessage}
       <form className="select-form" onSubmit={handleSubmit}>
         <SelectCoin handleCoinChange={handleCoinChange} />
         <SelectExchange handleMarketChange={handleMarketChange} />

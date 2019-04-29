@@ -41,7 +41,7 @@ class CryptoCompareService {
 
   /**
    * Return full info about passed coin on passed market.
-   * See details: 'https://min-api.cryptocompare.com/data/generateAvg?fsym=BTC&tsym=USD&e=Kraken'
+   * See details: 'https://min-api.cryptocompare.com/documentation?key=Price&cat=multipleSymbolsFullPriceEndpoint'
    * 
    * @param {string} coin
    * @param {string} market

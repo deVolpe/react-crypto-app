@@ -3,6 +3,6 @@
   display: grid;
   grid: {
     template-columns: repeat(5, 1fr);
-    template-rows: minmax(10px, 1fr) minmax(10px, 1fr) 5fr;
+    template-rows: minmax(10px, 50px) minmax(10px, 50px) auto ;
   }
 }

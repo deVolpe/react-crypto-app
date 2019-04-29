@@ -1,4 +1,14 @@
 .logo {
-  text-transform: uppercase;
-  padding: 10px 60px;
+  display: flex;
+  justify-content: flex-start;
+  font-size: 50px;
+  margin: 5px;
+  padding: 0 0.3em;
+}
+
+@media (max-width: 479px) {
+  .logo {
+    font-size: 30px;
+    padding: 0;
+  }
 }

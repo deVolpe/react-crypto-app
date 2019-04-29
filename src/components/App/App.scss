@@ -141,6 +141,18 @@ table {
   border-spacing: 0;
 }
 
+button {
+  outline: 0;
+  border: 0;
+}
+
+header,
+footer {
+  display: flex;
+  align-items: center;
+  background-color: $style_background;
+}
+
 a,
 a:visited,
 a:active {
@@ -148,7 +160,11 @@ a:active {
   justify-content: center;
   align-content: center;
   color: #ffffff;
-  text-decoration: none;
+  text: {
+    decoration: none;
+    transform: uppercase;
+  }
+  cursor: pointer;
 }
 
 .App {
@@ -158,8 +174,9 @@ a:active {
   display: grid;
   grid: {
     template-columns: repeat(4, 1fr);
-    template-rows: minmax(100px, 2fr) 5fr minmax(50px, 1fr);
+    template-rows: minmax(50px, 120px) auto minmax(50px, 100px);
     row-gap: 16px;
   }
-  background: #d1ceced9;
+  background: $background;
 }
+

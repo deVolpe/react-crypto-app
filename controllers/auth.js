@@ -3,8 +3,8 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/User');
 const keys = require('../config/database/keys');
-const validateRegisterInput = require('../validators/register');
-const validateLoginInput = require('../validators/login');
+const validateRegisterInput = require('./validators/register');
+const validateLoginInput = require('./validators/login');
 
 module.exports = {
   async login(req, res) {

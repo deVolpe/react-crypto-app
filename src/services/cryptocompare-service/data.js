@@ -1,7 +1,7 @@
 export default {
   currencies: {
-    usd: 'USD',
-    eur: 'EUR',
-    byn: 'BYN'
+    USD: 'USD',
+    EUR: 'EUR',
+    BYN: 'BYN'
   }
 }

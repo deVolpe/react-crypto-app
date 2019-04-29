@@ -23,7 +23,7 @@ export default class SelectCoin extends Component {
   }
 
   handleChange = event => {
-    const coin = event.target.value
+    const coin = event.target.value;
     this.props.handleCoinChange(coin);
   };
 
@@ -40,7 +40,11 @@ export default class SelectCoin extends Component {
     return (
       <div className="select-form__coin">
         <label htmlFor="select-field">Coin</label>
-        <select name="select-market" id="select-field" onChange={this.handleChange}>
+        <select
+          name="select-market"
+          id="select-field"
+          onChange={this.handleChange}
+        >
           {options}
         </select>
       </div>

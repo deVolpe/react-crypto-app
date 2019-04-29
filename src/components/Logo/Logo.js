@@ -6,7 +6,7 @@ import './Logo.scss';
 const Logo = () => {
   return (
     <h1 className="logo">
-      <a href="#">CryptoApp</a> 
+      <Link to="/main/cards">CryptoApp</Link>
     </h1>
   );
 };

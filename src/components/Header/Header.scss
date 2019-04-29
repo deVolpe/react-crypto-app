@@ -1,18 +1,30 @@
+%position {
+  position: absolute;
+  right: 1em;
+}
+
 .header {
   grid-area: 1 / 1 / span 1 / -1;
-  display: flex;
-  justify-content: center;
-  background-color: #c59dd8;
-  .logo {
-    display: flex;
-    align-items: center;
-    margin: 5px;
-    font-size: 50px;
+  position: relative;
+
+  .logout,
+  .auth {
+    @extend %position;
   }
+
+  .auth {
+    display: flex;
+    &-link {
+      margin: 0.3rem;
+    }
+  }
+
   @media (max-width: 479px) {
-    .logo {
-      font-size: 30px;
-      padding: 0;
+    .logout,
+    .auth {
+      display: block;
+      font-size: 15px;
+      right: 0.3em;
     }
   }
 }
