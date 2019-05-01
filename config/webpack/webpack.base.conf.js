@@ -1,5 +1,4 @@
 const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const PATHS = {
@@ -18,11 +17,6 @@ module.exports = {
     polyfill: 'babel-polyfill',
     app: PATHS.src
   },
-  output: {
-    filename: `${PATHS.assets}js/[name].bundle.js`,
-    path: PATHS.dist,
-    publicPath: '/'
-  },
   resolve: {
     extensions: ['.js', '.json', '.jsx'],
     modules: ['node_modules']
@@ -35,14 +29,17 @@ module.exports = {
     rules: [
       {
         test: /\.(jsx?)$/,
-        use: [{ loader: 'babel-loader' }, { loader: 'eslint-loader' }],
+        use: [
+          { loader: 'babel-loader' },
+          { loader: 'eslint-loader', options: { emitError: true } }
+        ],
         exclude: '/node_modules/'
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[ext]',
+          name: '[name].[hash:base64:5].[ext]',
           outputPath: `${PATHS.assets}img`,
           publicPath: '/'
         }
@@ -51,7 +48,7 @@ module.exports = {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[ext]',
+          name: '[name].[hash:base64:5].[ext]',
           outputPath: `${PATHS.assets}fonts`,
           publicPath: '/'
         }
@@ -59,12 +56,15 @@ module.exports = {
       {
         test: /\.(s?css)$/,
         use: [
-          'style-loader',
-          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
-              sourceMap: true
+              sourceMap: true,
+              url: true,
+              import: true,
+              modules: true,
+              importLoaders: 2,
+              localIdentName: '[name]_[local]__[hash:base64:5]'
             }
           },
           {
@@ -79,7 +79,8 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: true
+              sourceMap: true,
+              url: true
             }
           }
         ]
@@ -87,9 +88,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: `${PATHS.assets}css/[name].bundle.css`
-    }),
     new CopyWebpackPlugin([
       {
         from: `${PATHS.public}${PATHS.assets}icons`,
