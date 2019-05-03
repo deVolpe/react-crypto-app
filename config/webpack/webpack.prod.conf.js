@@ -61,8 +61,10 @@ const prodConfig = {
     }),
     new HtmlWebpackPlugin({
       hash: false,
+      inject: 'body',
       template: `${baseConfig.externals.paths.public}index.html`,
-      filename: './index.html'
+      filename: './index.html',
+      showErrors: false
     })
   ]
 };

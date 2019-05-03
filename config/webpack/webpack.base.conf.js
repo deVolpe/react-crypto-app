@@ -14,7 +14,7 @@ module.exports = {
     paths: PATHS
   },
   entry: {
-    polyfill: 'babel-polyfill',
+    polyfill: '@babel/polyfill',
     app: PATHS.src
   },
   resolve: {
