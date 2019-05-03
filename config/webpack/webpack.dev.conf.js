@@ -7,7 +7,7 @@ const baseConfig = require('./webpack.base.conf');
 const devConfig = {
   mode: 'development',
   output: {
-    filename: `${baseConfig.externals.paths.assets}js/bundle.js`,
+    filename: `${baseConfig.externals.paths.assets}js/[name].bundle.js`,
     path: baseConfig.externals.paths.dist,
     publicPath: '/'
   },
@@ -33,7 +33,8 @@ const devConfig = {
       hash: false,
       template: `${baseConfig.externals.paths.public}index.html`,
       showErrors: false,
-      inject: false
+      inject: 'body',
+      filename: './index.html'
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
