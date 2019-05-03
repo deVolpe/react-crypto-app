@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const express = require('express');
 const path = require('path');
 const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
 
 const app = require('./app');
 const config = require('./config/webpack/webpack.dev.conf');
@@ -18,14 +19,20 @@ if (env === 'development') {
       publicPath: config.output.publicPath
     })
   );
+  app.use(
+    webpackHotMiddleware(compiler, {
+      reload: true
+    })
+  );
 }
 
 if (env === 'production') {
   app.use(require('morgan')('combined'));
   app.use(express.static(path.join(__dirname, 'dist')));
   app.get('*', (req, res) => {
-    res.sendFile('index.html', path.join(__dirname, 'dist'));
+    res.sendFile('index.html', { root: path.join(__dirname, 'dist') });
   });
 }
+
 
 app.listen(port, () => console.log(`Server has been started ${port}`));
