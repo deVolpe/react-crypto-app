@@ -1,13 +1,16 @@
 import React from 'react';
 
-const Label = () => {
+import styles from './Label.scss';
 
+const Label = () => {
   return (
-    <section className="label">
-      <h1 className="label__bold">Add crypto</h1>
-      <span className="label__normal">you want to track</span>
-    </section>
-  )
+    <div className={styles.label}>
+      <h1 className={styles.labelBold}>
+        Add crypto
+        <span className={styles.labelNormal}>you want to track</span>
+      </h1>
+    </div>
+  );
 };
 
 export default Label;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import './SelectExchange.scss';
+import styles from './SelectExchange.scss';
 import service from '../../services/cryptocompare-service';
 
 export default class SelectExchange extends Component {
@@ -42,7 +42,12 @@ export default class SelectExchange extends Component {
     return (
       <div className="select-form__market">
         <label htmlFor="select-field">Market</label>
-        <select name="select-market" id="select-field" onChange={this.handleChange}>
+        <select
+          name="select-market"
+          id="select-field"
+          onChange={this.handleChange}
+          value="Binance"
+        >
           {options}
         </select>
       </div>

@@ -1,14 +1,26 @@
 import React from 'react';
-
-import './NavBar.scss';
+import { Link } from 'react-router-dom';
+import styles from './NavBar.scss';
 
 const NavBar = () => {
   return (
-    <div className="navbar">
-      <ul className="links-list">
-        <li className="link"><a href="#" className="link-1">Main</a></li>
-        <li className="link"><a href="#" className="link-2">Top</a></li>
-        <li className="link"><a href="#" className="link-3">News</a></li>
+    <div className={styles.NavBar}>
+      <ul className={styles.list}>
+        <li>
+          <Link to="/main/cards" className={styles.link}>
+            Main
+          </Link>
+        </li>
+        <li>
+          <Link to="" className={styles.link}>
+            Top
+          </Link>
+        </li>
+        <li>
+          <Link to="" className={styles.link}>
+            News
+          </Link>
+        </li>
       </ul>
     </div>
   );

@@ -2,20 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import './Header.scss';
+import styles from './Header.scss';
 
 const Header = ({ children, auth }) => {
   const links = auth.isAuthenticate ? (
-    <Link className="logout">logout</Link>
+    <Link className={styles.logout}>logout</Link>
   ) : (
-      <div className="auth">
-        <Link className="auth-link" to="auth/login">signin</Link>
-        <Link className="auth-link" to="auth/register">signup</Link>
+      <div className={styles.auth}>
+        <Link className={styles.link} to="/auth/login">signin</Link>
+        <Link className={styles.link} to="/auth/register">signup</Link>
       </div>
     );
 
   return (
-    <header className="header">
+    <header className={styles.Header}>
       {children}
       {links}
     </header>

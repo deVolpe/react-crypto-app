@@ -1,4 +1,10 @@
-.side-bar {
-  grid-area: 3 / 1 / span 1 / span 1;
-  background: red;
+.SideBar {
+  grid-area: 2 / 1 / span 2 / span 1;
+  background: rgb(175, 169, 180);
+}
+
+@media (max-width: 479px) {
+  .SideBar {
+    grid-row: 3 / span 1;
+  }
 }

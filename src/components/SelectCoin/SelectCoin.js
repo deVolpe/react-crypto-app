@@ -44,6 +44,7 @@ export default class SelectCoin extends Component {
           name="select-market"
           id="select-field"
           onChange={this.handleChange}
+          value="BTC"
         >
           {options}
         </select>

@@ -1,0 +1,20 @@
+@mixin fontStyle($size, $weight: 400) {
+  font: {
+    weight: $weight;
+    size: $size;
+  }
+}
+
+.label {
+  text-align: center;
+  line-height: 30px;
+}
+
+.labelBold {
+  @include fontStyle(30px, 600);
+}
+
+.labelNormal {
+  display: block;
+  @include fontStyle(15px);
+}

@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Footer.scss';
+import styles from './Footer.scss';
 
 const Footer = ({ children }) => {
-
-
   return (
-    <footer className="footer">
-      <div className="logo">{children}</div>
+    <footer className={styles.Footer}>
+      <div className={styles.logo}>{children}</div>
     </footer>
   );
 };

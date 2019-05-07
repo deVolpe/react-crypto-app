@@ -1,6 +1,13 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-export default class Login extends Component {
+import styles from './Login.scss';
+export default class Login extends PureComponent {
+  static propTypes = {
+    signIn: PropTypes.func.isRequired,
+    errors: PropTypes.object
+  };
   state = {
     email: '',
     password: '',
@@ -9,7 +16,7 @@ export default class Login extends Component {
 
   handleInputChange = e => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.defaultValue
     });
   };
 
@@ -27,26 +34,32 @@ export default class Login extends Component {
   }
 
   render() {
-    const { email, password } = this.state;
+    const { email, password, errors } = this.state;
 
     return (
-      <form className="login-form" onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit}>
         <input
           type="email"
           placeholder="email"
           onChange={this.handleInputChange}
-          value={email}
+          defaultValue={email}
+          className={styles.input}
         />
         <input
           type="password"
-          name="password"
           placeholder="password"
           onChange={this.handleInputChange}
-          value={password}
+          defaultValue={password}
+          className={styles.input}
         />
-        <button type="submit">Login</button>
-        <figcaption className="message">
-          Not registered? <a href="#">Create an account</a>
+        <button type="submit" className={styles.button}>
+          Login
+        </button>
+        <figcaption className={styles.message}>
+          Not registered?{' '}
+          <Link to="/auth/register" className={styles.link}>
+            Create an account
+          </Link>
         </figcaption>
       </form>
     );

@@ -1,10 +1,25 @@
-.login-page {
+.auth {
   grid-area: 2 / 1 / span 1 / -1;
   margin: auto;
+  padding: 30px;
 }
 
 .form {
-  background: red;
+  background: #fff;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   max-width: 360px;
+  margin: 0 auto;
+  padding: 45px;
+  text-align: center;
+  z-index: 1;
+}
+
+@media (max-width: 479px) {
+  .auth {
+    padding: 10px;
+  }
+
+  .form {
+    margin: 50px auto 50px;
+  }
 }

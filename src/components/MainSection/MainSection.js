@@ -1,27 +1,55 @@
-import React, { Component } from 'react';
+import React, { Component, lazy, Suspense } from 'react';
 import PropTypes from 'prop-types';
+import { Route } from 'react-router-dom';
 
 import Navbar from '../NavBar';
 import SearchPanel from '../SearchPanel';
 import SideBar from '../SideBar';
 
-import './MainSection.scss';
+import styles from './MainSection.scss';
+
+const CardsList = lazy(() => import('../../containers/CardsListContainer'));
 
 export default class MainSection extends Component {
   static defaultProps = {
-    children: null
+    match: null,
+    history: null
   };
   static propTypes = {
-    children: PropTypes.element.isRequired
+    match: PropTypes.object,
+    history: PropTypes.object,
+    auth: PropTypes.object.isRequired,
+    cancel: PropTypes.func
   };
+
+  componentDidMount() {
+    if (!this.props.auth.isAuthenticated) {
+      this.props.history.push('/auth/login');
+    }
+  }
+
+  componentWillUnmount() {
+    this.props.cancel();
+  }
+
   render() {
-    const { children } = this.props;
+    const { path } = this.props.match;
     return (
-      <section className="Main">
+      <section className={styles.Main}>
         <Navbar />
         <SearchPanel />
-        {/* <SideBar/> */}
-        {children}
+        <SideBar />
+        <Route
+          exact
+          path={`${path}/cards`}
+          render={() => {
+            return (
+              <Suspense fallback={<div />}>
+                <CardsList />
+              </Suspense>
+            );
+          }}
+        />
       </section>
     );
   }

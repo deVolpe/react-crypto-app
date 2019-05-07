@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import SelectExchange from '../SelectExchange';
 import SelectCoin from '../SelectCoin';
 
+import styles from './SelectForm.scss';
+
 const SelectForm = ({ errors, createCard }) => {
   const [name, setName] = useState('');
   const [market, setMarket] = useState('');
@@ -25,23 +27,25 @@ const SelectForm = ({ errors, createCard }) => {
     setMarket(market);
   };
 
-
-  const errorMessage = errors ? <div className="error-block">{errors}</div> : null;
+  const errorMessage = errors ? (
+    <div className="error-block">{errors}</div>
+  ) : null;
 
   return (
-    <div className="select">
+    <div className={styles.select}>
       {errorMessage}
-      <form className="select-form" onSubmit={handleSubmit}>
+      <form className={styles.selectForm} onSubmit={handleSubmit}>
         <SelectCoin handleCoinChange={handleCoinChange} />
         <SelectExchange handleMarketChange={handleMarketChange} />
-        <button className="button">Confirm</button>
+        <button type="submit" className="button">Confirm</button>
       </form>
     </div>
   );
 };
 
 SelectForm.propTypes = {
-  createCard: PropTypes.func.isRequired
+  createCard: PropTypes.func.isRequired,
+  errors: PropTypes.object
 };
 
 export default SelectForm;

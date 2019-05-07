@@ -31,7 +31,9 @@ export default class Card extends PureComponent {
   componentDidMount() {
     service.getCoinMarketInfo(this.props.name, this.props.exchange)
       .then(data => {
-
+        this.setState(state => {
+          
+        })
       })
   }
 
@@ -41,10 +43,10 @@ export default class Card extends PureComponent {
 
     return (
       <>
-        <section className="card-label">
+        <div className="card-label">
           <img src={imgSrc} alt={name} className="coin-img"/>
           <h2>{name}-{exchange}</h2>
-        </section>
+        </div>
         
       </>
     )

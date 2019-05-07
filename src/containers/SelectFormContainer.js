@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import SelectForm from '../components/SelectForm';
-import { createCard } from '../modules/actions/cryptoCard';
+import { createCard } from '../modules/actions/crypto';
 
 const mapStateToProps = state => ({ errors: state.errors });
 

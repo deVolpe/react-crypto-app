@@ -1,7 +1,10 @@
 import { connect } from 'react-redux';
 
-import App from '../components/App'
+import App from '../components/App';
 
-const mapStateToProps = state => ({ auth: state.auth })
+const mapStateToProps = state => ({ auth: state.auth });
 
-export default connect(mapStateToProps, null)(App)
+export default connect(
+  mapStateToProps,
+  null
+)(App);

@@ -3,7 +3,7 @@
   right: 1em;
 }
 
-.header {
+.Header {
   grid-area: 1 / 1 / span 1 / -1;
   position: relative;
 
@@ -14,7 +14,7 @@
 
   .auth {
     display: flex;
-    &-link {
+    .link {
       margin: 0.3rem;
     }
   }

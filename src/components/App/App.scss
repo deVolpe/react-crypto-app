@@ -141,9 +141,13 @@ table {
   border-spacing: 0;
 }
 
-button {
+button, input {
   outline: 0;
   border: 0;
+  padding: 15px;
+  width: 100%;
+  font-size: 14px;
+  box-sizing: border-box;
 }
 
 header,
@@ -174,8 +178,7 @@ a:active {
   display: grid;
   grid: {
     template-columns: repeat(4, 1fr);
-    template-rows: minmax(50px, 120px) auto minmax(50px, 100px);
-    row-gap: 16px;
+    template-rows: minmax(50px, 100px) auto 80px;
   }
   background: $background;
 }

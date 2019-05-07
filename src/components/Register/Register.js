@@ -1,7 +1,13 @@
-import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-export default class Register extends Component {
+import styles from './Register.scss';
+export default class Register extends PureComponent {
+  static propTypes = {
+    signUp: PropTypes.func.isRequired,
+    errors: PropTypes.object
+  };
   state = {
     email: '',
     password: '',
@@ -11,7 +17,7 @@ export default class Register extends Component {
 
   handleChangeInput = e => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.defaultValue
     });
   };
 
@@ -30,32 +36,43 @@ export default class Register extends Component {
   }
 
   render() {
-    console.log(this.props.match)
+    const { email, password, passwordConfirm, errors } = this.state;
     return (
-      <form class="register-form" onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit}>
+        {errors.email}
         <input
           type="email"
           placeholder="email"
           onChange={this.handleInputChange}
-          value={email}
+          defaultValue={email}
+          className={styles.input}
         />
+        {errors.password}
         <input
           type="password"
           name="password"
           placeholder="password"
           onChange={this.handleInputChange}
-          value={password}
+          defaultValue={password}
+          className={styles.input}
         />
+        {errors.passwordConfirm}
         <input
           type="password"
           name="confirm-password"
           placeholder="confirm password"
           onChange={this.handleInputChange}
-          value={passwordConfirm}
+          defaultValue={passwordConfirm}
+          className={styles.input}
         />
-        <button type="submit">Login</button>
-        <figcaption class="message">
-          Already registered? <Link to={`shg`}>Sign In</Link>
+        <button type="submit" className={styles.button}>
+          Register
+        </button>
+        <figcaption className={styles.message}>
+          Already registered?{' '}
+          <Link to="/auth/login" className={styles.link}>
+            Sign In
+          </Link>
         </figcaption>
       </form>
     );

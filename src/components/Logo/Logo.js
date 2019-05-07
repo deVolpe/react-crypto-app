@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import './Logo.scss';
+import styles from './Logo.scss';
 
 const Logo = () => {
   return (
-    <h1 className="logo">
-      <Link to="/main/cards">CryptoApp</Link>
+    <h1 className={styles.logo}>
+      <Link to="/main/cards">cryptoApp</Link>
     </h1>
   );
 };
