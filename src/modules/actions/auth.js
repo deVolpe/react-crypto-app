@@ -38,6 +38,9 @@ export const signIn = user => dispatch => {
 export const logout = history => dispatch => {
   localStorage.removeItem('jwtToken');
   setAuthToken(null);
-  dispatch(setCurrentUser(null));
+  dispatch({
+    type: SET_CURRENT_USER,
+    payload: null
+  });
   history.push('/login');
 };
