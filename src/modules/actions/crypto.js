@@ -3,21 +3,11 @@ import {
   GET_ERROR,
   GET_ALL_CARDS,
   SET_NEW_CARD,
-  DELETE_SELECTED_CARD,
-  CANCEL_REQUEST
+  DELETE_SELECTED_CARD
 } from './types';
 
-const CancelToken = axios.CancelToken;
-
 export const getAllCryptoCards = () => dispatch => {
-  axios('/main/cards', {
-    cancelToken: new CancelToken(cancel => {
-      dispatch({
-        type: CANCEL_REQUEST,
-        payload: cancel
-      });
-    })
-  })
+  axios('/main/cards')
     .then(res => {
       dispatch({
         type: GET_ALL_CARDS,

@@ -9,7 +9,7 @@ export default (state = initialState, action) => {
     case SET_CURRENT_USER:
       return {
         ...state,
-        isAuthenticated: token ? true : false
+        isAuthenticated: action.payload ? true : false
       };
     default:
       return state;

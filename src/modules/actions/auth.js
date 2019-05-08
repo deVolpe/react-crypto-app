@@ -3,10 +3,10 @@ import axios from 'axios';
 import setAuthToken from '../../utils/setAuthToken';
 import { GET_ERROR, SET_CURRENT_USER } from './types';
 
-export const signUp = (user, history) => dispatch => {
+export const signUp = (user, push) => dispatch => {
   axios
     .post('/api/auth/register', user)
-    .then(() => history.push('/login'))
+    .then(() => push('/auth/login'))
     .catch(err => {
       dispatch({
         type: GET_ERROR,
@@ -15,7 +15,7 @@ export const signUp = (user, history) => dispatch => {
     });
 };
 
-export const signIn = user => dispatch => {
+export const signIn = (user, push) => dispatch => {
   axios
     .post('/api/auth/login', user)
     .then(res => {
@@ -26,6 +26,7 @@ export const signIn = user => dispatch => {
         type: SET_CURRENT_USER,
         payload: token
       });
+      push('/main/cards');
     })
     .catch(err => {
       dispatch({
@@ -35,12 +36,12 @@ export const signIn = user => dispatch => {
     });
 };
 
-export const logout = history => dispatch => {
+export const logout = push => dispatch => {
   localStorage.removeItem('jwtToken');
   setAuthToken(null);
   dispatch({
     type: SET_CURRENT_USER,
     payload: null
   });
-  history.push('/login');
+  push('/auth/login');
 };
