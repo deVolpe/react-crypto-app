@@ -11,7 +11,8 @@ module.exports = {
     const { errors, isValid } = validateLoginInput(req.body);
 
     if (!isValid) {
-      res.status(401).json(errors);
+      console.error(errors);
+      return res.status(401).json(errors);
     }
 
     const user = await User.findOne({
@@ -33,16 +34,18 @@ module.exports = {
           keys.jwt,
           { expiresIn: 3600 }
         );
-        res.status(202).json({
+        return res.status(202).json({
           token: `Bearer ${token}`
         });
       } else {
         errors.password = 'Password is incorrect';
-        res.status(404).json(errors);
+        console.error(errors);
+        return res.status(404).json(errors);
       }
     } else {
       errors.email = 'User not found';
-      res.status(404).json(errors);
+      console.error(errors);
+      return res.status(404).json(errors);
     }
   },
 
@@ -50,7 +53,7 @@ module.exports = {
     const { errors, isValid } = validateRegisterInput(req.body);
 
     if (!isValid) {
-      res.status(401).json(errors);
+      return res.status(401).json(errors);
     }
 
     const candidate = await User.findOne({
@@ -59,7 +62,7 @@ module.exports = {
 
     if (candidate) {
       errors.email = 'Email already exists';
-      res.status(409).json(errors);
+      return res.status(409).json(errors);
     } else {
       bcrypt
         .genSalt(10)
@@ -73,7 +76,7 @@ module.exports = {
               });
               user
                 .save()
-                .then(res => res.status(201).json(user))
+                .then(user => res.status(201).json(user))
                 .catch(console.error);
             })
             .catch(console.error);
