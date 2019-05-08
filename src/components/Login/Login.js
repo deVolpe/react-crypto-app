@@ -4,10 +4,17 @@ import { Link } from 'react-router-dom';
 
 import styles from './Login.scss';
 export default class Login extends PureComponent {
+  static defaultProps = {
+    match: null,
+    push: () => {}
+  };
   static propTypes = {
     signIn: PropTypes.func.isRequired,
-    errors: PropTypes.object
+    errors: PropTypes.object,
+    match: PropTypes.object,
+    push: PropTypes.func
   };
+
   state = {
     email: '',
     password: '',
@@ -16,7 +23,7 @@ export default class Login extends PureComponent {
 
   handleInputChange = e => {
     this.setState({
-      [e.target.name]: e.target.defaultValue
+      [e.target.name]: e.target.value
     });
   };
 
@@ -26,11 +33,13 @@ export default class Login extends PureComponent {
       email: this.state.email,
       password: this.state.password
     };
-    this.props.signIn(user);
+    this.props.signIn(user, this.props.push);
   };
 
-  componentDidMount() {
-    this.setState({ errors: this.props.errors });
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.errors !== prevProps.errors) {
+      this.setState({ errors: this.props.errors });
+    }
   }
 
   render() {
@@ -40,16 +49,16 @@ export default class Login extends PureComponent {
       <form onSubmit={this.handleSubmit}>
         <input
           type="email"
+          name="email"
           placeholder="email"
           onChange={this.handleInputChange}
-          defaultValue={email}
           className={styles.input}
         />
         <input
           type="password"
           placeholder="password"
+          name="password"
           onChange={this.handleInputChange}
-          defaultValue={password}
           className={styles.input}
         />
         <button type="submit" className={styles.button}>

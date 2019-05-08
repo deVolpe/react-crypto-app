@@ -4,9 +4,15 @@ import { Link } from 'react-router-dom';
 
 import styles from './Register.scss';
 export default class Register extends PureComponent {
+  static defaultProps = {
+    push: () => {},
+    match: null
+  };
   static propTypes = {
     signUp: PropTypes.func.isRequired,
-    errors: PropTypes.object
+    errors: PropTypes.object,
+    push: PropTypes.func,
+    match: PropTypes.object
   };
   state = {
     email: '',
@@ -17,7 +23,7 @@ export default class Register extends PureComponent {
 
   handleChangeInput = e => {
     this.setState({
-      [e.target.name]: e.target.defaultValue
+      [e.target.name]: e.target.value
     });
   };
 
@@ -28,41 +34,38 @@ export default class Register extends PureComponent {
       password: this.state.password,
       passwordConfirm: this.state.passwordConfirm
     };
-    this.props.signUp(candidate);
+    this.props.signUp(candidate, this.props.push);
   };
 
-  componentDidMount() {
-    this.setState({ errors: this.props.errors });
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.errors !== prevProps.errors) {
+      this.setState({ errors: this.props.errors });
+    }
   }
 
   render() {
     const { email, password, passwordConfirm, errors } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
-        {errors.email}
         <input
           type="email"
+          name="email"
           placeholder="email"
-          onChange={this.handleInputChange}
-          defaultValue={email}
+          onChange={this.handleChangeInput}
           className={styles.input}
         />
-        {errors.password}
         <input
           type="password"
           name="password"
           placeholder="password"
-          onChange={this.handleInputChange}
-          defaultValue={password}
+          onChange={this.handleChangeInput}
           className={styles.input}
         />
-        {errors.passwordConfirm}
         <input
           type="password"
-          name="confirm-password"
+          name="passwordConfirm"
           placeholder="confirm password"
-          onChange={this.handleInputChange}
-          defaultValue={passwordConfirm}
+          onChange={this.handleChangeInput}
           className={styles.input}
         />
         <button type="submit" className={styles.button}>
