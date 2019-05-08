@@ -11,7 +11,6 @@ module.exports = {
     const { errors, isValid } = validateLoginInput(req.body);
 
     if (!isValid) {
-      console.error(errors);
       return res.status(401).json(errors);
     }
 
@@ -39,12 +38,10 @@ module.exports = {
         });
       } else {
         errors.password = 'Password is incorrect';
-        console.error(errors);
         return res.status(404).json(errors);
       }
     } else {
       errors.email = 'User not found';
-      console.error(errors);
       return res.status(404).json(errors);
     }
   },
