@@ -1,4 +1,5 @@
 const Crypto = require('../models/Crypto');
+const isEmpty = require('./validators/features/isEmpty');
 
 module.exports = {
   getAll(req, res) {
@@ -6,11 +7,10 @@ module.exports = {
       user: req.user.id
     })
       .then(cards => {
-        if (cards) {
-          res.status(200).json(cards);
-        } else {
-          res.status(404).json({ error: 'No cards you have' });
+        if (isEmpty(cards)) {
+          return res.status(404).json({ error: 'No cards yet' });
         }
+        return res.status(200).json(cards);
       })
       .catch(console.error);
   },
@@ -23,7 +23,7 @@ module.exports = {
     });
 
     if (candidate) {
-      res.status(409).json({
+      return res.status(409).json({
         error: 'Card already exists'
       });
     }
