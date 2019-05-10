@@ -7,7 +7,7 @@ import {
 } from './types';
 
 export const getAllCryptoCards = () => dispatch => {
-  axios('/main/cards')
+  axios('/api/main/cards')
     .then(res => {
       dispatch({
         type: GET_ALL_CARDS,

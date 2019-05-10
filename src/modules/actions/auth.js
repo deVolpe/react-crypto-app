@@ -22,10 +22,7 @@ export const signIn = (user, push) => dispatch => {
       const { token } = res.data;
       localStorage.setItem('jwtToken', token);
       setAuthToken(token);
-      dispatch({
-        type: SET_CURRENT_USER,
-        payload: token
-      });
+      dispatch(setCurrentUser(token));
       push('/main/cards');
     })
     .catch(err => {
@@ -36,12 +33,13 @@ export const signIn = (user, push) => dispatch => {
     });
 };
 
-export const logout = push => dispatch => {
+export const logout = () => dispatch => {
   localStorage.removeItem('jwtToken');
   setAuthToken(null);
-  dispatch({
-    type: SET_CURRENT_USER,
-    payload: null
-  });
-  push('/auth/login');
+  dispatch(setCurrentUser(null));
 };
+
+export const setCurrentUser = token => ({
+  type: SET_CURRENT_USER,
+  payload: token
+});

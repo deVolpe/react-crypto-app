@@ -5,7 +5,7 @@ import Login from '../components/Login';
 import { signIn } from '../modules/actions/auth';
 
 const mapStateToProps = state => ({
-  errors: state.errors
+  error: state.error
 });
 
 export default connect(

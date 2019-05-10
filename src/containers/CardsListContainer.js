@@ -3,8 +3,8 @@ import CardsList from '../components/CardsList';
 import { getAllCryptoCards, deleteCard } from '../modules/actions/crypto';
 
 const mapStateToProps = state => ({
-  errors: state.errors,
-  cards: state.cryptos
+  error: state.error,
+  cryptos: state.cryptos
 });
 
 export default connect(
