@@ -8,7 +8,7 @@ module.exports = {
     })
       .then(cards => {
         if (isEmpty(cards)) {
-          return res.status(404).json({ error: 'No cards yet' });
+          return res.status(404).json({ message: 'No cards yet' });
         }
         return res.status(200).json(cards);
       })
@@ -24,7 +24,7 @@ module.exports = {
 
     if (candidate) {
       return res.status(409).json({
-        error: 'Card already exists'
+        message: 'Card already exists'
       });
     }
 
@@ -35,14 +35,19 @@ module.exports = {
     });
     card
       .save()
-      .then(card => {
-        res.status(201).json(card);
-      })
+      .then(card => res.status(201).json(card))
       .catch(console.error);
   },
+
   delete(req, res) {
-    Crypto.deleteOne({ _id: req.body.id, user: req.user.id })
-      .then(() => res.status(200).json({ id: req.body.id }))
+    Crypto.findByIdAndRemove(req.body.id)
+      .then(data => res.status(200).json(data._id))
+      .catch(console.error);
+  },
+
+  setCount(req, res) {
+    Crypto.findByIdAndUpdate(req.body.id, { count: req.body.count })
+      .then(data => res.status(200).json(data))
       .catch(console.error);
   }
 };
