@@ -6,6 +6,10 @@ const baseConfig = require('./webpack.base.conf');
 
 const devConfig = {
   mode: 'development',
+  entry: {
+    polyfill: 'babel-polyfill',
+    app: ['webpack-hot-middleware/client?path=/__what&timeout=2000&overlay=false']
+  },
   output: {
     filename: `${baseConfig.externals.paths.assets}js/[name].bundle.js`,
     path: baseConfig.externals.paths.dist,
@@ -23,10 +27,6 @@ const devConfig = {
   devServer: {
     contentBase: baseConfig.externals.paths.dist,
     watchContentBase: true,
-    overlay: {
-      warnings: false,
-      errors: true
-    }
   },
   plugins: [
     new HtmlWebpackPlugin({
