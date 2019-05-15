@@ -33,7 +33,7 @@ const prodConfig = {
       })
     ],
     splitChunks: {
-      chunks: 'async',
+      chunks: 'all',
       minSize: 30000,
       maxSize: 0,
       minChunks: 1,
@@ -44,7 +44,9 @@ const prodConfig = {
       cacheGroups: {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
-          priority: -10
+          priority: 10,
+          reuseExistingChunk: true,
+          filename: `${baseConfig.externals.paths.assets}js/[name].[hash].js`
         },
         default: {
           minChunks: 2,
