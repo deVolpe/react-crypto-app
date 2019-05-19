@@ -1,6 +1,23 @@
 {
+  "env": {
+    "es6": true,
+    "node": true
+  },
   "parser": "babel-eslint",
-  "plugins": [
-    "react"
-  ]
+  "extends": [
+    "airbnb"
+  ],
+  "plugins": [],
+  "rules": {
+    "react/jsx-filename-extension": [
+      2,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "linebreak-style": "off"
+  }
 }
