@@ -1,0 +1,34 @@
+@import '../App/styleVariables.scss';
+
+@keyframes eclipse {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.6em;
+}
+
+.spinner {
+  width: 100px !important;
+  height: 100px !important;
+  transform: translate(-50px, -50px) scale(0.5) translate(50px, 50px);
+}
+.spinner div {
+  animation: eclipse 1s linear infinite;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  box-shadow: 0 4px 0 0 $style_color;
+  transform-origin: 80px 82px;
+}

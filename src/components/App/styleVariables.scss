@@ -1,5 +1,19 @@
-@import 'fonts';
 
-$primary-font: 'Open Sans', sans-serif;
+// Main
 $background: #d1ceced9;
-$style_background: #7b1ea7;
+$style_color: #8dc6e0;
+
+// Panel
+$input_margin: 0 0 20px;
+$input_color: #f2f2f2;
+$panel_background: #e7e4e4;
+
+// Auth 
+$buttonStyle: #4b7d94;
+$figcaption_style: #b3b3b3;
+
+// Select 
+$selectBackground: $input_color;
+
+// Card
+$index_color: #cccccc;

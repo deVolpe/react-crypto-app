@@ -1,27 +1,29 @@
+@import '../App/styleVariables';
+
 .input {
-  background: #f2f2f2;
-  margin: 0 0 15px;
+  background: $input_color;
+  margin: $input_margin;
   box-sizing: border-box;
 }
 
 .button {
   text-transform: uppercase;
   color: #ffffff;
-  background: #7b1ea7;
+  background: $style_color;
   &:focus,
   &:active,
   &:hover {
-    background: #5d1280;
+    background: $buttonStyle;
   }
 }
 
 .message {
   margin: 15px 0 0;
-  color: #b3b3b3;
+  color: $figcaption_style;
   font-size: 12px;
   .link {
     display: inline-block;
-    color: #7b1ea7;
+    color: $style_color;
     font-size: inherit;
     text-transform: capitalize;
   }

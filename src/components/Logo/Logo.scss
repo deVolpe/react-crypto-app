@@ -1,9 +1,17 @@
 .logo {
   display: flex;
   justify-content: flex-start;
-  font-size: 50px;
+  font: {
+    size: 50px;
+    weight: 800;
+  }
   margin: 5px;
   padding: 0 0.5em;
+}
+
+.disabled {
+  pointer-events: none;
+  cursor: default;
 }
 
 @media (max-width: 479px) {

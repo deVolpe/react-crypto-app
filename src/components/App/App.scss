@@ -1,4 +1,5 @@
 @import 'styleVariables';
+@import 'fonts';
 
 html,
 body,
@@ -87,7 +88,7 @@ video {
   font-size: 100%;
   box-sizing: border-box;
   font: {
-    family: $primary-font;
+    family: 'Open Sans', sans-serif;
   }
   vertical-align: baseline;
 }
@@ -141,7 +142,9 @@ table {
   border-spacing: 0;
 }
 
-button, input {
+button,
+input,
+select {
   outline: 0;
   border: 0;
   padding: 15px;
@@ -154,7 +157,7 @@ header,
 footer {
   display: flex;
   align-items: center;
-  background-color: $style_background;
+  background-color: $style_color;
 }
 
 a,
@@ -176,10 +179,10 @@ a:active {
   min-width: 320px;
   min-height: 100vh;
   display: grid;
+  position: relative;
   grid: {
     template-columns: repeat(4, 1fr);
     template-rows: minmax(50px, 100px) auto 80px;
   }
   background: $background;
 }
-

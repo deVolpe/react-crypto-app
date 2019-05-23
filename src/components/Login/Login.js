@@ -2,51 +2,56 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import InvalidError from '../../pages/InvalidError';
+
 import styles from './Login.scss';
+
 export default class Login extends PureComponent {
   static defaultProps = {
     match: null,
-    push: () => {}
+    push: () => {},
   };
+
   static propTypes = {
     signIn: PropTypes.func.isRequired,
-    errors: PropTypes.object,
+    error: PropTypes.object,
     match: PropTypes.object,
-    push: PropTypes.func
+    push: PropTypes.func,
   };
 
   state = {
     email: '',
     password: '',
-    errors: {}
+    error: {},
   };
 
-  handleInputChange = e => {
+  handleInputChange = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const user = {
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
     };
     this.props.signIn(user, this.props.push);
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.errors !== prevProps.errors) {
-      this.setState({ errors: this.props.errors });
+    if (this.props.error !== prevProps.error) {
+      this.setState({ error: this.props.error });
     }
   }
 
   render() {
-    const { email, password, errors } = this.state;
+    const { error } = this.state;
 
     return (
       <form onSubmit={this.handleSubmit}>
+        <InvalidError error={error.email} />
         <input
           type="email"
           name="email"
@@ -54,6 +59,7 @@ export default class Login extends PureComponent {
           onChange={this.handleInputChange}
           className={styles.input}
         />
+        <InvalidError error={error.password} />
         <input
           type="password"
           placeholder="password"
@@ -62,11 +68,15 @@ export default class Login extends PureComponent {
           className={styles.input}
         />
         <button type="submit" className={styles.button}>
+
           Login
         </button>
         <figcaption className={styles.message}>
-          Not registered?{' '}
+
+          Not registered?
+          {' '}
           <Link to="/auth/register" className={styles.link}>
+
             Create an account
           </Link>
         </figcaption>

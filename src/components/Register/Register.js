@@ -3,50 +3,55 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import styles from './Register.scss';
+import InvalidError from '../../pages/InvalidError';
+
 export default class Register extends PureComponent {
   static defaultProps = {
     push: () => {},
-    match: null
+    match: null,
   };
+
   static propTypes = {
     signUp: PropTypes.func.isRequired,
-    errors: PropTypes.object,
+    error: PropTypes.object,
     push: PropTypes.func,
-    match: PropTypes.object
+    match: PropTypes.object,
   };
+
   state = {
     email: '',
     password: '',
     passwordConfirm: '',
-    errors: {}
+    error: {},
   };
 
-  handleChangeInput = e => {
+  handleChangeInput = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const candidate = {
       email: this.state.email,
       password: this.state.password,
-      passwordConfirm: this.state.passwordConfirm
+      passwordConfirm: this.state.passwordConfirm,
     };
     this.props.signUp(candidate, this.props.push);
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.errors !== prevProps.errors) {
-      this.setState({ errors: this.props.errors });
+    if (this.props.error !== prevProps.error) {
+      this.setState({ error: this.props.error });
     }
   }
 
   render() {
-    const { email, password, passwordConfirm, errors } = this.state;
+    const { error } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
+        <InvalidError error={error.email} />
         <input
           type="email"
           name="email"
@@ -54,6 +59,7 @@ export default class Register extends PureComponent {
           onChange={this.handleChangeInput}
           className={styles.input}
         />
+        <InvalidError error={error.password} />
         <input
           type="password"
           name="password"
@@ -61,6 +67,7 @@ export default class Register extends PureComponent {
           onChange={this.handleChangeInput}
           className={styles.input}
         />
+        <InvalidError error={error.passwordConfirm} />
         <input
           type="password"
           name="passwordConfirm"
@@ -69,11 +76,15 @@ export default class Register extends PureComponent {
           className={styles.input}
         />
         <button type="submit" className={styles.button}>
+
           Register
         </button>
         <figcaption className={styles.message}>
-          Already registered?{' '}
+
+          Already registered?
+          {' '}
           <Link to="/auth/login" className={styles.link}>
+
             Sign In
           </Link>
         </figcaption>
