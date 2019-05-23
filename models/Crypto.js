@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import mongoose, { model } from 'mongoose';
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const cryptoSchema = new Schema({
   name: {
@@ -21,4 +21,4 @@ const cryptoSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model('cryptocurrencies', cryptoSchema);
+export default model('cryptocurrencies', cryptoSchema);
