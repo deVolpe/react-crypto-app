@@ -3,6 +3,6 @@ import axios from 'axios';
 export default axios.create({
   baseURL: 'https://min-api.cryptocompare.com/data/',
   headers: {
-    authorization: 'Apikey d6d6e8697d98f36950808052e5da5a630cbd287563b51fbee6a5c417fcad5340',
+    authorization: 'Apikey 3d4373e4f9cadb376998af238332036ab270b2c60c2538ebe48b7ce84d5ed707',
   },
 });

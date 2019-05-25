@@ -1,43 +1,58 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import SelectExchange from '../SelectExchange';
 import SelectCoin from '../SelectCoin';
+import InvalidError from '../../pages/InvalidError';
+import service from '../../services/cryptocompare-service';
 
 import styles from './SelectForm.scss';
 
-const SelectForm = ({ errors, createCard }) => {
-  const [name, setName] = useState('');
-  const [market, setMarket] = useState('');
+const SelectForm = ({ error: { conflict }, createCard }) => {
+  const [coin, setCoin] = useState('');
+  const [exchange, setExchange] = useState('');
+  const [invalid, setInvalid] = useState('');
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const coin = {
-      name,
-      market
+    const card = {
+      coin,
+      exchange,
     };
-    createCard(coin);
+    service
+      .getCoinPrices(card.coin, card.exchange)
+      .then(() => {
+        createCard(card);
+      })
+      .catch(setInvalid);
   };
 
-  const handleCoinChange = name => {
-    setName(name);
+  useEffect(() => {
+    setInvalid(invalid);
+  }, [invalid]);
+
+  const handleCoinSelect = (coin) => {
+    setCoin(coin);
   };
 
-  const handleMarketChange = market => {
-    setMarket(market);
+  const handleMarketSelect = (exchange) => {
+    setExchange(exchange);
   };
 
-  const errorMessage = errors ? (
-    <div className="error-block">{errors}</div>
-  ) : null;
+  const invalidError = invalid ? <InvalidError error={invalid} /> : null;
+  const conflictError = conflict ? <InvalidError error={conflict} /> : null;
 
   return (
     <div className={styles.select}>
-      {errorMessage}
-      <form className={styles.selectForm} onSubmit={handleSubmit}>
-        <SelectCoin handleCoinChange={handleCoinChange} />
-        <SelectExchange handleMarketChange={handleMarketChange} />
-        <button type="submit" className="button">Confirm</button>
+      {conflictError}
+      {invalidError}
+      <form onSubmit={handleSubmit}>
+        <SelectCoin handleCoinSelect={handleCoinSelect} />
+        <SelectExchange handleMarketSelect={handleMarketSelect} />
+        <button type="submit" className={styles.button}>
+
+          Confirm
+        </button>
       </form>
     </div>
   );
@@ -45,7 +60,10 @@ const SelectForm = ({ errors, createCard }) => {
 
 SelectForm.propTypes = {
   createCard: PropTypes.func.isRequired,
-  errors: PropTypes.object
+  error: PropTypes.shape({
+    invalid: PropTypes.string,
+    exist: PropTypes.string,
+  }),
 };
 
 export default SelectForm;

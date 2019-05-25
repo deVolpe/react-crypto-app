@@ -4,19 +4,21 @@ const isEmpty = require('./features/isEmpty');
 
 module.exports = function validateLoginInput(data) {
   const errors = {};
-  data.email = !isEmpty(data.email) ? data.email : '';
-  data.password = !isEmpty(data.password) ? data.password : '';
+  const email = !isEmpty(data.email) ? data.email : '';
 
-  if (!Validator.isEmail(data.email)) {
+
+  const password = !isEmpty(data.password) ? data.password : '';
+
+  if (!Validator.isEmail(email)) {
     errors.email = 'Email is invalid';
   }
-  if (Validator.isEmpty(data.email)) {
+  if (Validator.isEmpty(email)) {
     errors.email = 'Email is required';
   }
-  if (!Validator.isLength(data.password, { min: 6, max: 16 })) {
+  if (!Validator.isLength(password, { min: 6, max: 16 })) {
     errors.password = 'Password must have a range from 6 to 16 chars';
   }
-  if (Validator.isEmpty(data.password)) {
+  if (Validator.isEmpty(password)) {
     errors.password = 'Password is required';
   }
 

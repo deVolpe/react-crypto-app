@@ -4,39 +4,31 @@ import { Link } from 'react-router-dom';
 
 import styles from './Header.scss';
 
-const Header = ({ children, auth, logout }) => {
-  const onLogout = () => {
-    logout();
-  };
-
-  const links = auth.isAuthenticated ? (
-    <Link to="/auth/login" className={styles.logout} onClick={onLogout}>
-      logout
-    </Link>
-  ) : (
-    <div className={styles.auth}>
-      <Link className={styles.link} to="/auth/login">
-        signin
+const Header = ({ children, auth, logout }) => (
+  <header className={styles.Header}>
+    {children}
+    {auth.isAuthenticated ? (
+      <Link to="/auth/login" className={styles.logout} onClick={logout}>
+        logout
       </Link>
-      <Link className={styles.link} to="/auth/register">
-        signup
-      </Link>
-    </div>
-  );
-
-  return (
-    <header className={styles.Header}>
-      {children}
-      {links}
-    </header>
-  );
-};
+    ) : (
+      <div className={styles.auth}>
+        <Link className={styles.link} to="/auth/login">
+          signin
+        </Link>
+        <Link className={styles.link} to="/auth/register">
+          signup
+        </Link>
+      </div>
+    )}
+  </header>
+);
 
 Header.defaultProps = { children: null };
 Header.propTypes = {
   children: PropTypes.element.isRequired,
   auth: PropTypes.object.isRequired,
-  logout: PropTypes.func
+  logout: PropTypes.func.isRequired
 };
 
 export default Header;

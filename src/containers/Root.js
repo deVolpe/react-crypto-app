@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import jwt_decode from 'jwt-decode';
+import jwtDecode from 'jwt-decode';
 
 import App from './AppContainer';
 import store from '../modules/store';
@@ -10,7 +10,7 @@ import setAuthToken from '../utils/setAuthToken';
 if (localStorage.jwtToken) {
   store.dispatch(setCurrentUser(localStorage.jwtToken));
   setAuthToken(localStorage.jwtToken);
-  const decoded = jwt_decode(localStorage.jwtToken);
+  const decoded = jwtDecode(localStorage.jwtToken);
   const currentTime = Date.now() / 1000;
 
   if (decoded.exp < currentTime) {
@@ -18,12 +18,10 @@ if (localStorage.jwtToken) {
   }
 }
 
-const Root = () => {
-  return (
-    <Provider store={store}>
-      <App />
-    </Provider>
-  );
-};
+const Root = () => (
+  <Provider store={store}>
+    <App />
+  </Provider>
+);
 
 export default Root;

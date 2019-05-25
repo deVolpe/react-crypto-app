@@ -18,3 +18,15 @@
   display: block;
   @include fontStyle(15px);
 }
+
+@media (max-width: 479px) {
+  .label {
+    line-height: 30px;
+  }
+  .lineBold {
+    @include fontStyle(15px, 600);
+  }
+  .lineNormal {
+    @include fontStyle(10px);
+  }
+}

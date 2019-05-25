@@ -2,7 +2,18 @@
   grid-area: 2 / 1 / span 1 / -1;
   display: grid;
   grid: {
-    template-columns: repeat(5, 1fr);
-    template-rows: minmax(10px, 50px) minmax(10px, 50px) auto ;
+    template-columns: 1fr;
+    template-rows: 50px auto;
+  }
+}
+
+.container {
+  grid-area: 2 / 1 / -1 / -1;
+  padding: 1.6rem;
+}
+
+@media (max-width: 479px) {
+  .Main {
+    grid-template-rows: 100px auto
   }
 }

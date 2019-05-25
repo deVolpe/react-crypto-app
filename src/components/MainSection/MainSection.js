@@ -1,54 +1,48 @@
-import React, { Component, lazy, Suspense } from 'react';
+import React, { PureComponent, lazy, Suspense } from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 
+import Panel from '../Panel';
+import Spinner from '../Spinner';
 import Navbar from '../NavBar';
-import SearchPanel from '../SearchPanel';
-import SideBar from '../SideBar';
+import SearchPanel from '../../containers/SearchPanelContainer';
+import DropMenu from '../DropMenu';
+import MenuSVG from '../MenuSVG';
 
 import styles from './MainSection.scss';
 
 const CardsList = lazy(() => import('../../containers/CardsListContainer'));
 
-export default class MainSection extends Component {
+export default class MainSection extends PureComponent {
   static defaultProps = {
     match: null,
-    history: null
   };
+
   static propTypes = {
-    match: PropTypes.object,
-    history: PropTypes.object,
-    auth: PropTypes.object.isRequired,
-    cancel: PropTypes.func
+    match: PropTypes.shape({
+      path: PropTypes.string,
+    }),
   };
-
-  componentDidMount() {
-    if (!this.props.auth.isAuthenticated) {
-      this.props.history.push('/auth/login');
-    }
-  }
-
-  componentWillUnmount() {
-    this.props.cancel();
-  }
 
   render() {
-    const { path } = this.props.match;
+    const { match: { path } } = this.props;
     return (
       <section className={styles.Main}>
-        <Navbar />
-        <SearchPanel />
-        <SideBar />
+        <Panel>
+          <Navbar />
+          <SearchPanel />
+          <DropMenu />
+        </Panel>
         <Route
           exact
           path={`${path}/cards`}
-          render={() => {
-            return (
-              <Suspense fallback={<div />}>
+          render={() => (
+            <Suspense fallback={<Spinner />}>
+              <div className={styles.container}>
                 <CardsList />
-              </Suspense>
-            );
-          }}
+              </div>
+            </Suspense>
+          )}
         />
       </section>
     );

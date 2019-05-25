@@ -16,13 +16,15 @@ if (env === 'development') {
   app.use(
     webpackDevMiddleware(compiler, {
       noInfo: true,
-      publicPath: config.output.publicPath
-    })
+      publicPath: config.output.publicPath,
+    }),
   );
   app.use(
     webpackHotMiddleware(compiler, {
-      reload: true
-    })
+      log: console.log,
+      path: '/__webpack_hmr',
+      heartbeat: 10 * 1000,
+    }),
   );
 }
 
@@ -34,5 +36,11 @@ if (env === 'production') {
   });
 }
 
+app.use((err, req, res, next) => {
+  if (err) {
+    res.status(500).send('Internal Server Error');
+  }
+  next();
+});
 
 app.listen(port, () => console.log(`Server has been started ${port}`));

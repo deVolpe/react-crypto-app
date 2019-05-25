@@ -1,8 +1,8 @@
 module.exports = {
   plugins: [
     require('autoprefixer')({
-      grid: true
+      grid: true,
     }),
-    require('css-mqpacker')
-  ]
+    require('css-mqpacker'),
+  ],
 };

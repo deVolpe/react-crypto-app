@@ -1,5 +1,14 @@
-import { INC, DEC } from './types';
+import axios from 'axios';
 
-export const inc = () => ({ type: INC });
 
-export const dec = () => ({ type: DEC });
+export const setCount = id => (dispatch) => {
+  const count = (value) => {
+    axios.patch('/api/main/cards/change', { id, value }).then(() => {
+      dispatch({
+        type: SET_COUNT,
+        payload: value,
+      });
+    });
+  };
+  return count;
+};

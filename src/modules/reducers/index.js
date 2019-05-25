@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-import counter from './counterReducer';
 import auth from './authReducer';
 import cryptos from './cryptoReducer';
 import error from './errorReducer';
+import filter from './filterReducer';
 
 export default combineReducers({
-  counter,
   auth,
   cryptos,
-  error
+  error,
+  filter,
 });

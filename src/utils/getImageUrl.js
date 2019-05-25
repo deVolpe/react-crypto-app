@@ -7,6 +7,5 @@
 export default function getImageUrl(path) {
   if (!path) return null;
 
-  return `{https://www.cryptocompare.com/}${path}`;
+  return `https://www.cryptocompare.com/${path}`;
 }
-

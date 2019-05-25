@@ -1,3 +1,11 @@
-.select-form__market {
-  width: 100%;
+@import '../App/styleVariables.scss';
+
+.selectMarket {
+  margin-bottom: 10px;
 }
+
+.select {
+  padding: 5px;
+  background: $selectBackground;
+}
+

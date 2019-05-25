@@ -1,3 +1,14 @@
+@import '../App/styleVariables.scss';
+
 .select {
-  width: 100%;
+  padding: 1.6em;
+}
+
+.button {
+  background: $style_color;
+  color: #ffffff;
+
+  &:active {
+    background: $buttonStyle;
+  }
 }

@@ -12,25 +12,25 @@ const prodConfig = {
   output: {
     filename: `${baseConfig.externals.paths.assets}js/[name].[hash].js`,
     path: baseConfig.externals.paths.dist,
-    publicPath: '/'
+    publicPath: '/',
   },
   module: {
     rules: [
       {
         test: /\.(s?css)$/,
         use: [
-          { loader: MiniCssExtractPlugin.loader, options: { publicPath: '' } }
-        ]
-      }
-    ]
+          { loader: MiniCssExtractPlugin.loader, options: { publicPath: '' } },
+        ],
+      },
+    ],
   },
   optimization: {
     minimizer: [
       new OptimizeCssAssetsWebpackPlugin({}),
       new UglifyJsPlugin({
         cache: true,
-        parallel: true
-      })
+        parallel: true,
+      }),
     ],
     splitChunks: {
       chunks: 'all',
@@ -46,29 +46,28 @@ const prodConfig = {
           test: /[\\/]node_modules[\\/]/,
           priority: 10,
           reuseExistingChunk: true,
-          filename: `${baseConfig.externals.paths.assets}js/[name].[hash].js`
         },
         default: {
           minChunks: 2,
           priority: -20,
-          reuseExistingChunk: true
-        }
-      }
-    }
+          reuseExistingChunk: true,
+        },
+      },
+    },
   },
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: `${baseConfig.externals.paths.assets}css/[name].[hash].css`
+      filename: `${baseConfig.externals.paths.assets}css/[name].[hash].css`,
     }),
     new HtmlWebpackPlugin({
       hash: false,
       inject: 'body',
       template: `${baseConfig.externals.paths.public}index.html`,
       filename: './index.html',
-      showErrors: false
-    })
-  ]
+      showErrors: false,
+    }),
+  ],
 };
 
 module.exports = merge.smart(prodConfig, baseConfig);

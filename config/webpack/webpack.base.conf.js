@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const PATHS = {
@@ -6,24 +7,24 @@ const PATHS = {
   dist: path.join(__dirname, '../../dist/'),
   config: path.join(__dirname, '../../config/'),
   public: path.join(__dirname, '../../public/'),
-  assets: 'assets/'
+  assets: 'assets/',
 };
 
 module.exports = {
   externals: {
-    paths: PATHS
+    paths: PATHS,
   },
   entry: {
     polyfill: 'babel-polyfill',
-    app: PATHS.src
+    app: PATHS.src,
   },
   resolve: {
     extensions: ['.js', '.json', '.jsx'],
-    modules: ['node_modules']
+    modules: ['node_modules'],
   },
   resolveLoader: {
     extensions: ['.js', '.json'],
-    modules: ['node_modules']
+    modules: ['node_modules'],
   },
   module: {
     rules: [
@@ -31,9 +32,9 @@ module.exports = {
         test: /\.(jsx?)$/,
         use: [
           { loader: 'babel-loader' },
-          { loader: 'eslint-loader', options: { emitError: true } }
+          { loader: 'eslint-loader', options: { emitError: true } },
         ],
-        exclude: '/node_modules/'
+        exclude: '/node_modules/',
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/,
@@ -41,8 +42,8 @@ module.exports = {
         options: {
           name: '[name].[hash:base64:5].[ext]',
           outputPath: `${PATHS.assets}img`,
-          publicPath: '/'
-        }
+          publicPath: '/',
+        },
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
@@ -50,8 +51,8 @@ module.exports = {
         options: {
           name: '[name].[hash:base64:5].[ext]',
           outputPath: `${PATHS.assets}fonts`,
-          publicPath: '/'
-        }
+          publicPath: '/',
+        },
       },
       {
         test: /\.(s?css)$/,
@@ -64,35 +65,39 @@ module.exports = {
               import: true,
               modules: true,
               importLoaders: 2,
-              localIdentName: '[name]_[local]__[hash:base64:5]'
-            }
+              localIdentName: '[name]_[local]__[hash:base64:5]',
+            },
           },
           {
             loader: 'postcss-loader',
             options: {
               sourceMap: true,
               config: {
-                path: `${PATHS.config}postcss/postcss.config.js`
-              }
-            }
+                path: `${PATHS.config}postcss/postcss.config.js`,
+              },
+            },
           },
           {
             loader: 'sass-loader',
             options: {
               sourceMap: true,
-              url: true
-            }
-          }
-        ]
-      }
-    ]
+              url: true,
+            },
+          },
+        ],
+      },
+    ],
   },
   plugins: [
     new CopyWebpackPlugin([
       {
         from: `${PATHS.public}${PATHS.assets}icons`,
-        to: `${PATHS.assets}icons/[name].[ext]`
-      }
-    ])
-  ]
+        to: `${PATHS.assets}icons/[name].[ext]`,
+      },
+    ]),
+    new webpack.IgnorePlugin({
+      resourceRegExp: /^\.\/locale$/,
+      contextRegExp: /moment$/,
+    }),
+  ],
 };

@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import styles from './SearchPanel.scss';
 
-const SearchPanel = ({}) => {
+const SearchPanel = ({ filter }) => {
   const [term, setTerm] = useState('');
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const term = e.target.value;
     setTerm(term);
+    filter(term);
   };
 
   return (
@@ -14,12 +17,16 @@ const SearchPanel = ({}) => {
       <input
         type="text"
         className={styles.input}
-        value={term}
         placeholder="Paste crypto"
+        value={term}
         onChange={handleChange}
       />
     </div>
   );
+};
+
+SearchPanel.propTypes = {
+  filter: PropTypes.func.isRequired,
 };
 
 export default SearchPanel;

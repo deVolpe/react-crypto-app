@@ -18,7 +18,7 @@ class CryptoCompareService {
    * Returns all exchanges that are available
    * @see 'https://min-api.cryptocompare.com/documentation?key=Other&cat=allExchangesStaticInfoEndpoint'.
    *
-   * @return {array}
+   * @return {object}
    *
    */
   getAllExchanges = async () => {
@@ -34,31 +34,30 @@ class CryptoCompareService {
    * @return {object}
    *
    */
-  getCoinPrices = async coin => {
+  getCoinPrices = async (coin, market) => {
     const res = await api(
-      `price?fsym=${coin}&tsyms=${data.currencies.join(',')}`
+      `price?fsym=${coin}&tsyms=USDT&e=${market}`,
     );
-    return res;
+    if (res.data.Response) {
+      throw res.data.Message;
+    }
+    return res.data;
   };
 
   /**
    * Return full info about passed coin's pair on passed market.
    *
    * @see 'https://min-api.cryptocompare.com/documentation?key=Price&cat=multipleSymbolsFullPriceEndpoint'
-   * @param {string} first
-   * @param {string} second
+   * @param {string} coin
    * @param {string} market
    *
    * @return {object}
    */
-  getCoinMarketInfo = async (first, second, market) => {
+  getCoinMarketInfo = async (coin, market) => {
     const res = await api(
-      `pricemultifull?fsyms=${first}&tsyms=${second}&e=${market}`
+      `pricemultifull?fsyms=${coin}&tsyms=USDT&e=${market}`,
     );
-    if (res.data.Response) {
-      throw new Error(res.data.Message);
-    }
-    return res.data.RAW[coin].USD;
+    return res.data.RAW[coin].USDT;
   };
 
   /**
@@ -70,9 +69,9 @@ class CryptoCompareService {
    *
    * @return {object}
    */
-  getHistoricalData = async (first, second, market) => {
+  getHistoricalData = async (first, market) => {
     const res = await api(
-      `histoday?fsym=${first}&tsym=${second}&e=${market}&limit=10`
+      `histoday?fsym=${first}&tsym=${second}&e=${market}&limit=10`,
     );
     return res.data.DATA;
   };

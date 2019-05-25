@@ -2,49 +2,44 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import service from '../../services/cryptocompare-service';
+import styles from './SelectCoin.scss';
 
 export default class SelectCoin extends Component {
-  static defaultProps = {
-    handleCoinChange: () => {}
-  };
-
   static propTypes = {
-    handleCoinChange: PropTypes.func.isRequired
+    handleCoinSelect: PropTypes.func.isRequired,
   };
 
   state = {
-    coins: []
+    coins: [],
   };
 
   componentDidMount() {
-    service.getAllCoins().then(coins => {
+    service.getAllCoins().then((coins) => {
       this.setState({ coins });
     });
   }
 
-  handleChange = event => {
+  handleSelect = (event) => {
     const coin = event.target.value;
-    this.props.handleCoinChange(coin);
+    this.props.handleCoinSelect(coin);
   };
 
   render() {
     const { coins } = this.state;
-    const options = Object.values(coins).map(coin => {
-      return (
-        <option key={+coin['Id']} value={coin['Symbol']}>
-          {coin['FullName']}
-        </option>
-      );
-    });
+    const options = Object.values(coins).map(coin => (
+      <option key={+coin.Id} value={coin.Symbol}>
+        {coin.FullName}
+      </option>
+    ));
 
     return (
-      <div className="select-form__coin">
-        <label htmlFor="select-field">Coin</label>
+      <div className={styles.selectCoin}>
+        <label htmlFor="select-first">First Coin</label>
         <select
           name="select-market"
-          id="select-field"
-          onChange={this.handleChange}
-          value="BTC"
+          id="select-first"
+          onChange={this.handleSelect}
+          className={styles.select}
         >
           {options}
         </select>

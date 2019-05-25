@@ -6,6 +6,7 @@
 .Header {
   grid-area: 1 / 1 / span 1 / -1;
   position: relative;
+  padding: 1.6rem;
 
   .logout,
   .auth {

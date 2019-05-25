@@ -7,5 +7,5 @@ const mapStateToProps = state => ({ error: state.error, auth: state.auth });
 
 export default connect(
   mapStateToProps,
-  { signUp }
+  { signUp },
 )(Register);

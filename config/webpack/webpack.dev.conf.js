@@ -6,13 +6,17 @@ const baseConfig = require('./webpack.base.conf');
 
 const devConfig = {
   mode: 'development',
+  context: __dirname,
   entry: {
     polyfill: 'babel-polyfill',
-    app: ['webpack-hot-middleware/client?path=/__what&timeout=2000&overlay=false']
+    app: [
+      baseConfig.externals.paths.src,
+      'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true'
+    ]
   },
   output: {
-    filename: `${baseConfig.externals.paths.assets}js/[name].bundle.js`,
-    path: baseConfig.externals.paths.dist,
+    filename: '[name].bundle.js',
+    path: __dirname,
     publicPath: '/'
   },
   module: {

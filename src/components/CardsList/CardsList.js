@@ -1,39 +1,69 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Card from '../Card';
+import Card from '../../containers/CardContainer';
+import NoContent from '../../pages/NoContent';
 
-export default class CardsList extends PureComponent {
+import styles from './CardsList.scss';
+
+export default class CardsList extends Component {
+  static defaultProps = {
+    error: null,
+    cryptos: null,
+    filter: null,
+  };
+
   static propTypes = {
-    errors: PropTypes.string,
-    cryptos: PropTypes.object,
-    getAllCryptoCards: PropTypes.func,
-    deleteCard: PropTypes.func
+    error: PropTypes.shape({
+      message: PropTypes.string,
+    }),
+    cryptos: PropTypes.shape({
+      cards: PropTypes.arrayOf(PropTypes.object),
+    }),
+    filter: PropTypes.shape({
+      term: PropTypes.string,
+    }),
+    getAllCryptoCards: PropTypes.func.isRequired,
+    deleteCard: PropTypes.func.isRequired,
+    setCount: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
-    // this.props.getAllCryptoCards();
+    this.props.getAllCryptoCards();
   }
 
   render() {
-    const { errors } = this.props;
-    return errors ? (
-      <span className={styles.errors}>{errors}</span>
+    const {
+      error: { message },
+      cryptos: { cards },
+      filter: { term },
+    } = this.props;
+
+    const filterCards = cards.filter(
+      card => card.name.includes(term) || card.exchange.includes(term),
+    );
+
+    return message ? (
+      <NoContent message={message} />
     ) : (
-      <div className="cards-list">
-        {/* {cards.map(card => {
-          const { name, exchange, count, id } = card;
+      <div className={styles.list}>
+        {filterCards.map((card) => {
+          const {
+            name, exchange, count, _id: id,
+          } = card;
+          const countFunc = this.props.setCount(id);
           return (
-            <div key={id} className="card">
+            <div key={id} className={styles.card}>
               <Card
                 name={name}
                 exchange={exchange}
                 count={count}
-                handleDeleteCard={() => deleteCard(id)}
+                handleDeleteCard={() => this.props.deleteCard(id)}
+                countFunc={countFunc}
               />
             </div>
           );
-        })} */}
+        })}
       </div>
     );
   }

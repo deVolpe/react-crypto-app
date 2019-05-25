@@ -1,24 +1,24 @@
-import mongoose, { model } from 'mongoose';
+const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
 const cryptoSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   exchange: {
     type: String,
-    required: true
+    required: true,
   },
   count: {
     type: Number,
-    default: 1
+    default: 1,
   },
   user: {
     ref: 'users',
-    type: Schema.Types.ObjectId
-  }
+    type: Schema.Types.ObjectId,
+  },
 });
 
-export default model('cryptocurrencies', cryptoSchema);
+module.exports = mongoose.model('cryptocurrencies', cryptoSchema);
