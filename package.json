@@ -32,6 +32,9 @@
     "> 1%",
     "last 3 version"
   ],
+  "engines": {
+    "node": "10.3.0"
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
