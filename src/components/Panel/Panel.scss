@@ -1,0 +1,17 @@
+@import '../App/styleVariables.scss';
+
+.panel {
+  grid-area: 1 / 1 / 1 / -1;
+  background: $panel_background;
+  display: grid;
+  grid-template: {
+    columns: repeat(5, 1fr);
+    rows: 50px;
+  }
+}
+
+@media (max-width: 479px) {
+  .panel {
+    grid-template-rows: 50px 50px;
+  }
+}

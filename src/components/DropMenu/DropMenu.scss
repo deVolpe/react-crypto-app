@@ -1,0 +1,14 @@
+.menuIcon {
+  grid-area: 1 / 1 / span 1 / span 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-left: 1.6em;
+}
+.menu {
+  grid-area: 2 / 1 / auto / 1;
+  padding: 10px;
+  background: #ffffff;
+  // display: none;
+}
+

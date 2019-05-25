@@ -3,6 +3,21 @@
     "es6": true,
     "node": true
   },
-  "parser": "babel-eslint"
-  
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb"
+  ],
+  "plugins": [],
+  "rules": {
+    "react/jsx-filename-extension": [
+      2,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "linebreak-style": "off"
+  }
 }

@@ -1,0 +1,7 @@
+@import '../App/styleVariables.scss';
+
+.line {
+  stroke: $style_color;
+  stroke-linecap: round;
+  stroke-width: 4px;
+}

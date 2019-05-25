@@ -1,0 +1,12 @@
+@import '../App/styleVariables.scss';
+
+svg:hover {
+  cursor: pointer;
+}
+
+svg .polyline {
+  stroke: $style_color;
+  stroke-width: 3;
+  stroke-linecap: round;
+  fill: none;
+}

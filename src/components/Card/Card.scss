@@ -1,0 +1,77 @@
+@import '../App/styleVariables.scss';
+
+.label {
+  font-size: 26px;
+  padding: 10px;
+  position: relative;
+  .img {
+    max-width: 30px;
+    max-height: 23px;
+    margin-right: 15px;
+  }
+  .pair {
+    display: inline-block;
+  }
+  .button {
+    position: absolute;
+    background: inherit;
+    padding: 0;
+    right: 5px;;
+    width: 10%;
+  }
+}
+
+.price {
+  display: inline-block;
+  margin: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  .index {
+    color: $index_color;
+    font-size: 16px;
+    &::before,
+    &::after {
+      color: $index_color;
+      margin: 0 10px 0;
+      font-weight: 400;
+    }
+    sub {
+      color: grey;
+      font-size: 10px;
+    }
+  }
+  .indexDown {
+    color: #bd221d;
+  }
+  .indexUp {
+    color: #1dbd52;
+  }
+}
+
+.counter {
+  margin: 5px 10px 5px;
+}
+
+.input {
+  padding: 2px;
+  width: 20vw;
+  background: $input_color;
+}
+
+@media (max-width: 479px) {
+  .label {
+    font-size: 20px;
+    .img {
+      max-height: 15px;
+    }
+  }
+  .price {
+    font: {
+      size: 18px;
+      weight: 400;
+    }
+    .index {
+      font-size: 13px;
+    }
+  }
+}

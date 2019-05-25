@@ -1,0 +1,16 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: #ffffff;
+  margin: 0.8em;
+}
+
+@media (max-width: 479px) {
+  .list {
+    justify-content: center;
+    padding: 0;
+  }
+}
