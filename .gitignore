@@ -7,8 +7,9 @@
 node_modules
 
 # Dist & test
-test
 dist
+test
+build
 
 # Db config
 config/database/keys.js
