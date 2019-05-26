@@ -23,7 +23,7 @@ module.exports = {
     modules: ['node_modules'],
   },
   resolveLoader: {
-    extensions: ['.js', '.json'z],
+    extensions: ['.js', '.json'],
     modules: ['node_modules'],
   },
   module: {
