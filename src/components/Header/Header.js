@@ -26,9 +26,11 @@ const Header = ({ children, auth, logout }) => (
 
 Header.defaultProps = { children: null };
 Header.propTypes = {
-  children: PropTypes.element.isRequired,
-  auth: PropTypes.object.isRequired,
-  logout: PropTypes.func.isRequired
+  children: PropTypes.element,
+  auth: PropTypes.shape({
+    isAuthenticated: PropTypes.bool,
+  }).isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
 export default Header;

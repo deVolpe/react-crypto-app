@@ -16,7 +16,9 @@ const Logo = ({ auth }) => (
 );
 
 Logo.propTypes = {
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.shape({
+    isAuthenticated: PropTypes.bool,
+  }).isRequired,
 };
 
 export default Logo;
