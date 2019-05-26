@@ -5,8 +5,6 @@ const isEmpty = require('./features/isEmpty');
 module.exports = function validateLoginInput(data) {
   const errors = {};
   const email = !isEmpty(data.email) ? data.email : '';
-
-
   const password = !isEmpty(data.password) ? data.password : '';
 
   if (!Validator.isEmail(email)) {

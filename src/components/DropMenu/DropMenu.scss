@@ -9,6 +9,17 @@
   grid-area: 2 / 1 / auto / 1;
   padding: 10px;
   background: #ffffff;
-  // display: none;
+  z-index: 1;
+}
+.hide {
+  display: none;
 }
 
+@media (max-width: 479px) {
+  .menuIcon {
+    grid-row-start: 2;
+  }
+  .menu {
+    grid-row: 3 / span 1;
+  }
+}

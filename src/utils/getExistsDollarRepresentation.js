@@ -4,7 +4,9 @@
  * @param {string} coin
  * @param {string} exchange
  *
- * @return {string}
+ * @return {string} valid dollar representation (for instance: USDT or TUSD)
  */
 
-export const getExistsDollarRepresentation = (coin, exchange) => null;
+export const getExistsDollarRepresentation = (coin, exchange) => {
+  
+};

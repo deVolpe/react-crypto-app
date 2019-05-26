@@ -3,6 +3,6 @@ module.exports = {
     require('autoprefixer')({
       grid: true,
     }),
-    require('css-mqpacker'),
-  ],
+    require('css-mqpacker')
+  ]
 };

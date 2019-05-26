@@ -31,6 +31,8 @@ class CryptoCompareService {
    *
    * @see 'https://min-api.cryptocompare.com/documentation?key=Price&cat=SingleSymbolPriceEndpoint'
    * @param {string} coin
+   * @param {string} market
+   * 
    * @return {object}
    *
    */

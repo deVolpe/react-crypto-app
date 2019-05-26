@@ -7,7 +7,6 @@
     "start": "cross-env NODE_ENV=production node server",
     "server": "cross-env NODE_ENV=development node server",
     "build": "webpack --config ./config/webpack/webpack.prod.conf.js --progress",
-    "dev": "webpack-dev-server --config ./config/webpack/webpack.dev.conf.js --open",
     "lint": "./node_modules/.bin/eslint ./ --fix"
   },
   "repository": {
@@ -33,7 +32,8 @@
     "last 3 version"
   ],
   "engines": {
-    "node": "10.3.0"
+    "node": "10.3.0",
+    "npm": "6.9.0"
   },
   "dependencies": {
     "axios": "^0.18.0",

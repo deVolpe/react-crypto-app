@@ -12,12 +12,12 @@ const NavBar = () => (
         </Link>
       </li>
       <li>
-        <Link to="" className={styles.link}>
+        <Link to="/main" className={styles.link}>
           Top
         </Link>
       </li>
       <li>
-        <Link to="" className={styles.link}>
+        <Link to="/main" className={styles.link}>
           News
         </Link>
       </li>
