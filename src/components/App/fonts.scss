@@ -4,7 +4,7 @@
     weight: bold;
     style: normal;
   }
-  src: url('./assets/fonts/Open_Sans/OpenSans-Bold.ttf') format('truetype');
+  src: url(./assets/fonts/Open_Sans/OpenSans-Bold.ttf);
 }
 
 @font-face {
@@ -13,5 +13,5 @@
     weight: normal;
     style: normal;
   }
-  src: url('./assets/fonts/Open_Sans/OpenSans-Regular.ttf') format('truetype');
+  src: url(./assets/fonts/Open_Sans/OpenSans-Regular.ttf);
 }

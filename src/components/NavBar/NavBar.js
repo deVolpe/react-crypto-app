@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 import styles from './NavBar.scss';
 
 const NavBar = () => (
@@ -7,20 +8,17 @@ const NavBar = () => (
     <ul className={styles.list}>
       <li>
         <Link to="/main/cards" className={styles.link}>
-
-            Main
+          Main
         </Link>
       </li>
       <li>
         <Link to="" className={styles.link}>
-
-            Top
+          Top
         </Link>
       </li>
       <li>
         <Link to="" className={styles.link}>
-
-            News
+          News
         </Link>
       </li>
     </ul>
