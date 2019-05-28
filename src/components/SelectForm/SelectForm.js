@@ -13,11 +13,11 @@ const SelectForm = ({ error: { conflict }, createCard }) => {
   const [exchange, setExchange] = useState('');
   const [invalid, setInvalid] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     const card = {
       coin,
-      exchange,
+      exchange
     };
     service
       .getCoinPrices(card.coin, card.exchange)
@@ -27,15 +27,11 @@ const SelectForm = ({ error: { conflict }, createCard }) => {
       .catch(setInvalid);
   };
 
-  useEffect(() => {
-    setInvalid(invalid);
-  }, [invalid]);
-
-  const handleCoinSelect = (coin) => {
+  const handleCoinSelect = coin => {
     setCoin(coin);
   };
 
-  const handleMarketSelect = (exchange) => {
+  const handleMarketSelect = exchange => {
     setExchange(exchange);
   };
 
@@ -44,13 +40,11 @@ const SelectForm = ({ error: { conflict }, createCard }) => {
 
   return (
     <div className={styles.select}>
-      {conflictError}
-      {invalidError}
+      {conflictError || invalidError}
       <form onSubmit={handleSubmit}>
         <SelectCoin handleCoinSelect={handleCoinSelect} />
         <SelectExchange handleMarketSelect={handleMarketSelect} />
         <button type="submit" className={styles.button}>
-
           Confirm
         </button>
       </form>
@@ -62,8 +56,8 @@ SelectForm.propTypes = {
   createCard: PropTypes.func.isRequired,
   error: PropTypes.shape({
     invalid: PropTypes.string,
-    exist: PropTypes.string,
-  }),
+    exist: PropTypes.string
+  })
 };
 
 export default SelectForm;

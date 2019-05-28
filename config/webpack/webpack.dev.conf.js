@@ -29,7 +29,7 @@ const devConfig = {
   },
   devtool: 'cheap-module-eval-source-map',
   devServer: {
-    contentBase: baseConfig.externals.paths.dist,
+    contentBase: baseConfig.externals.paths.build,
     watchContentBase: true,
   },
   plugins: [

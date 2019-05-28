@@ -30,9 +30,9 @@ if (env === 'development') {
 
 if (env === 'production') {
   app.use(require('morgan')('combined'));
-  app.use(express.static(path.join(__dirname, 'dist')));
+  app.use(express.static(path.join(__dirname, 'build')));
   app.get('*', (req, res) => {
-    res.sendFile('index.html', { root: path.join(__dirname, 'dist') });
+    res.sendFile('index.html', { root: path.join(__dirname, 'build') });
   });
 }
 

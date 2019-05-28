@@ -24,9 +24,9 @@
     line-height: 30px;
   }
   .lineBold {
-    @include fontStyle(15px, 600);
+    @include fontStyle(12px, 600);
   }
   .lineNormal {
-    @include fontStyle(10px);
+    @include fontStyle(7px);
   }
 }

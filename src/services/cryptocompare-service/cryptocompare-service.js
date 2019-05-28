@@ -23,7 +23,7 @@ class CryptoCompareService {
    */
   getAllExchanges = async () => {
     const res = await api('exchanges/general');
-    return res.data.Data;
+    return await res.data.Data;
   };
 
   /**

@@ -7,7 +7,7 @@ import Spinner from '../Spinner';
 import Navbar from '../NavBar';
 import SearchPanel from '../../containers/SearchPanelContainer';
 import DropMenu from '../DropMenu';
-import MenuSVG from '../MenuSVG';
+import NoContent from '../../pages/NoContent';
 
 import styles from './MainSection.scss';
 
@@ -15,17 +15,23 @@ const CardsList = lazy(() => import('../../containers/CardsListContainer'));
 
 export default class MainSection extends PureComponent {
   static defaultProps = {
-    match: null,
+    match: null
   };
 
   static propTypes = {
     match: PropTypes.shape({
-      path: PropTypes.string,
+      path: PropTypes.string
     }),
+    error: PropTypes.shape({
+      message: PropTypes.string
+    }).isRequired
   };
 
   render() {
-    const { match: { path } } = this.props;
+    const {
+      match: { path },
+      error: { message }
+    } = this.props;
     return (
       <section className={styles.Main}>
         <Panel>
@@ -36,13 +42,17 @@ export default class MainSection extends PureComponent {
         <Route
           exact
           path={`${path}/cards`}
-          render={() => (
-            <Suspense fallback={<Spinner />}>
+          render={() =>
+            message ? (
+              <NoContent message={message} />
+            ) : (
               <div className={styles.container}>
-                <CardsList />
+                <Suspense fallback={<Spinner />}>
+                  <CardsList />
+                </Suspense>
               </div>
-            </Suspense>
-          )}
+            )
+          }
         />
       </section>
     );

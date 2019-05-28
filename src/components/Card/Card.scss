@@ -3,7 +3,6 @@
 .label {
   font-size: 26px;
   padding: 10px;
-  position: relative;
   .img {
     max-width: 30px;
     max-height: 23px;
@@ -13,10 +12,9 @@
     display: inline-block;
   }
   .button {
-    position: absolute;
     background: inherit;
     padding: 0;
-    right: 5px;;
+    margin-left: 0.6rem;
     width: 10%;
   }
 }

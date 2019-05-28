@@ -13,16 +13,18 @@ export default class Card extends PureComponent {
   static defaultProps = {
     name: 'unknown',
     exchange: 'unknown',
-    count: 1
+    count: 1,
+    countFunc: () => {}
   };
 
   static propTypes = {
     name: PropTypes.string,
     exchange: PropTypes.string,
     count: PropTypes.number,
+    counter: PropTypes.number.isRequired,
     getError: PropTypes.func.isRequired,
     handleDeleteCard: PropTypes.func.isRequired,
-    setCount: PropTypes.func
+    countFunc: PropTypes.func
   };
 
   state = {
@@ -30,7 +32,8 @@ export default class Card extends PureComponent {
     exchange: '',
     currPrice: 0,
     currIndex: 0.0,
-    imgSrc: ''
+    imgSrc: '',
+    count: this.props.count
   };
 
   componentDidMount() {
@@ -42,8 +45,15 @@ export default class Card extends PureComponent {
     clearInterval(this.interval);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.counter !== this.props.counter) {
+      this.setState({ count: this.props.counter });
+    }
+  }
+
   handleChangeCount = e => {
-    this.props.setCount(e.target.value);
+    const count = e.target.value;
+    this.props.countFunc(+count);
   };
 
   loadData = () => {
@@ -61,8 +71,15 @@ export default class Card extends PureComponent {
   };
 
   render() {
-    const { coinSymbol, exchange, currPrice, currIndex, imgSrc } = this.state;
-    const { handleDeleteCard, count } = this.props;
+    const {
+      coinSymbol,
+      exchange,
+      currPrice,
+      currIndex,
+      imgSrc,
+      count
+    } = this.state;
+    const { handleDeleteCard } = this.props;
     return (
       <>
         <div className={styles.label}>
@@ -79,7 +96,7 @@ export default class Card extends PureComponent {
           </button>
         </div>
         <div className={styles.price}>
-          ${currPrice.toFixed(2)}
+          ${currPrice * count}
           <span
             className={cx(
               styles.index,
@@ -88,7 +105,7 @@ export default class Card extends PureComponent {
             )}
           >
             {' '}
-            {currIndex.toFixed(3)}%<sub>24H</sub>
+            {currIndex.toFixed(3)}% <sub>24H</sub>
           </span>
         </div>
         {/* <CardChart/> */}
