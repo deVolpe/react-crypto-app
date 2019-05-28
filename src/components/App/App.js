@@ -39,15 +39,15 @@ const App = ({ auth }) => (
             <Route
               exact
               path={`${path}/login`}
-              render={({ match, history: { push } }) => (
-                <Login match={match} push={push} />
+              render={({ history: { push } }) => (
+                <Login push={push} />
               )}
             />
             <Route
               exact
               path={`${path}/register`}
-              render={({ match, history: { push } }) => (
-                <Register match={match} push={push} />
+              render={({ history: { push } }) => (
+                <Register push={push} />
               )}
             />
           </Auth>
@@ -62,7 +62,7 @@ const App = ({ auth }) => (
 
 App.propTypes = {
   auth: PropTypes.shape({
-    isAuthenticated: PropTypes.string,
+    isAuthenticated: PropTypes.bool,
   }).isRequired,
 };
 

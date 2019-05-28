@@ -8,37 +8,20 @@ import InvalidError from '../../pages/InvalidError';
 export default class Register extends PureComponent {
   static defaultProps = {
     push: () => {},
-    match: null,
+    match: null
   };
 
   static propTypes = {
     signUp: PropTypes.func.isRequired,
-    error: PropTypes.object,
+    error: PropTypes.objectOf(PropTypes.string).isRequired,
     push: PropTypes.func,
-    match: PropTypes.object,
   };
 
   state = {
     email: '',
     password: '',
     passwordConfirm: '',
-    error: {},
-  };
-
-  handleChangeInput = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const candidate = {
-      email: this.state.email,
-      password: this.state.password,
-      passwordConfirm: this.state.passwordConfirm,
-    };
-    this.props.signUp(candidate, this.props.push);
+    error: {}
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -46,6 +29,22 @@ export default class Register extends PureComponent {
       this.setState({ error: this.props.error });
     }
   }
+
+  handleChangeInput = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    const candidate = {
+      email: this.state.email,
+      password: this.state.password,
+      passwordConfirm: this.state.passwordConfirm
+    };
+    this.props.signUp(candidate, this.props.push);
+  };
 
   render() {
     const { error } = this.state;
@@ -76,15 +75,11 @@ export default class Register extends PureComponent {
           className={styles.input}
         />
         <button type="submit" className={styles.button}>
-
           Register
         </button>
         <figcaption className={styles.message}>
-
-          Already registered?
-          {' '}
+          Already registered?{' '}
           <Link to="/auth/login" className={styles.link}>
-
             Sign In
           </Link>
         </figcaption>

@@ -15,9 +15,6 @@ export default class Login extends PureComponent {
   static propTypes = {
     signIn: PropTypes.func.isRequired,
     error: PropTypes.objectOf(PropTypes.string).isRequired,
-    match: PropTypes.shape({
-      url: PropTypes.string,
-    }),
     push: PropTypes.func,
   };
 
@@ -49,7 +46,7 @@ export default class Login extends PureComponent {
   };
 
   render() {
-    const { error, match } = this.state;
+    const { error } = this.state;
 
     return (
       <form onSubmit={this.handleSubmit}>
@@ -70,10 +67,8 @@ export default class Login extends PureComponent {
           className={styles.input}
         />
         <button type="submit" className={styles.button}>Login </button>
-        <figcaption className={styles.message}>
-Not registered?
-          {' '}
-          <Link to={`${match.url}/register`} className={styles.link}>Create an account</Link>
+        <figcaption className={styles.message}>Not registered?{' '}
+          <Link to="/login/register" className={styles.link}>Create an account</Link>
         </figcaption>
       </form>
     );

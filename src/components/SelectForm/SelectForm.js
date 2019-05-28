@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import SelectExchange from '../SelectExchange';
@@ -45,7 +45,6 @@ const SelectForm = ({ error: { conflict }, createCard }) => {
         <SelectCoin handleCoinSelect={handleCoinSelect} />
         <SelectExchange handleMarketSelect={handleMarketSelect} />
         <button type="submit" className={styles.button}>
-
           Confirm
         </button>
       </form>
