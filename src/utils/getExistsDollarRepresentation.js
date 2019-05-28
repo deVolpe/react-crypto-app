@@ -8,5 +8,5 @@
  */
 
 export const getExistsDollarRepresentation = (coin, exchange) => {
-  
+
 };

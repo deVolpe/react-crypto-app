@@ -61,7 +61,9 @@ const App = ({ auth }) => (
 );
 
 App.propTypes = {
-  auth: PropTypes.object.isRequired,
+  auth: PropTypes.shape({
+    isAuthenticated: PropTypes.string,
+  }).isRequired,
 };
 
 export default App;

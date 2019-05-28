@@ -8,35 +8,35 @@ import InvalidError from '../../pages/InvalidError';
 export default class Register extends PureComponent {
   static defaultProps = {
     push: () => {},
-    match: null
+    match: null,
   };
 
   static propTypes = {
     signUp: PropTypes.func.isRequired,
     error: PropTypes.object,
     push: PropTypes.func,
-    match: PropTypes.object
+    match: PropTypes.object,
   };
 
   state = {
     email: '',
     password: '',
     passwordConfirm: '',
-    error: {}
+    error: {},
   };
 
-  handleChangeInput = e => {
+  handleChangeInput = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const candidate = {
       email: this.state.email,
       password: this.state.password,
-      passwordConfirm: this.state.passwordConfirm
+      passwordConfirm: this.state.passwordConfirm,
     };
     this.props.signUp(candidate, this.props.push);
   };
@@ -76,11 +76,15 @@ export default class Register extends PureComponent {
           className={styles.input}
         />
         <button type="submit" className={styles.button}>
+
           Register
         </button>
         <figcaption className={styles.message}>
-          Already registered?{' '}
+
+          Already registered?
+          {' '}
           <Link to="/auth/login" className={styles.link}>
+
             Sign In
           </Link>
         </figcaption>

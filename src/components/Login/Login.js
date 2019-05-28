@@ -14,8 +14,10 @@ export default class Login extends PureComponent {
 
   static propTypes = {
     signIn: PropTypes.func.isRequired,
-    error: PropTypes.object,
-    match: PropTypes.object,
+    error: PropTypes.objectOf(PropTypes.string).isRequired,
+    match: PropTypes.shape({
+      url: PropTypes.string,
+    }),
     push: PropTypes.func,
   };
 
@@ -24,6 +26,12 @@ export default class Login extends PureComponent {
     password: '',
     error: {},
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.error !== prevProps.error) {
+      this.setState({ error: this.props.error });
+    }
+  }
 
   handleInputChange = (e) => {
     this.setState({
@@ -40,14 +48,8 @@ export default class Login extends PureComponent {
     this.props.signIn(user, this.props.push);
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.error !== prevProps.error) {
-      this.setState({ error: this.props.error });
-    }
-  }
-
   render() {
-    const { error } = this.state;
+    const { error, match } = this.state;
 
     return (
       <form onSubmit={this.handleSubmit}>
@@ -67,18 +69,11 @@ export default class Login extends PureComponent {
           onChange={this.handleInputChange}
           className={styles.input}
         />
-        <button type="submit" className={styles.button}>
-
-          Login
-        </button>
+        <button type="submit" className={styles.button}>Login </button>
         <figcaption className={styles.message}>
-
-          Not registered?
+Not registered?
           {' '}
-          <Link to="/auth/register" className={styles.link}>
-
-            Create an account
-          </Link>
+          <Link to={`${match.url}/register`} className={styles.link}>Create an account</Link>
         </figcaption>
       </form>
     );

@@ -10,5 +10,5 @@ export default combineReducers({
   cryptos,
   counter,
   error,
-  filter
+  filter,
 });

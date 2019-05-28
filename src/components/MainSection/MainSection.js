@@ -15,22 +15,22 @@ const CardsList = lazy(() => import('../../containers/CardsListContainer'));
 
 export default class MainSection extends PureComponent {
   static defaultProps = {
-    match: null
+    match: null,
   };
 
   static propTypes = {
     match: PropTypes.shape({
-      path: PropTypes.string
+      path: PropTypes.string,
     }),
     error: PropTypes.shape({
-      message: PropTypes.string
-    }).isRequired
+      message: PropTypes.string,
+    }).isRequired,
   };
 
   render() {
     const {
       match: { path },
-      error: { message }
+      error: { message },
     } = this.props;
     return (
       <section className={styles.Main}>
@@ -42,16 +42,15 @@ export default class MainSection extends PureComponent {
         <Route
           exact
           path={`${path}/cards`}
-          render={() =>
-            message ? (
-              <NoContent message={message} />
-            ) : (
-              <div className={styles.container}>
-                <Suspense fallback={<Spinner />}>
-                  <CardsList />
-                </Suspense>
-              </div>
-            )
+          render={() => (message ? (
+            <NoContent message={message} />
+          ) : (
+            <div className={styles.container}>
+              <Suspense fallback={<Spinner />}>
+                <CardsList />
+              </Suspense>
+            </div>
+          ))
           }
         />
       </section>
