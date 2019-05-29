@@ -14,7 +14,7 @@ export default class Card extends PureComponent {
     name: 'unknown',
     exchange: 'unknown',
     count: 1,
-    countFunc: () => {},
+    countFunc: () => {}
   };
 
   static propTypes = {
@@ -24,7 +24,7 @@ export default class Card extends PureComponent {
     counter: PropTypes.number.isRequired,
     getError: PropTypes.func.isRequired,
     handleDeleteCard: PropTypes.func.isRequired,
-    countFunc: PropTypes.func,
+    countFunc: PropTypes.func
   };
 
   state = {
@@ -33,7 +33,7 @@ export default class Card extends PureComponent {
     currPrice: 0,
     currIndex: 0.0,
     imgSrc: '',
-    count: this.props.count,
+    count: 1
   };
 
   componentDidMount() {
@@ -45,13 +45,13 @@ export default class Card extends PureComponent {
     clearInterval(this.interval);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.counter !== this.props.counter) {
-      this.setState({ count: this.props.counter });
-    }
+  static getDerivedStateFromProps(props, state) {
+    return {
+      count: props.counter
+    };
   }
 
-  handleChangeCount = (e) => {
+  handleChangeCount = e => {
     const count = e.target.value;
     this.props.countFunc(+count);
   };
@@ -59,13 +59,13 @@ export default class Card extends PureComponent {
   loadData = () => {
     service
       .getCoinMarketInfo(this.props.name, this.props.exchange)
-      .then((data) => {
+      .then(data => {
         this.setState({
           imgSrc: getImgUrl(data.IMAGEURL),
           exchange: data.MARKET,
           currPrice: data.PRICE,
           currIndex: data.CHANGEPCT24HOUR,
-          coinSymbol: data.FROMSYMBOL,
+          coinSymbol: data.FROMSYMBOL
         });
       });
   };
@@ -77,7 +77,7 @@ export default class Card extends PureComponent {
       currPrice,
       currIndex,
       imgSrc,
-      count,
+      count
     } = this.state;
     const { handleDeleteCard } = this.props;
     return (
@@ -85,9 +85,7 @@ export default class Card extends PureComponent {
         <div className={styles.label}>
           <img src={imgSrc} alt={coinSymbol} className={styles.img} />
           <h2 className={styles.pair}>
-            {coinSymbol}
--
-            {exchange}
+            {coinSymbol}-{exchange}
           </h2>
           <button
             type="button"
@@ -98,20 +96,16 @@ export default class Card extends PureComponent {
           </button>
         </div>
         <div className={styles.price}>
-
-          $
-          {currPrice * count}
+          ${currPrice * count}
           <span
             className={cx(
               styles.index,
               { indexUp: currIndex > 0 },
-              { indexDown: currIndex < 0 },
+              { indexDown: currIndex < 0 }
             )}
           >
             {' '}
-            {currIndex.toFixed(3)}
-%
-            <sub>24H</sub>
+            {currIndex.toFixed(3)}%<sub>24H</sub>
           </span>
         </div>
         {/* <CardChart/> */}

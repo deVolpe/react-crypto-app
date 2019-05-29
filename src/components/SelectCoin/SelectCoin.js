@@ -5,8 +5,13 @@ import service from '../../services/cryptocompare-service';
 import styles from './SelectCoin.scss';
 
 export default class SelectCoin extends Component {
+  static defaultProps = {
+    value: '',
+  };
+
   static propTypes = {
     handleCoinSelect: PropTypes.func.isRequired,
+    value: PropTypes.string,
   };
 
   state = {
@@ -26,6 +31,7 @@ export default class SelectCoin extends Component {
 
   render() {
     const { coins } = this.state;
+    const { value } = this.props;
     const options = Object.values(coins).map(coin => (
       <option key={+coin.Id} value={coin.Symbol}>
         {coin.FullName}
@@ -38,6 +44,7 @@ export default class SelectCoin extends Component {
         <select
           name="select-market"
           id="select-first"
+          value={value}
           onChange={this.handleSelect}
           className={styles.select}
         >

@@ -9,15 +9,15 @@ import service from '../../services/cryptocompare-service';
 import styles from './SelectForm.scss';
 
 const SelectForm = ({ error: { conflict }, createCard }) => {
-  const [coin, setCoin] = useState('');
-  const [exchange, setExchange] = useState('');
+  const [coin, setCoin] = useState('BTC');
+  const [exchange, setExchange] = useState('Binance');
   const [invalid, setInvalid] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     const card = {
       coin,
-      exchange,
+      exchange
     };
     service
       .getCoinPrices(card.coin, card.exchange)
@@ -27,11 +27,11 @@ const SelectForm = ({ error: { conflict }, createCard }) => {
       .catch(setInvalid);
   };
 
-  const handleCoinSelect = (coin) => {
+  const handleCoinSelect = coin => {
     setCoin(coin);
   };
 
-  const handleMarketSelect = (exchange) => {
+  const handleMarketSelect = exchange => {
     setExchange(exchange);
   };
 
@@ -42,8 +42,11 @@ const SelectForm = ({ error: { conflict }, createCard }) => {
     <div className={styles.select}>
       {conflictError || invalidError}
       <form onSubmit={handleSubmit}>
-        <SelectCoin handleCoinSelect={handleCoinSelect} />
-        <SelectExchange handleMarketSelect={handleMarketSelect} />
+        <SelectCoin value={coin} handleCoinSelect={handleCoinSelect} />
+        <SelectExchange
+          value={exchange}
+          handleMarketSelect={handleMarketSelect}
+        />
         <button type="submit" className={styles.button}>
           Confirm
         </button>
@@ -56,8 +59,8 @@ SelectForm.propTypes = {
   createCard: PropTypes.func.isRequired,
   error: PropTypes.shape({
     invalid: PropTypes.string,
-    exist: PropTypes.string,
-  }),
+    exist: PropTypes.string
+  }).isRequired
 };
 
 export default SelectForm;

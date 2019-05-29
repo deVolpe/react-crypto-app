@@ -14,7 +14,7 @@ export default class Register extends PureComponent {
   static propTypes = {
     signUp: PropTypes.func.isRequired,
     error: PropTypes.objectOf(PropTypes.string).isRequired,
-    push: PropTypes.func,
+    push: PropTypes.func
   };
 
   state = {

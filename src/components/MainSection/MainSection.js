@@ -45,11 +45,11 @@ export default class MainSection extends PureComponent {
           render={() => (message ? (
             <NoContent message={message} />
           ) : (
-            <div className={styles.container}>
+            <main className={styles.container}>
               <Suspense fallback={<Spinner />}>
                 <CardsList />
               </Suspense>
-            </div>
+            </main>
           ))
           }
         />

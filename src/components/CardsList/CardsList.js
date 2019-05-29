@@ -8,36 +8,38 @@ import styles from './CardsList.scss';
 export default class CardsList extends Component {
   static propTypes = {
     cryptos: PropTypes.shape({
-      cards: PropTypes.arrayOf(PropTypes.object),
+      cards: PropTypes.arrayOf(PropTypes.object)
     }).isRequired,
     filter: PropTypes.shape({
-      term: PropTypes.string,
+      term: PropTypes.string
     }).isRequired,
     getAllCryptoCards: PropTypes.func.isRequired,
     deleteCard: PropTypes.func.isRequired,
-    setCount: PropTypes.func.isRequired,
+    setCount: PropTypes.func.isRequired
   };
 
-  componentDidMount() {
-    this.props.getAllCryptoCards();
+  state = {
+    cards: []
+  };
+
+  static getDerivedStateFromProps(props, state) {
+    props.getAllCryptoCards();
+    return {
+      cards: props.cryptos.cards
+    };
   }
 
   render() {
-    const {
-      cryptos: { cards },
-      filter: { term },
-    } = this.props;
-
+    const { filter: { term } } = this.props;
+    const { cards } = this.state;
     const filterCards = cards.filter(
-      card => card.name.includes(term) || card.exchange.includes(term),
+      card => card.name.includes(term) || card.exchange.includes(term)
     );
 
     return (
       <div className={styles.list}>
-        {filterCards.map((card) => {
-          const {
-            name, exchange, count, _id: id,
-          } = card;
+        {filterCards.map(card => {
+          const { name, exchange, count, _id: id } = card;
           const countFunc = this.props.setCount(id);
           return (
             <div key={id} className={styles.card}>
