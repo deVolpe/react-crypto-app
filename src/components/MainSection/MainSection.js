@@ -1,4 +1,4 @@
-import React, { PureComponent, lazy, Suspense } from 'react';
+import React, { PureComponent, lazy, Suspense, memo } from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 
@@ -13,47 +13,42 @@ import styles from './MainSection.scss';
 
 const CardsList = lazy(() => import('../../containers/CardsListContainer'));
 
-export default class MainSection extends PureComponent {
-  static defaultProps = {
-    match: null,
-  };
+const MainSection = memo(({ match: { path }, error: { message } }) => (
+  <section className={styles.Main}>
+    <Panel>
+      <Navbar />
+      <SearchPanel />
+      <DropMenu />
+    </Panel>
+    <Route
+      exact
+      path={`${path}/cards`}
+      render={() =>
+        message ? (
+          <NoContent message={message} />
+        ) : (
+          <main className={styles.container}>
+            <Suspense fallback={<Spinner />}>
+              <CardsList />
+            </Suspense>
+          </main>
+        )
+      }
+    />
+  </section>
+));
 
-  static propTypes = {
-    match: PropTypes.shape({
-      path: PropTypes.string,
-    }),
-    error: PropTypes.shape({
-      message: PropTypes.string,
-    }).isRequired,
-  };
+MainSection.defaultProps = {
+  match: null
+};
 
-  render() {
-    const {
-      match: { path },
-      error: { message },
-    } = this.props;
-    return (
-      <section className={styles.Main}>
-        <Panel>
-          <Navbar />
-          <SearchPanel />
-          <DropMenu />
-        </Panel>
-        <Route
-          exact
-          path={`${path}/cards`}
-          render={() => (message ? (
-            <NoContent message={message} />
-          ) : (
-            <main className={styles.container}>
-              <Suspense fallback={<Spinner />}>
-                <CardsList />
-              </Suspense>
-            </main>
-          ))
-          }
-        />
-      </section>
-    );
-  }
-}
+MainSection.propTypes = {
+  match: PropTypes.shape({
+    path: PropTypes.string
+  }),
+  error: PropTypes.shape({
+    message: PropTypes.string
+  }).isRequired
+};
+
+export default MainSection;

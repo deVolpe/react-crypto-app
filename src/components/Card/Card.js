@@ -33,7 +33,7 @@ export default class Card extends PureComponent {
     currPrice: 0,
     currIndex: 0.0,
     imgSrc: '',
-    count: 1
+    count: this.props.count
   };
 
   componentDidMount() {

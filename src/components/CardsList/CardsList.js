@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import Card from '../../containers/CardContainer';
 
 import styles from './CardsList.scss';
 
-export default class CardsList extends Component {
+export default class CardsList extends PureComponent {
   static propTypes = {
     cryptos: PropTypes.shape({
       cards: PropTypes.arrayOf(PropTypes.object)

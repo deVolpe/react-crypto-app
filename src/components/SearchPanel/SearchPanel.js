@@ -17,7 +17,7 @@ const SearchPanel = ({ filter }) => {
       <input
         type="text"
         className={styles.input}
-        placeholder="Paste crypto"
+        placeholder="Paste crypto or market"
         value={term}
         onChange={handleChange}
       />

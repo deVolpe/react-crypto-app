@@ -68,7 +68,7 @@ export default class Login extends PureComponent {
         />
         <button type="submit" className={styles.button}>Login </button>
         <figcaption className={styles.message}>Not registered?{' '}
-          <Link to="/login/register" className={styles.link}>Create an account</Link>
+          <Link to="/auth/register" className={styles.link}>Create an account</Link>
         </figcaption>
       </form>
     );

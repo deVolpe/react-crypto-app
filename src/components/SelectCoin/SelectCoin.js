@@ -40,7 +40,7 @@ export default class SelectCoin extends Component {
 
     return (
       <div className={styles.selectCoin}>
-        <label htmlFor="select-first">First Coin</label>
+        <label htmlFor="select-first">Coin</label>
         <select
           name="select-market"
           id="select-first"

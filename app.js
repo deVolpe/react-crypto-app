@@ -12,7 +12,11 @@ const keys = require('./config/database/keys');
 const app = express();
 
 mongoose
-  .connect(keys.mongoURI, { useCreateIndex: true, useNewUrlParser: true, useFindAndModify: false })
+  .connect(keys.mongoURI, {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useFindAndModify: false
+  })
   .then(() => console.log('Db is connected'))
   .catch(console.error);
 

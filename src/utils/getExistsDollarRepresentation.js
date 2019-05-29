@@ -1,3 +1,4 @@
+import service from '../services/cryptocompare-service';
 /**
  * @description Return dollar representation that is exist in passed exchange
  *
@@ -8,5 +9,5 @@
  */
 
 export const getExistsDollarRepresentation = (coin, exchange) => {
-
+  service.getCoinPrices(coin, market);
 };

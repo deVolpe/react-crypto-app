@@ -57,10 +57,7 @@ const SelectForm = ({ error: { conflict }, createCard }) => {
 
 SelectForm.propTypes = {
   createCard: PropTypes.func.isRequired,
-  error: PropTypes.shape({
-    invalid: PropTypes.string,
-    exist: PropTypes.string
-  }).isRequired
+  error: PropTypes.objectOf(PropTypes.string).isRequired
 };
 
 export default SelectForm;

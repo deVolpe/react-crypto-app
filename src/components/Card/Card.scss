@@ -3,6 +3,7 @@
 .label {
   font-size: 26px;
   padding: 10px;
+  position: relative;
   .img {
     max-width: 30px;
     max-height: 23px;
@@ -13,8 +14,9 @@
   }
   .button {
     background: inherit;
+    position: absolute;
     padding: 0;
-    margin-left: 0.6rem;
+    right: 0.6rem;
     width: 10%;
   }
 }
@@ -47,12 +49,14 @@
 }
 
 .counter {
+  display: flex;
+  justify-content: center;
   margin: 5px 10px 5px;
 }
 
 .input {
   padding: 2px;
-  width: 20vw;
+  width: 10vw;
   background: $input_color;
 }
 
@@ -71,5 +75,8 @@
     .index {
       font-size: 13px;
     }
+  }
+  .input {
+    width: 20vw;
   }
 }
