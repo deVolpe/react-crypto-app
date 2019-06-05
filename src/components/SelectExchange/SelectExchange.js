@@ -33,7 +33,7 @@ export default class SelectExchange extends Component {
     const { exchanges } = this.state;
     const { value } = this.props;
     const options = Object.values(exchanges).map(market => (
-      <option key={+market.Id} value={market.Name}>
+      <option key={+market.Id} value={market.InternalName}>
         {market.Name}
       </option>
     ));

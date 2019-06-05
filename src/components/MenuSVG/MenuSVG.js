@@ -2,10 +2,10 @@ import React from 'react';
 import styles from './MenuSVG.scss';
 
 const MenuSVG = () => (
-  <svg height="40" width="50">
-    <line className={styles.line} x1="10" y1="10" x2="40" y2="10" />
-    <line className={styles.line} x1="10" y1="20" x2="40" y2="20" />
-    <line className={styles.line} x1="10" y1="30" x2="40" y2="30" />
+  <svg height="28" width="32">
+    <line className={styles.line} x1="1" y1="5" x2="31" y2="5" />
+    <line className={styles.line} x1="1" y1="15" x2="31" y2="15" />
+    <line className={styles.line} x1="1" y1="25" x2="31" y2="25" />
   </svg>
 );
 

@@ -4,9 +4,9 @@ const isEmpty = require('./validators/features/isEmpty');
 module.exports = {
   getAll(req, res) {
     Crypto.find({
-      user: req.user.id,
+      user: req.user.id
     })
-      .then((cards) => {
+      .then(cards => {
         if (isEmpty(cards)) {
           return res.status(404).json({ message: 'No cards yet' });
         }
@@ -19,19 +19,19 @@ module.exports = {
     const candidate = await Crypto.findOne({
       name: req.body.coin,
       exchange: req.body.exchange,
-      user: req.user.id,
+      user: req.user.id
     });
 
     if (candidate) {
       return res.status(409).json({
-        conflict: 'Card already exists',
+        conflict: 'Card already exists'
       });
     }
 
     const card = new Crypto({
       name: req.body.coin,
       exchange: req.body.exchange,
-      user: req.user.id,
+      user: req.user.id
     });
     card
       .save()
@@ -46,12 +46,14 @@ module.exports = {
   },
 
   async setCount(req, res) {
+    console.log(req.body.id);
+    console.log(req.body.value);
     const data = await Crypto.findByIdAndUpdate(req.body.id, {
-      count: req.body.count,
+      count: req.body.value
     });
 
     Crypto.findOne({ _id: data._id })
       .then(result => res.status(200).json(result.count))
       .catch(console.error);
-  },
+  }
 };

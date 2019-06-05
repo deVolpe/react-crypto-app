@@ -14,21 +14,23 @@ export default class Card extends PureComponent {
     name: 'unknown',
     exchange: 'unknown',
     count: 1,
-    countFunc: () => {}
+    id: ''
   };
 
   static propTypes = {
     name: PropTypes.string,
     exchange: PropTypes.string,
     count: PropTypes.number,
+    id: PropTypes.string,
     counter: PropTypes.number.isRequired,
     getError: PropTypes.func.isRequired,
     handleDeleteCard: PropTypes.func.isRequired,
-    countFunc: PropTypes.func
+    setCount: PropTypes.func.isRequired
   };
 
   state = {
     coinSymbol: '',
+    usdSymbol: '',
     exchange: '',
     currPrice: 0,
     currIndex: 0.0,
@@ -53,7 +55,7 @@ export default class Card extends PureComponent {
 
   handleChangeCount = e => {
     const count = e.target.value;
-    this.props.countFunc(+count);
+    this.props.setCount(+count);
   };
 
   loadData = () => {
@@ -65,7 +67,8 @@ export default class Card extends PureComponent {
           exchange: data.MARKET,
           currPrice: data.PRICE,
           currIndex: data.CHANGEPCT24HOUR,
-          coinSymbol: data.FROMSYMBOL
+          coinSymbol: data.FROMSYMBOL,
+          usdSymbol: data.TOSYMBOL
         });
       });
   };
@@ -73,6 +76,7 @@ export default class Card extends PureComponent {
   render() {
     const {
       coinSymbol,
+      usdSymbol,
       exchange,
       currPrice,
       currIndex,
@@ -108,7 +112,12 @@ export default class Card extends PureComponent {
             {currIndex.toFixed(3)}%<sub>24H</sub>
           </span>
         </div>
-        {/* <CardChart/> */}
+        <CardChart
+          coin={coinSymbol}
+          dollar={usdSymbol}
+          exchange={exchange}
+          color={currIndex < 0 ? 'red' : 'green'}
+        />
         <div className={styles.counter}>
           <input
             type="text"

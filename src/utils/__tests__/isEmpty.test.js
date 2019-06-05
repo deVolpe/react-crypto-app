@@ -13,7 +13,7 @@ describe('isEmpty', () => {
     const result = isEmpty(value);
     expect(result).toBe(answer);
   });
-  test('value="Hello, world"', () => {
+  test('[value="Hello, world"]', () => {
     const value = 'Hello, world';
     const answer = true;
     const result = isEmpty(value);

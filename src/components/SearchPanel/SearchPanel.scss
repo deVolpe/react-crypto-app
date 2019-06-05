@@ -1,14 +1,5 @@
 @import '../App/styleVariables.scss';
 
-@keyframes shadow {
-  form {
-    border: 1px solid $style_color;
-  }
-  to {
-    border: 3px solid $style_color;
-  }
-}
-
 .SearchPanel {
   grid-area: 1 / 3 / span 1 / -1;
   display: flex;

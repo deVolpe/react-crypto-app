@@ -21,12 +21,13 @@ const App = ({ auth }) => (
       <Route
         exact
         path="/"
-        render={() => (auth.isAuthenticated ? (
-          <Redirect to="/main/cards" />
-        ) : (
-          <Redirect to="/auth/login" />
-        ))
-          }
+        render={() =>
+          auth.isAuthenticated ? (
+            <Redirect to="/main/cards" />
+          ) : (
+            <Redirect to="/auth/login" />
+          )
+        }
       />
       <Route
         path="/main"
@@ -39,16 +40,12 @@ const App = ({ auth }) => (
             <Route
               exact
               path={`${path}/login`}
-              render={({ history: { push } }) => (
-                <Login push={push} />
-              )}
+              render={({ history: { push } }) => <Login push={push} />}
             />
             <Route
               exact
               path={`${path}/register`}
-              render={({ history: { push } }) => (
-                <Register push={push} />
-              )}
+              render={({ history: { push } }) => <Register push={push} />}
             />
           </Auth>
         )}
@@ -62,8 +59,8 @@ const App = ({ auth }) => (
 
 App.propTypes = {
   auth: PropTypes.shape({
-    isAuthenticated: PropTypes.bool,
-  }).isRequired,
+    isAuthenticated: PropTypes.bool
+  }).isRequired
 };
 
 export default App;

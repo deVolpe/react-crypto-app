@@ -7,7 +7,7 @@ const SearchPanel = ({ filter }) => {
   const [term, setTerm] = useState('');
 
   const handleChange = e => {
-    const term = e.target.value;
+    const term = e.target.value;  
     setTerm(term);
     filter(term);
   };

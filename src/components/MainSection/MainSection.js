@@ -1,13 +1,13 @@
-import React, { PureComponent, lazy, Suspense, memo } from 'react';
+import React, { memo, lazy, Suspense } from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 
 import Panel from '../Panel';
-import Spinner from '../Spinner';
 import Navbar from '../NavBar';
 import SearchPanel from '../../containers/SearchPanelContainer';
 import DropMenu from '../DropMenu';
 import NoContent from '../../pages/NoContent';
+import Spinner from '../Spinner';
 
 import styles from './MainSection.scss';
 
@@ -27,11 +27,11 @@ const MainSection = memo(({ match: { path }, error: { message } }) => (
         message ? (
           <NoContent message={message} />
         ) : (
-          <main className={styles.container}>
-            <Suspense fallback={<Spinner />}>
+          <Suspense fallback={<Spinner />}>
+            <main className={styles.container}>
               <CardsList />
-            </Suspense>
-          </main>
+            </main>
+          </Suspense>
         )
       }
     />

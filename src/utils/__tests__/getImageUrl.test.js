@@ -1,8 +1,5 @@
 import getImageUrl from '../getImageUrl';
 
 describe('getImageUrl', () => {
-  test('should ', () => {
-    
-  })
-  
-})
+  test('should ', () => {});
+});

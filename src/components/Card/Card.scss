@@ -18,6 +18,18 @@
     padding: 0;
     right: 0.6rem;
     width: 10%;
+    & svg {
+      transform: scale(1);
+      transition: all 200ms ease;
+    }
+    &:hover svg {
+      transform: scale(1.2);
+      transition: all 200ms ease;
+    }
+    &:active svg {
+      transform: scale(0.67);
+      transition: all 200ms ease;
+    }
   }
 }
 

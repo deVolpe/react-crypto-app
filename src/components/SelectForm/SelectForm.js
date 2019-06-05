@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import SelectExchange from '../SelectExchange';
 import SelectCoin from '../SelectCoin';
 import InvalidError from '../../pages/InvalidError';
-import service from '../../services/cryptocompare-service';
 
 import styles from './SelectForm.scss';
 
@@ -19,12 +18,7 @@ const SelectForm = ({ error: { conflict }, createCard }) => {
       coin,
       exchange
     };
-    service
-      .getCoinPrices(card.coin, card.exchange)
-      .then(() => {
-        createCard(card);
-      })
-      .catch(setInvalid);
+    createCard(card);
   };
 
   const handleCoinSelect = coin => {
@@ -34,6 +28,10 @@ const SelectForm = ({ error: { conflict }, createCard }) => {
   const handleMarketSelect = exchange => {
     setExchange(exchange);
   };
+
+  const manageErrors = (...errors) => {
+    
+  }
 
   const invalidError = invalid ? <InvalidError error={invalid} /> : null;
   const conflictError = conflict ? <InvalidError error={conflict} /> : null;

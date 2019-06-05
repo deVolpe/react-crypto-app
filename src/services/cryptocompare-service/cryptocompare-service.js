@@ -1,5 +1,8 @@
+import _ from 'lodash';
+
 import api from './api';
 import data from './data';
+import getExistsDollarRepresentation from '../../utils/getExistsDollarRepresentation';
 
 class CryptoCompareService {
   /**
@@ -23,7 +26,7 @@ class CryptoCompareService {
    */
   getAllExchanges = async () => {
     const res = await api('exchanges/general');
-    return await res.data.Data;
+    return res.data.Data;
   };
 
   /**
@@ -38,7 +41,7 @@ class CryptoCompareService {
    */
   getCoinPrices = async (coin, market) => {
     const res = await api(
-      `price?fsym=${coin}&tsyms=USDT&e=${market}`,
+      `price?fsym=${coin}&tsyms=${_.values(data.usdTokens).join(',')}&e=${market}`,
     );
     if (res.data.Response) {
       throw res.data.Message;
@@ -56,27 +59,49 @@ class CryptoCompareService {
    * @return {object}
    */
   getCoinMarketInfo = async (coin, market) => {
+    const dollar = await getExistsDollarRepresentation(coin, market);
+    if (!dollar) {
+      const err = `No data in ${market}`;
+      throw err;
+    }
     const res = await api(
-      `pricemultifull?fsyms=${coin}&tsyms=USDT&e=${market}`,
+      `pricemultifull?fsyms=${coin}&tsyms=${dollar}&e=${market}`,
     );
-    return res.data.RAW[coin].USDT;
+    return res.data.RAW[coin][dollar];
   };
 
   /**
    * Return daily historical data of passed coin's pair
    * @see 'https://min-api.cryptocompare.com/documentation?key=Historical&cat=dataHistoday'
-   * @param {string} first
-   * @param {string} second
+   * @param {string} coin
+   * @param {string} dollar
    * @param {string} market
    *
    * @return {object}
    */
-  getHistoricalData = async (first, market) => {
+  getHistoricalData = async (coin, dollar, market) => {
     const res = await api(
-      `histoday?fsym=${first}&tsym=${second}&e=${market}&limit=10`,
+      `histoday?fsym=${coin}&tsym=${dollar}&e=${market}&limit=10`,
     );
-    return res.data.DATA;
+    return res.data.Data;
   };
+
+  /**
+   * Return exchange and it's coin couples
+   * @see 'https://min-api.cryptocompare.com/documentation?key=Other&cat=allExchangesV2Endpoint'
+   * @param {string} coin
+   * @param {string} exchange
+   *
+   * @return {array} all coin couples
+   */
+  getAllTradingPairs = async (coin, market) => {
+    const res = await api(`v2/all/exchanges?fsym=${coin}&e=${market}`);
+    return res.data.Data[market].pairs[coin];
+  };
+
+  _transformDollar(array) {
+    
+  }
 }
 
 export default new CryptoCompareService();

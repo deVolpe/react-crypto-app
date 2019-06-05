@@ -10,7 +10,6 @@ const cx = classnames.bind(styles);
 const Logo = ({ auth }) => (
   <h1 className={styles.logo}>
     <Link to="/main/cards" className={cx({ disabled: !auth.isAuthenticated })}>
-
       cryptoapp
     </Link>
   </h1>
@@ -18,8 +17,8 @@ const Logo = ({ auth }) => (
 
 Logo.propTypes = {
   auth: PropTypes.shape({
-    isAuthenticated: PropTypes.bool,
-  }).isRequired,
+    isAuthenticated: PropTypes.bool
+  }).isRequired
 };
 
 export default Logo;

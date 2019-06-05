@@ -6,9 +6,8 @@
 # Node
 node_modules
 
-# Dist & test
-dist
-test
+# Build & test
+__tests__
 build
 
 # Db config

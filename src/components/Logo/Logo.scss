@@ -1,6 +1,7 @@
 .logo {
   display: flex;
   justify-content: flex-start;
+  flex-shrink: 0;
   font: {
     size: 50px;
     weight: 800;

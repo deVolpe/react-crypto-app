@@ -5,6 +5,7 @@ export default {
     BYN: 'BYN',
   },
   usdTokens: {
+    USD: 'USD',
     USDT: 'USDT',
     TUSD: 'TUSD',
     USDC: 'USDC',

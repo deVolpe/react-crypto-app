@@ -10,43 +10,42 @@ const devConfig = {
   entry: {
     polyfill: 'babel-polyfill',
     app: [
-      baseConfig.externals.paths.src,
-      'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true',
-    ],
+      'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+      baseConfig.externals.paths.src
+    ]
   },
   output: {
     filename: '[name].bundle.js',
     path: __dirname,
-    publicPath: '/',
+    publicPath: '/'
   },
   module: {
     rules: [
       {
         test: /\.(s?css)$/,
-        use: [{ loader: 'style-loader', options: { hmr: true } }],
-      },
-    ],
+        use: [{ loader: 'style-loader', options: { hmr: true } }]
+      }
+    ]
   },
   devtool: 'cheap-module-eval-source-map',
   devServer: {
-    contentBase: baseConfig.externals.paths.build,
-    watchContentBase: true,
+    contentBase: './temp'
   },
   plugins: [
     new HtmlWebpackPlugin({
       hash: false,
       template: `${baseConfig.externals.paths.public}index.html`,
-      showErrors: false,
+      showErrors: true,
       inject: 'body',
-      filename: './index.html',
+      filename: './index.html'
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.SourceMapDevToolPlugin({
-      filename: '[file].map',
-    }),
-  ],
+      filename: '[file].map'
+    })
+  ]
 };
 
 module.exports = merge.smart(devConfig, baseConfig);

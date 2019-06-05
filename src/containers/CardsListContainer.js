@@ -5,10 +5,10 @@ import { getAllCryptoCards, deleteCard } from '../modules/actions/crypto';
 
 const mapStateToProps = state => ({
   cryptos: state.cryptos,
-  filter: state.filter,
+  filter: state.filter
 });
 
 export default connect(
   mapStateToProps,
-  { getAllCryptoCards, deleteCard, setCount },
+  { getAllCryptoCards, deleteCard, setCount }
 )(CardsList);

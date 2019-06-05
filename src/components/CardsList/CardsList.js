@@ -1,11 +1,13 @@
-import React, { PureComponent } from 'react';
+import React, { Component, lazy, Suspense } from 'react';
 import PropTypes from 'prop-types';
 
-import Card from '../../containers/CardContainer';
+import Spinner from '../Spinner';
 
 import styles from './CardsList.scss';
 
-export default class CardsList extends PureComponent {
+const Card = lazy(() => import('../../containers/CardContainer'));
+
+export default class CardsList extends Component {
   static propTypes = {
     cryptos: PropTypes.shape({
       cards: PropTypes.arrayOf(PropTypes.object)
@@ -29,9 +31,22 @@ export default class CardsList extends PureComponent {
     };
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.cryptos.cards.length !== this.state.cards.length) {
+      return true;
+    }
+    if (nextProps.filter.term !== this.props.filter.term) {
+      return true;
+    }
+    return false;
+  }
+
   render() {
-    const { filter: { term } } = this.props;
+    const {
+      filter: { term }
+    } = this.props;
     const { cards } = this.state;
+    console.log(term);
     const filterCards = cards.filter(
       card => card.name.includes(term) || card.exchange.includes(term)
     );
@@ -39,17 +54,18 @@ export default class CardsList extends PureComponent {
     return (
       <div className={styles.list}>
         {filterCards.map(card => {
-          const { name, exchange, count, _id: id } = card;
-          const countFunc = this.props.setCount(id);
+          const { _id: id } = card;
+          const count = this.props.setCount(id);
           return (
             <div key={id} className={styles.card}>
-              <Card
-                name={name}
-                exchange={exchange}
-                count={count}
-                handleDeleteCard={() => this.props.deleteCard(id)}
-                countFunc={countFunc}
-              />
+              <Suspense fallback={<Spinner />}>
+                <Card
+                  {...card}
+                  id={id}
+                  handleDeleteCard={() => this.props.deleteCard(id)}
+                  setCount={count}
+                />
+              </Suspense>
             </div>
           );
         })}

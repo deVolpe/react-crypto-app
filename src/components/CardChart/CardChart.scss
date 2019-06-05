@@ -1,6 +1,12 @@
 .chart {
-  max-width: 300px;
-  max-height: 200px;
   display: inline-block;
+  max-width: 300px;
+  max-height: 300px;
   margin: 0.6rem;
+}
+
+@media (max-width: 470px) {
+  .chart {
+    display: none;
+  }
 }

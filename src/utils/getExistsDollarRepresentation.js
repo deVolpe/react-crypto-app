@@ -8,6 +8,12 @@ import service from '../services/cryptocompare-service';
  * @return {string} valid dollar representation (for instance: USDT or TUSD)
  */
 
-export const getExistsDollarRepresentation = (coin, exchange) => {
-  service.getCoinPrices(coin, market);
+const getExistsDollarRepresentation = async (coin, exchange) => {
+  const arr = await service.getAllTradingPairs(coin, exchange);
+  const res = arr.join(',').match(/T?USDT?C?/);
+
+  if (res.length) return res[0];
+  return null;
 };
+
+export default getExistsDollarRepresentation;
