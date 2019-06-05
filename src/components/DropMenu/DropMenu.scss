@@ -1,24 +1,9 @@
-@keyframes top {
-  0% {
-    transform: rotate(0);
-  }
-  50% {
-    transform: rotate(0);
-  }
-  100% {
-    transform: rotate(145deg)
-  }
-}
-
 .menuIcon {
   grid-area: 1 / 1 / span 1 / span 1;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   margin-left: 2em;
-  &:active svg:first-child{
-    animation: ease .7s scaled forwards;
-  }
 }
 .menu {
   grid-area: 2 / 1 / auto / 1;
