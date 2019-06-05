@@ -43,10 +43,11 @@ export default class CardsList extends Component {
 
   render() {
     const {
-      filter: { term }
+      filter: { term },
+      setCount,
+      deleteCard
     } = this.props;
     const { cards } = this.state;
-    console.log(term);
     const filterCards = cards.filter(
       card => card.name.includes(term) || card.exchange.includes(term)
     );
@@ -55,14 +56,14 @@ export default class CardsList extends Component {
       <div className={styles.list}>
         {filterCards.map(card => {
           const { _id: id } = card;
-          const count = this.props.setCount(id);
+          const count = setCount(id);
           return (
             <div key={id} className={styles.card}>
               <Suspense fallback={<Spinner />}>
                 <Card
                   {...card}
                   id={id}
-                  handleDeleteCard={() => this.props.deleteCard(id)}
+                  handleDeleteCard={() => deleteCard(id)}
                   setCount={count}
                 />
               </Suspense>
