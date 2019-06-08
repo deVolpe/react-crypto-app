@@ -1,6 +1,7 @@
 @import '../App/styleVariables.scss';
 
 .label {
+  grid-area: 1 / 1 / span 1 / -1;
   font-size: 26px;
   padding: 10px;
   position: relative;
@@ -20,20 +21,21 @@
     width: 10%;
     & svg {
       transform: scale(1);
-      transition: all 200ms ease;
+      transition: transform 200ms ease;
     }
     &:hover svg {
       transform: scale(1.2);
-      transition: all 200ms ease;
+      transition: transform 200ms ease;
     }
     &:active svg {
       transform: scale(0.67);
-      transition: all 200ms ease;
+      transition: transform 200ms ease;
     }
   }
 }
 
 .price {
+  grid-area: 2 / 1 / span 1 / span 1;
   display: inline-block;
   margin: 10px;
   font-size: 20px;
@@ -41,14 +43,8 @@
   .index {
     color: $index_color;
     font-size: 16px;
-    &::before,
-    &::after {
-      color: $index_color;
-      margin: 0 10px 0;
-      font-weight: 400;
-    }
     sub {
-      color: grey;
+      color: #bbbbbb;
       font-size: 10px;
     }
   }
@@ -61,8 +57,10 @@
 }
 
 .counter {
+  grid-area: 3 / 1 / -1 / -1;
   display: flex;
   justify-content: center;
+  align-content: center;
   margin: 5px 10px 5px;
 }
 
@@ -87,6 +85,9 @@
     .index {
       font-size: 13px;
     }
+  }
+  .counter {
+    grid-row-start: 4;
   }
   .input {
     width: 20vw;

@@ -8,6 +8,5 @@ const router = express.Router();
 router.get('/cards/all', passport.authenticate('jwt', { session: false }), controller.getAll);
 router.post('/cards/new', passport.authenticate('jwt', { session: false }), controller.create);
 router.delete('/cards/delete', passport.authenticate('jwt', { session: false }), controller.delete);
-router.patch('/cards/change', passport.authenticate('jwt', { session: false }), controller.setCount);
 
 module.exports = router;

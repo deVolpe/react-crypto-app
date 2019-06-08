@@ -10,7 +10,7 @@ const devConfig = {
   entry: {
     polyfill: 'babel-polyfill',
     app: [
-      'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+      'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true',
       baseConfig.externals.paths.src
     ]
   },
@@ -39,9 +39,7 @@ const devConfig = {
       inject: 'body',
       filename: './index.html'
     }),
-    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.SourceMapDevToolPlugin({
       filename: '[file].map'
     })

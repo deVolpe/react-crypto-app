@@ -1,0 +1,6 @@
+language: node_js
+node_js:
+  - "lts/*" -
+
+scripts:
+  - npm run lint

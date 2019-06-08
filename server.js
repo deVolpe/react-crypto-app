@@ -15,8 +15,7 @@ if (env === 'development') {
   app.use(require('morgan')('dev'));
   app.use(
     webpackDevMiddleware(compiler, {
-      hot: true,
-      historyApiFallback: true,
+      noInfo: true,
       publicPath: config.output.publicPath,
     }),
   );

@@ -8,14 +8,15 @@ import styles from './Login.scss';
 
 export default class Login extends PureComponent {
   static defaultProps = {
-    match: null,
     push: () => {},
+    url: '',
   };
 
   static propTypes = {
     signIn: PropTypes.func.isRequired,
     error: PropTypes.objectOf(PropTypes.string).isRequired,
     push: PropTypes.func,
+    url: PropTypes.string,
   };
 
   state = {
@@ -24,10 +25,10 @@ export default class Login extends PureComponent {
     error: {},
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.error !== prevProps.error) {
-      this.setState({ error: this.props.error });
-    }
+  static getDerivedStateFromProps(props, state) {
+    return {
+      error: props.error,
+    };
   }
 
   handleInputChange = (e) => {
@@ -66,9 +67,14 @@ export default class Login extends PureComponent {
           onChange={this.handleInputChange}
           className={styles.input}
         />
-        <button type="submit" className={styles.button}>Login </button>
-        <figcaption className={styles.message}>Not registered?{' '}
-          <Link to="/auth/register" className={styles.link}>Create an account</Link>
+        <button type="submit" className={styles.button}>
+          Login{' '}
+        </button>
+        <figcaption className={styles.message}>
+          Not registered?{' '}
+          <Link to={`${this.props.url}/register`} className={styles.link}>
+            Create an account
+          </Link>
         </figcaption>
       </form>
     );

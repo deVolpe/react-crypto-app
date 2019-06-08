@@ -43,17 +43,5 @@ module.exports = {
     Crypto.findByIdAndRemove(req.body.id)
       .then(data => res.status(200).json(data._id))
       .catch(console.error);
-  },
-
-  async setCount(req, res) {
-    console.log(req.body.id);
-    console.log(req.body.value);
-    const data = await Crypto.findByIdAndUpdate(req.body.id, {
-      count: req.body.value
-    });
-
-    Crypto.findOne({ _id: data._id })
-      .then(result => res.status(200).json(result.count))
-      .catch(console.error);
   }
 };

@@ -11,9 +11,9 @@ const cryptoSchema = new Schema({
     type: String,
     required: true,
   },
-  count: {
-    type: Number,
-    default: 1,
+  isFollowed: {
+    type: Boolean,
+    default: false,
   },
   user: {
     ref: 'users',

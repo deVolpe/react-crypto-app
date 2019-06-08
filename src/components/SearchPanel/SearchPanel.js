@@ -6,9 +6,8 @@ import styles from './SearchPanel.scss';
 const SearchPanel = ({ filter }) => {
   const [term, setTerm] = useState('');
 
-  const handleChange = e => {
-    const term = e.target.value;  
-    setTerm(term);
+  const handleChange = (e) => {
+    setTerm(e.target.value);
     filter(term);
   };
 
@@ -26,7 +25,7 @@ const SearchPanel = ({ filter }) => {
 };
 
 SearchPanel.propTypes = {
-  filter: PropTypes.func.isRequired
+  filter: PropTypes.func.isRequired,
 };
 
 export default SearchPanel;

@@ -4,7 +4,13 @@ import styles from './Footer.scss';
 
 const Footer = ({ children }) => (
   <footer className={styles.Footer}>
-    <div className={styles.logo}>{children}</div>
+    <div className={styles.container}>
+      <div className={styles.logo}>{children}</div>
+      <span className={styles.about}>
+        {' '}
+        © 2019 BrSTU, EIS department, coursework
+      </span>
+    </div>
   </footer>
 );
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames/bind';
+import $ from 'jquery';
 
 import SelectForm from '../../containers/SelectFormContainer';
 import Label from '../Label';
@@ -11,13 +12,15 @@ const cx = classnames.bind(styles);
 
 const DropMenu = () => {
   const pressed = () => {
-    document.getElementById('drop-menu').classList.toggle(styles.hide);
+    $('#drop-menu').toggleClass(styles.hide);
   };
 
   return (
     <>
-      <div className={styles.menuIcon} onClick={pressed}>
-        <MenuSVG />
+      <div className={styles.menuSection}>
+        <div className={styles.menuIcon} onClick={pressed}>
+          <MenuSVG />
+        </div>
       </div>
       <div className={cx(styles.menu, styles.hide)} id="drop-menu">
         <Label />

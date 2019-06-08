@@ -40,16 +40,18 @@ export default class SelectCoin extends Component {
 
     return (
       <div className={styles.selectCoin}>
-        <label htmlFor="select-first">Coin</label>
-        <select
-          name="select-market"
-          id="select-first"
-          value={value}
-          onChange={this.handleSelect}
-          className={styles.select}
-        >
-          {options}
-        </select>
+        <label>
+          Coin
+          <input
+            list="coins"
+            placeholder="Select coin you need"
+            value={value}
+            id="select-filed"
+            onChange={this.handleSelect}
+            className={styles.select}
+          />
+        </label>
+        <datalist id="coins">{options}</datalist>
       </div>
     );
   }

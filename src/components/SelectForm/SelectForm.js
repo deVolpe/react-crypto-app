@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import SelectExchange from '../SelectExchange';
@@ -7,38 +7,41 @@ import InvalidError from '../../pages/InvalidError';
 
 import styles from './SelectForm.scss';
 
-const SelectForm = ({ error: { conflict }, createCard }) => {
-  const [coin, setCoin] = useState('BTC');
-  const [exchange, setExchange] = useState('Binance');
+const SelectForm = memo(({ error: { conflict }, createCard }) => {
+  const [coin, setCoin] = useState('');
+  const [exchange, setExchange] = useState('');
   const [invalid, setInvalid] = useState('');
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const card = {
       coin,
-      exchange
+      exchange,
     };
     createCard(card);
   };
 
-  const handleCoinSelect = coin => {
+  const handleCoinSelect = (coin) => {
     setCoin(coin);
   };
 
-  const handleMarketSelect = exchange => {
+  const handleMarketSelect = (exchange) => {
     setExchange(exchange);
   };
 
-  const manageErrors = (...errors) => {
-    
-  }
-
-  const invalidError = invalid ? <InvalidError error={invalid} /> : null;
-  const conflictError = conflict ? <InvalidError error={conflict} /> : null;
+  const handleErrors = () => {
+    if (conflict) {
+      return <InvalidError error={conflict} />;
+    }
+    if (invalid) {
+      return <InvalidError error={invalid} />;
+    }
+    return null;
+  };
 
   return (
     <div className={styles.select}>
-      {conflictError || invalidError}
+      {handleErrors()}
       <form onSubmit={handleSubmit}>
         <SelectCoin value={coin} handleCoinSelect={handleCoinSelect} />
         <SelectExchange
@@ -51,11 +54,11 @@ const SelectForm = ({ error: { conflict }, createCard }) => {
       </form>
     </div>
   );
-};
+});
 
 SelectForm.propTypes = {
   createCard: PropTypes.func.isRequired,
-  error: PropTypes.objectOf(PropTypes.string).isRequired
+  error: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 export default SelectForm;

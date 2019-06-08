@@ -6,24 +6,23 @@ import styles from './Header.scss';
 
 const Header = ({ children, auth, logout }) => (
   <header className={styles.Header}>
-    {children}
-    {auth.isAuthenticated ? (
-      <Link to="/auth/login" className={styles.logout} onClick={logout}>
-
-        logout
-      </Link>
-    ) : (
-      <div className={styles.auth}>
-        <Link className={styles.link} to="/auth/login">
-
-          signin
+    <div className={styles.container}>
+      {children}
+      {auth.isAuthenticated ? (
+        <Link to="/auth/login" className={styles.logout} onClick={logout}>
+          logout
         </Link>
-        <Link className={styles.link} to="/auth/register">
-
-          signup
-        </Link>
-      </div>
-    )}
+      ) : (
+        <div className={styles.auth}>
+          <Link className={styles.link} to="/auth/login">
+            signin
+          </Link>
+          <Link className={styles.link} to="/auth/register">
+            signup
+          </Link>
+        </div>
+      )}
+    </div>
   </header>
 );
 

@@ -6,25 +6,25 @@ import service from '../../services/cryptocompare-service';
 
 export default class SelectExchange extends Component {
   static defaultProps = {
-    value: ''
+    value: '',
   };
 
   static propTypes = {
     handleMarketSelect: PropTypes.func.isRequired,
-    value: PropTypes.string
+    value: PropTypes.string,
   };
 
   state = {
-    exchanges: {}
+    exchanges: {},
   };
 
   componentDidMount() {
-    service.getAllExchanges().then(exchanges => {
+    service.getAllExchanges().then((exchanges) => {
       this.setState({ exchanges });
     });
   }
 
-  handleChange = event => {
+  handleSelect = (event) => {
     const market = event.target.value;
     this.props.handleMarketSelect(market);
   };
@@ -40,16 +40,18 @@ export default class SelectExchange extends Component {
 
     return (
       <div className={styles.selectMarket}>
-        <label htmlFor="select-field">Market</label>
-        <select
-          name="select-market"
-          id="select-field"
-          value={value}
-          onChange={this.handleChange}
-          className={styles.select}
-        >
-          {options}
-        </select>
+        <label>Market
+          <input
+            list="exchanges"
+            placeholder="Select exchange you need"
+            value={value}
+            onChange={this.handleSelect}
+            className={styles.select}
+          />
+          <datalist id="exchanges">
+            {options}
+          </datalist>
+        </label>
       </div>
     );
   }

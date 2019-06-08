@@ -98,10 +98,6 @@ class CryptoCompareService {
     const res = await api(`v2/all/exchanges?fsym=${coin}&e=${market}`);
     return res.data.Data[market].pairs[coin];
   };
-
-  _transformDollar(array) {
-    
-  }
 }
 
 export default new CryptoCompareService();

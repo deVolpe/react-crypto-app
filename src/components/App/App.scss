@@ -179,7 +179,6 @@ a:active {
   min-width: 320px;
   min-height: 100vh;
   display: grid;
-  position: relative;
   grid: {
     template-columns: repeat(4, 1fr);
     template-rows: minmax(50px, 100px) auto 80px;

@@ -13,19 +13,12 @@ export default class Card extends PureComponent {
   static defaultProps = {
     name: 'unknown',
     exchange: 'unknown',
-    count: 1,
-    id: ''
   };
 
   static propTypes = {
     name: PropTypes.string,
     exchange: PropTypes.string,
-    count: PropTypes.number,
-    id: PropTypes.string,
-    counter: PropTypes.number.isRequired,
-    getError: PropTypes.func.isRequired,
     handleDeleteCard: PropTypes.func.isRequired,
-    setCount: PropTypes.func.isRequired
   };
 
   state = {
@@ -35,40 +28,33 @@ export default class Card extends PureComponent {
     currPrice: 0,
     currIndex: 0.0,
     imgSrc: '',
-    count: this.props.count
+    count: 1,
   };
 
   componentDidMount() {
     this.loadData();
-    this.interval = setInterval(this.loadData, 1000);
+    this.interval = setInterval(this.loadData, 5000);
   }
 
   componentWillUnmount() {
     clearInterval(this.interval);
   }
 
-  static getDerivedStateFromProps(props, state) {
-    return {
-      count: props.counter
-    };
-  }
-
-  handleChangeCount = e => {
-    const count = e.target.value;
-    this.props.setCount(+count);
+  handleChangeCount = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   loadData = () => {
     service
       .getCoinMarketInfo(this.props.name, this.props.exchange)
-      .then(data => {
+      .then((data) => {
         this.setState({
           imgSrc: getImgUrl(data.IMAGEURL),
           exchange: data.MARKET,
           currPrice: data.PRICE,
           currIndex: data.CHANGEPCT24HOUR,
           coinSymbol: data.FROMSYMBOL,
-          usdSymbol: data.TOSYMBOL
+          usdSymbol: data.TOSYMBOL,
         });
       });
   };
@@ -81,7 +67,7 @@ export default class Card extends PureComponent {
       currPrice,
       currIndex,
       imgSrc,
-      count
+      count,
     } = this.state;
     const { handleDeleteCard } = this.props;
     return (
@@ -105,7 +91,7 @@ export default class Card extends PureComponent {
             className={cx(
               styles.index,
               { indexUp: currIndex > 0 },
-              { indexDown: currIndex < 0 }
+              { indexDown: currIndex < 0 },
             )}
           >
             {' '}
@@ -120,7 +106,7 @@ export default class Card extends PureComponent {
         />
         <div className={styles.counter}>
           <input
-            type="text"
+            type="number"
             name="count"
             id="input-count"
             className={styles.input}

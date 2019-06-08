@@ -3,6 +3,11 @@ import axios from 'axios';
 import setAuthToken from '../../utils/setAuthToken';
 import { GET_ERROR, SET_CURRENT_USER } from './types';
 
+export const setCurrentUser = token => ({
+  type: SET_CURRENT_USER,
+  payload: token,
+});
+
 export const signUp = (user, push) => (dispatch) => {
   axios
     .post('/api/auth/register', user)
@@ -38,8 +43,3 @@ export const logout = () => (dispatch) => {
   setAuthToken(null);
   dispatch(setCurrentUser(null));
 };
-
-export const setCurrentUser = token => ({
-  type: SET_CURRENT_USER,
-  payload: token,
-});

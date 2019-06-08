@@ -8,40 +8,41 @@ import InvalidError from '../../pages/InvalidError';
 export default class Register extends PureComponent {
   static defaultProps = {
     push: () => {},
-    match: null
+    url: '',
   };
 
   static propTypes = {
     signUp: PropTypes.func.isRequired,
     error: PropTypes.objectOf(PropTypes.string).isRequired,
-    push: PropTypes.func
+    push: PropTypes.func,
+    url: PropTypes.string,
   };
 
   state = {
     email: '',
     password: '',
     passwordConfirm: '',
-    error: {}
+    error: {},
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.error !== prevProps.error) {
-      this.setState({ error: this.props.error });
-    }
+  static getDerivedStateFromProps(props, state) {
+    return {
+      error: props.error,
+    };
   }
 
-  handleChangeInput = e => {
+  handleChangeInput = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const candidate = {
       email: this.state.email,
       password: this.state.password,
-      passwordConfirm: this.state.passwordConfirm
+      passwordConfirm: this.state.passwordConfirm,
     };
     this.props.signUp(candidate, this.props.push);
   };
@@ -79,7 +80,7 @@ export default class Register extends PureComponent {
         </button>
         <figcaption className={styles.message}>
           Already registered?{' '}
-          <Link to="/auth/login" className={styles.link}>
+          <Link to={`${this.props.url}/login`} className={styles.link}>
             Sign In
           </Link>
         </figcaption>
