@@ -1,28 +1,33 @@
 import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import SelectExchange from '../SelectExchange';
-import SelectCoin from '../SelectCoin';
+import { SelectCoin, SelectExchange } from '../../hoc-components/ItemSelect';
 import InvalidError from '../../pages/InvalidError';
 
 import styles from './SelectForm.scss';
 
 const SelectForm = memo(({ error: { conflict }, createCard }) => {
-  const [coin, setCoin] = useState('');
+  const [first, setFirstCoin] = useState('');
+  const [second, setSecondCoin] = useState('');
   const [exchange, setExchange] = useState('');
   const [invalid, setInvalid] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const card = {
-      coin,
+      first,
+      second,
       exchange,
     };
     createCard(card);
   };
 
-  const handleCoinSelect = (coin) => {
-    setCoin(coin);
+  const handleFirstCoinSelect = (coin) => {
+    setFirstCoin(coin);
+  };
+
+  const handleSecondCoinSelect = (coin) => {
+    setSecondCoin(coin);
   };
 
   const handleMarketSelect = (exchange) => {
@@ -39,14 +44,18 @@ const SelectForm = memo(({ error: { conflict }, createCard }) => {
     return null;
   };
 
+  const errors = handleErrors();
+
   return (
     <div className={styles.select}>
-      {handleErrors()}
+      {errors}
       <form onSubmit={handleSubmit}>
-        <SelectCoin value={coin} handleCoinSelect={handleCoinSelect} />
+        <SelectCoin value={first} term="First coin" handleItemSelect={handleFirstCoinSelect} />
+        <SelectCoin value={second} term="Second coin" handleItemSelect={handleSecondCoinSelect} />
         <SelectExchange
           value={exchange}
-          handleMarketSelect={handleMarketSelect}
+          term="Market"
+          handleItemSelect={handleMarketSelect}
         />
         <button type="submit" className={styles.button}>
           Confirm

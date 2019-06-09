@@ -1,10 +1,16 @@
 @import '../App/styleVariables.scss';
 
-.selectMarket {
+.selectItem {
   margin-bottom: 10px;
 }
 
 .select {
   padding: 5px;
   background: $selectBackground;
+}
+
+@media (max-width: 479px) {
+  .selectItem {
+    font-size: 14px;
+  }
 }

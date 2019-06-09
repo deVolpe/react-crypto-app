@@ -9,50 +9,58 @@ import MainSection from '../../containers/MainSectionContainer';
 import Auth from '../Auth';
 import Login from '../../containers/LoginContainer';
 import Register from '../../containers/RegisterContainer';
+import { ServiceContextProvider } from './ServiceContext';
+import service from '../../services/cryptocompare-service';
 
 import styles from './App.scss';
 
 const App = ({ auth }) => (
   <Router>
-    <div className={styles.App}>
-      <Header>
-        <Logo auth={auth} />
-      </Header>
-      <Route
-        exact
-        path="/"
-        render={() => (auth.isAuthenticated ? (
-          <Redirect to="/main/cards" />
-        ) : (
-          <Redirect to="/auth/login" />
-        ))
-        }
-      />
-      <Route
-        path="/main"
-        render={({ match }) => <MainSection match={match} />}
-      />
-      <Route
-        path="/auth"
-        render={({ match: { path, url } }) => (
-          <Auth>
-            <Route
-              exact
-              path={`${path}/login`}
-              render={({ history: { push } }) => <Login push={push} url={url} />}
-            />
-            <Route
-              exact
-              path={`${path}/register`}
-              render={({ history: { push } }) => <Register push={push} url={url} />}
-            />
-          </Auth>
-        )}
-      />
-      <Footer>
-        <Logo auth={auth} />
-      </Footer>
-    </div>
+    <ServiceContextProvider value={service}>
+      <div className={styles.App}>
+        <Header>
+          <Logo auth={auth} />
+        </Header>
+        <Route
+          exact
+          path="/"
+          render={() => (auth.isAuthenticated ? (
+            <Redirect to="/main/cards" />
+          ) : (
+            <Redirect to="/auth/login" />
+          ))
+          }
+        />
+        <Route
+          path="/main"
+          render={({ match }) => <MainSection match={match} />}
+        />
+        <Route
+          path="/auth"
+          render={({ match: { path, url } }) => (
+            <Auth>
+              <Route
+                exact
+                path={`${path}/login`}
+                render={({ history: { push } }) => (
+                  <Login push={push} url={url} />
+                )}
+              />
+              <Route
+                exact
+                path={`${path}/register`}
+                render={({ history: { push } }) => (
+                  <Register push={push} url={url} />
+                )}
+              />
+            </Auth>
+          )}
+        />
+        <Footer>
+          <Logo auth={auth} />
+        </Footer>
+      </div>
+    </ServiceContextProvider>
   </Router>
 );
 

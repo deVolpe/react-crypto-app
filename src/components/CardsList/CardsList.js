@@ -1,13 +1,14 @@
-import React, { Component, lazy, Suspense } from 'react';
+import React, { PureComponent, lazy, Suspense } from 'react';
 import PropTypes from 'prop-types';
 
 import Spinner from '../Spinner';
+import { ServiceContextConsumer } from '../App/ServiceContext';
 
 import styles from './CardsList.scss';
 
 const Card = lazy(() => import('../../containers/CardContainer'));
 
-export default class CardsList extends Component {
+export default class CardsList extends PureComponent {
   static propTypes = {
     cryptos: PropTypes.shape({
       cards: PropTypes.arrayOf(PropTypes.object),
@@ -19,25 +20,13 @@ export default class CardsList extends Component {
     deleteCard: PropTypes.func.isRequired,
   };
 
-  state = {
-    cards: [],
-  };
+  state = { cards: [] };
 
-  static getDerivedStateFromProps(props, state) {
+  static getDerivedStateFromProps(props) {
     props.getAllCryptoCards();
     return {
       cards: props.cryptos.cards,
     };
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.state.cards.length !== nextState.cards.length) {
-      return true;
-    }
-    if (this.props.filter.term !== nextProps.filter.term) {
-      return true;
-    }
-    return false;
   }
 
   render() {
@@ -46,9 +35,14 @@ export default class CardsList extends Component {
       deleteCard,
     } = this.props;
     const { cards } = this.state;
-    const filterCards = cards.filter(
-      card => card.name.includes(term) || card.exchange.includes(term),
-    );
+    const filterCards = cards.filter((card) => {
+      const { firstCoin, secondCoin, exchange } = card;
+      return (
+        firstCoin.includes(term)
+        || secondCoin.includes(term)
+        || exchange.includes(term)
+      );
+    });
 
     return (
       <div className={styles.list}>
@@ -57,11 +51,15 @@ export default class CardsList extends Component {
           return (
             <div key={id} className={styles.card}>
               <Suspense fallback={<Spinner />}>
-                <Card
-                  {...card}
-                  id={id}
-                  handleDeleteCard={() => deleteCard(id)}
-                />
+                <ServiceContextConsumer>
+                  {service => (
+                    <Card
+                      {...card}
+                      service={service}
+                      handleDeleteCard={() => deleteCard(id)}
+                    />
+                  )}
+                </ServiceContextConsumer>
               </Suspense>
             </div>
           );

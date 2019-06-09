@@ -2,7 +2,6 @@ import _ from 'lodash';
 
 import api from './api';
 import data from './data';
-import getExistsDollarRepresentation from '../../utils/getExistsDollarRepresentation';
 
 class CryptoCompareService {
   /**
@@ -53,35 +52,29 @@ class CryptoCompareService {
    * Return full info about passed coin's pair on passed market.
    *
    * @see 'https://min-api.cryptocompare.com/documentation?key=Price&cat=multipleSymbolsFullPriceEndpoint'
-   * @param {string} coin
+   * @param {string} first
+   * @param {string} second
    * @param {string} market
    *
    * @return {object}
    */
-  getCoinMarketInfo = async (coin, market) => {
-    const dollar = await getExistsDollarRepresentation(coin, market);
-    if (!dollar) {
-      const err = `No data in ${market}`;
-      throw err;
-    }
-    const res = await api(
-      `pricemultifull?fsyms=${coin}&tsyms=${dollar}&e=${market}`,
-    );
-    return res.data.RAW[coin][dollar];
+  getCoinMarketInfo = async (first, second, market) => {
+    const res = await api(`pricemultifull?fsyms=${first}&tsyms=${second}&e=${market}`);
+    return res.data.RAW[first][second];
   };
 
   /**
    * Return daily historical data of passed coin's pair
    * @see 'https://min-api.cryptocompare.com/documentation?key=Historical&cat=dataHistoday'
-   * @param {string} coin
-   * @param {string} dollar
+   * @param {string} first
+   * @param {string} second
    * @param {string} market
    *
    * @return {object}
    */
-  getHistoricalData = async (coin, dollar, market) => {
+  getHistoricalData = async (first, second, market) => {
     const res = await api(
-      `histoday?fsym=${coin}&tsym=${dollar}&e=${market}&limit=10`,
+      `histoday?fsym=${first}&tsym=${second}&e=${market}&limit=10`,
     );
     return res.data.Data;
   };

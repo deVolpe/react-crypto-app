@@ -11,4 +11,5 @@ __tests__
 build
 
 # Db config
-config/database/keys.js
+config/database/keys.dev.js
+config/database/keys.prod.js

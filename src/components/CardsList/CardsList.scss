@@ -7,10 +7,17 @@
   background: #ffffff;
   margin: 0.8em;
   min-width: 200px;
+  max-width: 480px;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  display: grid;
+  grid-template: 50px auto 30px / 1fr 2fr;
 }
 
 @media (max-width: 479px) {
+  .card {
+    grid-template-rows: 50px 30px auto 30px;
+    min-width: 250px;
+  }
   .list {
     justify-content: center;
     padding: 0;

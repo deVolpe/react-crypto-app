@@ -4,18 +4,16 @@ import { Line } from 'react-chartjs-2';
 import _ from 'lodash';
 import moment from 'moment';
 
-import service from '../../services/cryptocompare-service';
-
 import styles from './CardChart.scss';
 
 const CardChart = memo(({
-  color, coin, dollar, exchange,
+  color, first, second, exchange, service,
 }) => {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    service.getHistoricalData(coin, dollar, exchange).then(setData);
-  }, [coin]);
+    service.getHistoricalData(first, second, exchange).then(setData);
+  }, [color]);
 
   function formatChartData() {
     return {
@@ -54,13 +52,15 @@ const CardChart = memo(({
 });
 CardChart.defaultProps = {
   color: null,
+  service: null,
 };
 
 CardChart.propTypes = {
   color: PropTypes.oneOf(['red', 'green']),
-  coin: PropTypes.string.isRequired,
-  dollar: PropTypes.string.isRequired,
+  first: PropTypes.string.isRequired,
+  second: PropTypes.string.isRequired,
   exchange: PropTypes.string.isRequired,
+  service: PropTypes.objectOf(PropTypes.func),
 };
 
 export default CardChart;

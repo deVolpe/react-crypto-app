@@ -25,7 +25,7 @@ export default class Register extends PureComponent {
     error: {},
   };
 
-  static getDerivedStateFromProps(props, state) {
+  static getDerivedStateFromProps(props) {
     return {
       error: props.error,
     };

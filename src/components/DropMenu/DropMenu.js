@@ -5,6 +5,7 @@ import $ from 'jquery';
 import SelectForm from '../../containers/SelectFormContainer';
 import Label from '../Label';
 import MenuSVG from '../MenuSVG';
+import { ServiceContextConsumer } from '../App/ServiceContext';
 
 import styles from './DropMenu.scss';
 
@@ -24,7 +25,9 @@ const DropMenu = () => {
       </div>
       <div className={cx(styles.menu, styles.hide)} id="drop-menu">
         <Label />
-        <SelectForm />
+        <ServiceContextConsumer>
+          {service => <SelectForm service={service} />}
+        </ServiceContextConsumer>
       </div>
     </>
   );
