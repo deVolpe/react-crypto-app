@@ -6,7 +6,7 @@ import InvalidError from '../../pages/InvalidError';
 
 import styles from './SelectForm.scss';
 
-const SelectForm = memo(({ error: { conflict }, createCard }) => {
+const SelectForm = memo(({ error: { conflict }, createCard, service }) => {
   const [first, setFirstCoin] = useState('');
   const [second, setSecondCoin] = useState('');
   const [exchange, setExchange] = useState('');
@@ -14,12 +14,15 @@ const SelectForm = memo(({ error: { conflict }, createCard }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const card = {
-      first,
-      second,
-      exchange,
-    };
-    createCard(card);
+    service.isExist(first, second, exchange).then(() => {
+      const card = {
+        first,
+        second,
+        exchange,
+      };
+      setInvalid('');
+      createCard(card);
+    }).catch(setInvalid);
   };
 
   const handleFirstCoinSelect = (coin) => {
@@ -34,7 +37,7 @@ const SelectForm = memo(({ error: { conflict }, createCard }) => {
     setExchange(exchange);
   };
 
-  const handleErrors = () => {
+  const handleErrors = (conflict, invalid) => {
     if (conflict) {
       return <InvalidError error={conflict} />;
     }
@@ -44,7 +47,7 @@ const SelectForm = memo(({ error: { conflict }, createCard }) => {
     return null;
   };
 
-  const errors = handleErrors();
+  const errors = handleErrors(conflict, invalid);
 
   return (
     <div className={styles.select}>

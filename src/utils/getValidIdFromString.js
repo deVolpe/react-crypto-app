@@ -1,4 +1,4 @@
-import isEmpty from './isEmpty';
+import { isEmpty } from 'lodash';
 /**
  * @description Return valid id for label and input tags
  *

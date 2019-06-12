@@ -1,9 +1,26 @@
 import _ from 'lodash';
 
-import api from './api';
+import api, { source } from './api';
 import data from './data';
 
+export const { cancel } = source;
+
 class CryptoCompareService {
+  /**
+   * @description Check for coin's pair existing
+   *
+   * @param {string} first
+   * @param {string} second
+   * @param {string} market
+   *
+   * @return {object}
+   */
+  isExist = async (first, second, market) => {
+    const res = await api(`price?fsym=${first}&tsyms=${second}&e=${market}`);
+    if (res.data.Response) throw res.data.Message;
+    return true;
+  };
+
   /**
    * Returns all coins that are available with full info about them.
    *
@@ -40,7 +57,9 @@ class CryptoCompareService {
    */
   getCoinPrices = async (coin, market) => {
     const res = await api(
-      `price?fsym=${coin}&tsyms=${_.values(data.usdTokens).join(',')}&e=${market}`,
+      `price?fsym=${coin}&tsyms=${_.values(data.usdTokens).join(
+        ',',
+      )}&e=${market}`,
     );
     if (res.data.Response) {
       throw res.data.Message;
@@ -59,7 +78,9 @@ class CryptoCompareService {
    * @return {object}
    */
   getCoinMarketInfo = async (first, second, market) => {
-    const res = await api(`pricemultifull?fsyms=${first}&tsyms=${second}&e=${market}`);
+    const res = await api(
+      `pricemultifull?fsyms=${first}&tsyms=${second}&e=${market}`,
+    );
     return res.data.RAW[first][second];
   };
 
@@ -93,4 +114,4 @@ class CryptoCompareService {
   };
 }
 
-export default new CryptoCompareService();
+export default CryptoCompareService;

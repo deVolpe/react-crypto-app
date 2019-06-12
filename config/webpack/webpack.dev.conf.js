@@ -11,25 +11,25 @@ const devConfig = {
     polyfill: 'babel-polyfill',
     app: [
       'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true',
-      baseConfig.externals.paths.src
-    ]
+      baseConfig.externals.paths.src,
+    ],
   },
   output: {
     filename: '[name].bundle.js',
     path: __dirname,
-    publicPath: '/'
+    publicPath: '/',
   },
   module: {
     rules: [
       {
         test: /\.(s?css)$/,
-        use: [{ loader: 'style-loader', options: { hmr: true } }]
-      }
-    ]
+        use: [{ loader: 'style-loader', options: { hmr: true } }],
+      },
+    ],
   },
   devtool: 'cheap-module-eval-source-map',
   devServer: {
-    contentBase: './temp'
+    contentBase: './temp',
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -37,13 +37,13 @@ const devConfig = {
       template: `${baseConfig.externals.paths.public}index.html`,
       showErrors: true,
       inject: 'body',
-      filename: './index.html'
+      filename: './index.html',
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.SourceMapDevToolPlugin({
-      filename: '[file].map'
-    })
-  ]
+      filename: '[file].map',
+    }),
+  ],
 };
 
 module.exports = merge.smart(devConfig, baseConfig);

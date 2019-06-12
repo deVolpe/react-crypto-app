@@ -7,8 +7,8 @@
 node_modules
 
 # Build & test
-__tests__
 build
+dist
 
 # Db config
 config/database/keys.dev.js

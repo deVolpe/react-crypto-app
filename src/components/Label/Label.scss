@@ -10,11 +10,11 @@
   line-height: 30px;
 }
 
-.labelBold {
+.bold {
   @include fontStyle(30px, 600);
 }
 
-.labelNormal {
+.normal {
   display: block;
   @include fontStyle(15px);
 }

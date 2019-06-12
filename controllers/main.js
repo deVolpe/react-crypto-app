@@ -1,5 +1,6 @@
+const { isEmpty } = require('lodash');
+
 const Crypto = require('../models/Crypto');
-const isEmpty = require('./validators/features/isEmpty');
 
 module.exports = {
   getAll(req, res) {

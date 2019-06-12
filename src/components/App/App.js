@@ -10,9 +10,11 @@ import Auth from '../Auth';
 import Login from '../../containers/LoginContainer';
 import Register from '../../containers/RegisterContainer';
 import { ServiceContextProvider } from './ServiceContext';
-import service from '../../services/cryptocompare-service';
+import CryptoCompareService from '../../services/cryptocompare-service';
 
 import styles from './App.scss';
+
+const service = new CryptoCompareService();
 
 const App = ({ auth }) => (
   <Router>

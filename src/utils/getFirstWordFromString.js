@@ -1,4 +1,4 @@
-import isEmpty from './isEmpty';
+import { isEmpty } from 'lodash';
 
 const getFirstWordFromString = (string) => {
   if (isEmpty(string)) return null;

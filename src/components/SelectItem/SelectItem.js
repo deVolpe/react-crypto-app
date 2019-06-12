@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import AsyncSelect from 'react-select';
 
 import getValidIdFromString from '../../utils/getValidIdFromString';
 import getFirstWordFromString from '../../utils/getFirstWordFromString';

@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
+import { round } from 'lodash';
 
 import getImgUrl from '../../utils/getImageUrl';
-import CardChart from '../CardChart';
 import CrossSVG from '../CrossSVG';
 import styles from './Card.scss';
 
@@ -14,6 +14,7 @@ export default class Card extends PureComponent {
     secondCoin: 'unknown',
     exchange: 'unknown',
     service: null,
+    render: () => {},
   };
 
   static propTypes = {
@@ -22,6 +23,7 @@ export default class Card extends PureComponent {
     exchange: PropTypes.string,
     handleDeleteCard: PropTypes.func.isRequired,
     service: PropTypes.objectOf(PropTypes.func),
+    render: PropTypes.func,
   };
 
   state = {
@@ -33,6 +35,7 @@ export default class Card extends PureComponent {
     imgSrc: '',
     count: 1,
   };
+
 
   componentDidMount() {
     this.loadData();
@@ -59,7 +62,7 @@ export default class Card extends PureComponent {
           imgSrc: getImgUrl(data.IMAGEURL),
           exchange: data.MARKET,
           currPrice: data.PRICE,
-          currIndex: +data.CHANGEPCT24HOUR,
+          currIndex: data.CHANGEPCT24HOUR,
           firstCoinSymbol: data.FROMSYMBOL,
           secondCoinSymbol: data.TOSYMBOL,
         });
@@ -76,7 +79,7 @@ export default class Card extends PureComponent {
       imgSrc,
       count,
     } = this.state;
-    const { handleDeleteCard, service } = this.props;
+    const { handleDeleteCard, render } = this.props;
     return (
       <>
         <div className={styles.label}>
@@ -93,7 +96,7 @@ export default class Card extends PureComponent {
           </button>
         </div>
         <div className={styles.price}>
-          {currPrice}
+          {secondCoinSymbol} {round(currPrice * count, 12)}
           <span
             className={cx(
               styles.index,
@@ -102,16 +105,10 @@ export default class Card extends PureComponent {
             )}
           >
             {' '}
-            {currIndex.toFixed(3)}%{' '}<sub>24H</sub>
+            {currIndex.toFixed(2)}% <sub>24H</sub>
           </span>
         </div>
-        <CardChart
-          first={firstCoinSymbol}
-          second={secondCoinSymbol}
-          exchange={exchange}
-          color={currIndex < 0 ? 'red' : 'green'}
-          service={service}
-        />
+        {render(this.state)}
         <div className={styles.counter}>
           <input
             type="number"
@@ -119,6 +116,7 @@ export default class Card extends PureComponent {
             id="input-count"
             className={styles.input}
             defaultValue={count}
+            min="1"
             onChange={this.handleChangeCount}
           />
         </div>

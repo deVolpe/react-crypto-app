@@ -1,4 +1,5 @@
 import React from 'react';
+import { values, map } from 'lodash';
 
 import withSelect from './withSelect';
 import compose from './compose';
@@ -14,13 +15,13 @@ const renderExchangeLabel = selectExchange => (
   <label htmlFor={`select-${selectExchange}`}>{selectExchange}</label>
 );
 
-const renderCoinOptions = coins => Object.values(coins).map(coin => (
+const renderCoinOptions = coins => map(values(coins), coin => (
   <option key={+coin.Id} value={coin.Symbol}>
     {coin.FullName}
   </option>
 ));
 
-const renderExchangeOptions = exchanges => Object.values(exchanges).map(market => (
+const renderExchangeOptions = exchanges => map(values(exchanges), market => (
   <option key={+market.Id} value={market.InternalName}>
     {market.Name}
   </option>

@@ -1,9 +1,13 @@
+@import '../App/styleVariables.scss';
+
 .chart {
   grid-area: 2 / 2 / span 1 / -1;
   display: inline-block;
   max-height: 300px;
+  max-width: 300px;
   margin: 0.6rem;
 }
+
 
 @media (max-width: 479px) {
   .chart {

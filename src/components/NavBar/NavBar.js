@@ -17,7 +17,7 @@ const NavBar = () => (
         </Link>
       </li>
       <li>
-        <Link to="/main" className={styles.link}>
+        <Link to="/main/cards" className={styles.link}>
           News
         </Link>
       </li>

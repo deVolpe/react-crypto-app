@@ -1,19 +1,21 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Line } from 'react-chartjs-2';
 import _ from 'lodash';
 import moment from 'moment';
 
+import CryptoCompareService from '../../services/cryptocompare-service';
+
 import styles from './CardChart.scss';
 
 const CardChart = memo(({
-  color, first, second, exchange, service,
+  index, first, second, exchange, service,
 }) => {
   const [data, setData] = useState({});
 
-  useEffect(() => {
+  useMemo(() => {
     service.getHistoricalData(first, second, exchange).then(setData);
-  }, [color]);
+  }, [index]);
 
   function formatChartData() {
     return {
@@ -23,17 +25,17 @@ const CardChart = memo(({
           label: 'High Price',
           fill: false,
           lineTension: 0.1,
-          backgroundColor: color,
-          borderColor: color,
+          backgroundColor: '#000000',
+          borderColor: '#000000',
           borderCapStyle: 'butt',
           borderDash: [],
           borderDashOffset: 0.0,
           borderJoinStyle: 'miter',
-          pointBorderColor: color,
+          pointBorderColor: '#000000',
           pointBackgroundColor: '#fff',
           pointBorderWidth: 1,
           pointHoverRadius: 5,
-          pointHoverBackgroundColor: color,
+          pointHoverBackgroundColor: '#000000',
           pointHoverBorderColor: 'rgba(220,220,220,1)',
           pointHoverBorderWidth: 2,
           pointRadius: 3,
@@ -51,16 +53,14 @@ const CardChart = memo(({
   );
 });
 CardChart.defaultProps = {
-  color: null,
   service: null,
 };
 
 CardChart.propTypes = {
-  color: PropTypes.oneOf(['red', 'green']),
   first: PropTypes.string.isRequired,
   second: PropTypes.string.isRequired,
   exchange: PropTypes.string.isRequired,
-  service: PropTypes.objectOf(PropTypes.func),
+  service: PropTypes.instanceOf(CryptoCompareService),
 };
 
 export default CardChart;
