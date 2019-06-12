@@ -1,12 +1,10 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import jwtDecode from 'jwt-decode';
-import $ from 'jquery';
 
 import App from './AppContainer';
 import store from '../modules/store';
 import { logout, setCurrentUser } from '../modules/actions/auth';
-import { getAllCryptoCards } from '../modules/actions/crypto';
 import setAuthToken from '../utils/setAuthToken';
 
 if (localStorage.jwtToken) {
@@ -19,10 +17,6 @@ if (localStorage.jwtToken) {
     store.dispatch(logout());
   }
 }
-
-$('[data-id="main-content"]').ready(() => {
-  store.dispatch(getAllCryptoCards());
-});
 
 const Root = () => (
   <Provider store={store}>

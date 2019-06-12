@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
     case DELETE_SELECTED_CARD:
       return {
         ...state,
-        cards: state.cards.filter(card => card.id !== action.payload),
+        cards: [...state.cards.filter(card => card.id !== action.payload)],
       };
 
     default:

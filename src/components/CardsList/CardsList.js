@@ -25,6 +25,9 @@ export default class CardsList extends PureComponent {
   state = { cards: this.props.cryptos.cards };
 
   static getDerivedStateFromProps(props) {
+    if (props.cryptos.cards.length === 0) {
+      props.getAllCryptoCards();
+    }
     return {
       cards: props.cryptos.cards,
     };
@@ -36,6 +39,7 @@ export default class CardsList extends PureComponent {
       deleteCard,
     } = this.props;
     const { cards } = this.state;
+    console.log(this.props.cryptos.cards);
     const filterCards = getFilteredCardsByTerm(cards, term);
     const loading = <div className={styles.loading}><Spinner /></div>;
     return (
