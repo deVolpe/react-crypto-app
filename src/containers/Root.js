@@ -15,6 +15,7 @@ if (localStorage.jwtToken) {
 
   if (decoded.exp < currentTime) {
     store.dispatch(logout());
+    window.location.pathname = '/login';
   }
 }
 

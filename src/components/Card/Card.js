@@ -95,20 +95,22 @@ export default class Card extends PureComponent {
             <CrossSVG />
           </button>
         </div>
-        <div className={styles.price}>
-          {secondCoinSymbol} {round(currPrice * count, 12)}
-          <span
-            className={cx(
-              styles.index,
-              { indexUp: currIndex > 0 },
-              { indexDown: currIndex < 0 },
-            )}
-          >
-            {' '}
-            {currIndex.toFixed(2)}% <sub>24H</sub>
+        <span
+          className={cx(
+            styles.index,
+            { indexUp: currIndex > 0 },
+            { indexDown: currIndex < 0 },
+          )}
+        >
+          {' '}
+          {currIndex.toFixed(4)}% <sub>24H</sub>
+        </span>
+        {render(this.state)}
+        <div className={styles.data}>
+          <span>
+            {secondCoinSymbol} {round(currPrice * count, 12)}
           </span>
         </div>
-        {render(this.state)}
         <div className={styles.counter}>
           <input
             type="number"

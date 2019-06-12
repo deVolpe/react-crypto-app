@@ -34,30 +34,33 @@
   }
 }
 
-.price {
+.index {
   grid-area: 2 / 1 / span 1 / span 1;
+  color: $index_color;
+  font-size: 20px;
   display: inline-block;
   margin: 10px;
-  font-size: 20px;
   font-weight: 600;
-  .index {
-    color: $index_color;
-    font-size: 16px;
-    sub {
-      color: #bbbbbb;
-      font-size: 10px;
-    }
+  sub {
+    color: #bbbbbb;
+    font-size: 10px;
   }
-  .indexDown {
-    color: #bd221d;
-  }
-  .indexUp {
-    color: #1dbd52;
-  }
+}
+.indexDown {
+  color: #bd221d;
+}
+
+.indexUp {
+  color: #1dbd52;
+}
+
+.price {
+  font-size: 17px;
+  font-weight: 600;
 }
 
 .counter {
-  grid-area: 3 / 1 / -1 / -1;
+  grid-area: 4 / 1 / -1 / -1;
   display: flex;
   justify-content: center;
   align-content: center;

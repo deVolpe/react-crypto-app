@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Line } from 'react-chartjs-2';
 import _ from 'lodash';
@@ -13,7 +13,7 @@ const CardChart = memo(({
 }) => {
   const [data, setData] = useState({});
 
-  useMemo(() => {
+  useCallback(() => {
     service.getHistoricalData(first, second, exchange).then(setData);
   }, [index]);
 

@@ -5,6 +5,7 @@ import { getAllCryptoCards, deleteCard } from '../modules/actions/crypto';
 const mapStateToProps = state => ({
   cryptos: state.cryptos,
   filter: state.filter,
+  error: state.error,
 });
 
 export default connect(

@@ -11,7 +11,7 @@
   max-width: 480px;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   display: grid;
-  grid-template: 50px auto 30px / 1fr 2fr;
+  grid-template: 50px auto repeat(2, 30px) / 1fr 2fr;
 }
 
 .loading {
