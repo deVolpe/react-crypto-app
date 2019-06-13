@@ -7,7 +7,7 @@
     "start": "cross-env NODE_ENV=production node server",
     "server": "cross-env NODE_ENV=development node server",
     "devServer": "cross-env NODE_ENV=development nodemon server",
-    "build": "webpack --config ./config/webpack/webpack.prod.conf.js --progress",
+    "build": "webpack --config ./client/config/webpack/webpack.prod.conf.js --progress",
     "lint": "./node_modules/.bin/eslint ./ --fix"
   },
   "repository": {

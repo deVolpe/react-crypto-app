@@ -11,7 +11,7 @@ const prodConfig = {
   mode: 'production',
   output: {
     filename: `${baseConfig.externals.paths.assets}js/[name].[hash].js`,
-    path: '../../../build',
+    path: baseConfig.externals.paths.build,
     publicPath: '/',
   },
   module: {
@@ -46,6 +46,19 @@ const prodConfig = {
           test: /[\\/]node_modules[\\/]/,
           priority: 10,
           reuseExistingChunk: true,
+          filename: `${baseConfig.externals.paths.assets}js/vendors.[hash].js`,
+        },
+        react: {
+          test: /[\\/]node_modules[\\/](react(-dom|-router|-redux)?(-dom)?|redux(-thunk)?|prop-types)[\\/]/,
+          priority: 20,
+          reuseExistingChunk: true,
+          filename: `${baseConfig.externals.paths.assets}js/react.[hash].js`,
+        },
+        lodash: {
+          test: /[\\/]node_modules[\\/]lodash[\\/]/,
+          priority: 15,
+          reuseExistingChunk: true,
+          filename: `${baseConfig.externals.paths.assets}js/lodash.[hash].js`,
         },
         default: {
           minChunks: 2,

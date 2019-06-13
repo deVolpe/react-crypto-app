@@ -11,5 +11,5 @@ build
 dist
 
 # Db config
-config/database/keys.dev.js
-config/database/keys.prod.js
+keys.dev.js
+server/database/keys.prod.js
