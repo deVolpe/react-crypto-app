@@ -5,8 +5,8 @@ const history = require('connect-history-api-fallback');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
-const app = require('./app');
-const config = require('./config/webpack/webpack.dev.conf');
+const app = require('./server/app');
+const config = require('./client/config/webpack/webpack.dev.conf');
 
 const port = process.env.PORT || 5000;
 const env = process.env.NODE_ENV || 'production';
@@ -34,7 +34,9 @@ if (env === 'production') {
   app.use(require('morgan')('combined'));
   app.use(express.static(path.join(__dirname, 'build')));
   app.get('*', (req, res) => {
-    res.sendFile('index.html', { root: path.join(__dirname, 'build') });
+    res.sendFile('index.html', { root: path.join(__dirname, 'build') }, (err) => {
+
+    });
   });
 }
 

@@ -11,7 +11,7 @@ const prodConfig = {
   mode: 'production',
   output: {
     filename: `${baseConfig.externals.paths.assets}js/[name].[hash].js`,
-    path: baseConfig.externals.paths.build,
+    path: '../../../build',
     publicPath: '/',
   },
   module: {

@@ -7,7 +7,7 @@ const authRoutes = require('./routes/auth');
 const mainRoutes = require('./routes/main');
 const newsRoutes = require('./routes/news');
 const topRoutes = require('./routes/top');
-const keys = require('./config/database/keys');
+const keys = require('./database/keys');
 
 const app = express();
 

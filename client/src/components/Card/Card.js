@@ -107,7 +107,7 @@ export default class Card extends PureComponent {
         </span>
         {render(this.state)}
         <div className={styles.data}>
-          <span>
+          <span className={styles.price}>
             {secondCoinSymbol} {round(currPrice * count, 12)}
           </span>
         </div>
