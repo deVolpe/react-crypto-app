@@ -48,6 +48,7 @@
     "chart.js": "^2.8.0",
     "classnames": "^2.2.6",
     "clean-webpack-plugin": "^2.0.2",
+    "connect-history-api-fallback": "^1.6.0",
     "copy-webpack-plugin": "^5.0.3",
     "cors": "^2.8.5",
     "css-mqpacker": "^7.0.0",

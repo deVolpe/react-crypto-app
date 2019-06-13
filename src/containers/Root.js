@@ -13,7 +13,7 @@ if (localStorage.jwtToken) {
   const decoded = jwtDecode(localStorage.jwtToken);
   const currentTime = Date.now() / 1000;
 
-  if (decoded.exp && decoded.exp < currentTime) {
+  if (decoded.exp < currentTime) {
     store.dispatch(logout());
     window.location.pathname = '/auth/login';
   }

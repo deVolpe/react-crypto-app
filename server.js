@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const express = require('express');
 const path = require('path');
+const history = require('connect-history-api-fallback');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
@@ -13,6 +14,7 @@ const env = process.env.NODE_ENV || 'production';
 if (env === 'development') {
   const compiler = webpack(config);
   app.use(require('morgan')('dev'));
+  app.use(history());
   app.use(
     webpackDevMiddleware(compiler, {
       noInfo: true,
