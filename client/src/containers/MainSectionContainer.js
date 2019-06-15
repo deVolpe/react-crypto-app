@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { getAllCryptoCards } from '../modules/actions/crypto';
 import MainSection from '../components/MainSection';
 
 const mapStateToProps = state => ({
@@ -8,5 +7,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getAllCryptoCards },
+  null,
 )(MainSection);

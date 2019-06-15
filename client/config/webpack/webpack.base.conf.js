@@ -46,7 +46,7 @@ module.exports = {
         },
       },
       {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        test: /\.(woff2?|eot|ttf|otf)$/,
         loader: 'file-loader',
         options: {
           name: '[name].[hash:base64:5].[ext]',

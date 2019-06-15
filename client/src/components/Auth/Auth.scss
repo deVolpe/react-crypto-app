@@ -1,3 +1,5 @@
+@import '../App/styleVariables';
+
 .auth {
   grid-area: 2 / 1 / span 1 / -1;
   margin: auto;
@@ -12,6 +14,44 @@
   padding: 45px;
   text-align: center;
   z-index: 1;
+}
+
+.input {
+  background: $input_color;
+  margin: $input_margin;
+  box-sizing: border-box;
+  &::placeholder {
+    opacity: 1;
+    transition: all 300ms ease;
+  }
+  &:focus::placeholder {
+    opacity: 0;
+    transition: all 300ms ease;
+  }
+}
+
+.button {
+  text-transform: uppercase;
+  color: #ffffff;
+  background: $style_color;
+  &:focus,
+  &:active,
+  &:hover {
+
+    background: $buttonStyle;
+  }
+}
+
+.message {
+  margin: 15px 0 0;
+  color: $figcaption_style;
+  font-size: 12px;
+  .link {
+    display: inline-block;
+    color: $style_color;
+    font-size: inherit;
+    text-transform: capitalize;
+  }
 }
 
 @media (max-width: 479px) {

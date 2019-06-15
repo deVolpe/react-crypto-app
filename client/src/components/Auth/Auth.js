@@ -5,9 +5,21 @@ import styles from './Auth.scss';
 
 const Auth = ({ children }) => (
   <div className={styles.auth}>
-    <div className={styles.form}>{children}</div>
+    <form className={styles.form}>{children}</form>
   </div>
 );
+
+Auth.defaultProps = {
+  push: () => {},
+  url: '',
+};
+
+Auth.propTypes = {
+  signIn: PropTypes.func.isRequired,
+  error: PropTypes.objectOf(PropTypes.string).isRequired,
+  push: PropTypes.func,
+  url: PropTypes.string,
+};
 
 Auth.propTypes = {
   children: PropTypes.arrayOf(PropTypes.element).isRequired,

@@ -1,7 +1,7 @@
 import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { SelectCoin, SelectExchange } from '../../hoc-components/ItemSelect';
+import { SelectCoin, SelectExchange } from '../../hoc-components/SelectItem/ItemSelect';
 import InvalidError from '../../pages/InvalidError';
 
 import styles from './SelectForm.scss';

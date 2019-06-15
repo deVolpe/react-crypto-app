@@ -49,7 +49,7 @@ const prodConfig = {
           filename: `${baseConfig.externals.paths.assets}js/vendors.[hash].js`,
         },
         react: {
-          test: /[\\/]node_modules[\\/](react(-dom|-router|-redux)?(-dom)?|redux(-thunk)?|prop-types)[\\/]/,
+          test: /[\\/]node_modules[\\/](react(-dom|-router|-redux)?(-dom)?|redux(-thunk)?)[\\/]/,
           priority: 20,
           reuseExistingChunk: true,
           filename: `${baseConfig.externals.paths.assets}js/react.[hash].js`,

@@ -57,7 +57,7 @@ class CryptoCompareService {
    */
   getCoinPrices = async (coin, market) => {
     const res = await api(
-      `price?fsym=${coin}&tsyms=${_.values(data.usdTokens).join(
+      `price?fsym=${coin}&tsyms=${_.values(data.currencies).join(
         ',',
       )}&e=${market}`,
     );

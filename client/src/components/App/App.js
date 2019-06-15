@@ -9,6 +9,7 @@ import MainSection from '../../containers/MainSectionContainer';
 import Auth from '../Auth';
 import Login from '../../containers/LoginContainer';
 import Register from '../../containers/RegisterContainer';
+import PageError from '../../pages/PageError';
 import { ServiceContextProvider } from './ServiceContext';
 import CryptoCompareService from '../../services/cryptocompare-service';
 
@@ -35,7 +36,7 @@ const App = ({ auth }) => (
         />
         <Route
           path="/main"
-          render={({ match }) => <MainSection match={match} />}
+          render={({ match: { path } }) => <MainSection path={path} />}
         />
         <Route
           path="/auth"
@@ -57,6 +58,12 @@ const App = ({ auth }) => (
               />
             </Auth>
           )}
+        />
+        <Route
+          path="/lelo"
+          render={() => {
+            <PageError />;
+          }}
         />
         <Footer>
           <Logo auth={auth} />

@@ -11,7 +11,8 @@ import _ from 'lodash';
 export default function getFilteredCardsByTerm(cards, term) {
   if (_.isEmpty(term)) return cards;
 
-  const _term = term.trim();
+  const _term = _.lowerCase(term.trim());
+
 
   const _cards = cards.filter((card) => {
     const { firstCoin, secondCoin, exchange } = card;

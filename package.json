@@ -8,6 +8,7 @@
     "server": "cross-env NODE_ENV=development node server",
     "devServer": "cross-env NODE_ENV=development nodemon server",
     "build": "webpack --config ./client/config/webpack/webpack.prod.conf.js --progress",
+    "test:client": "jest --config ./client/config/jest/jest.config.js",
     "lint": "./node_modules/.bin/eslint ./ --fix"
   },
   "repository": {
@@ -68,6 +69,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-chartjs-2": "^2.7.6",
+    "react-compose": "^2.0.0",
     "react-dom": "^16.8.6",
     "react-hot-loader": "^4.9.0",
     "react-redux": "^7.0.1",
@@ -101,6 +103,8 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.0",
     "file-loader": "^3.0.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.8.0",
     "node-sass": "^4.12.0",
     "nodemon": "^1.19.1",
     "postcss-loader": "^3.0.0",

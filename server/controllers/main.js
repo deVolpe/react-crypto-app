@@ -1,6 +1,6 @@
 const { isEmpty } = require('lodash');
 
-const Crypto = require('../models/Crypto');
+const Crypto = require('../models/Card');
 
 module.exports = {
   getAll(req, res) {
