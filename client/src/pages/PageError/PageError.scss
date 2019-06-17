@@ -1,0 +1,19 @@
+.page {
+  display: flex;
+  justify-content: center;
+  padding: 50px;
+}
+
+.message {
+  font: {
+    size: 30px;
+  }
+  color: #4e4c4c98;
+  opacity: 0.4;
+}
+
+@media (max-width: 479px) {
+  .message {
+    font-size: 25px;
+  }
+}
