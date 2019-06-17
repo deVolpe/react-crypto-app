@@ -5,10 +5,11 @@
 
 # Node
 node_modules
-server
 
 # Build & test
 build
 dist
+__tests__
 
-
+# Db config
+server/database/keys._dev.js

@@ -23,7 +23,7 @@ const DropMenu = () => {
           <MenuSVG />
         </div>
       </div>
-      <div className={cx(styles.menu, styles.hide)} id="drop-menu">
+      <div className={cx(styles.menu, { hide: true })} id="drop-menu">
         <Label />
         <ServiceContextConsumer>
           {service => <SelectForm service={service} />}

@@ -181,7 +181,13 @@ a:active {
   display: grid;
   grid: {
     template-columns: repeat(4, 1fr);
-    template-rows: minmax(50px, 100px) auto 80px;
+    template-rows: minmax(50px, 100px) 50px auto 80px;
   }
   background: $background;
+}
+
+@media (max-width: 479px) {
+  .App {
+    grid-template-rows: minmax(50px, 100px) 100px auto 80px;
+  }
 }

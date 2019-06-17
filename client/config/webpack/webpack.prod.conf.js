@@ -44,12 +44,17 @@ const prodConfig = {
       cacheGroups: {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
+          priority: 5,
+          reuseExistingChunk: true,
+        },
+        axios: {
+          test: /[\\/]node_modules[\\/]axios[\\/]/,
           priority: 10,
           reuseExistingChunk: true,
-          filename: `${baseConfig.externals.paths.assets}js/vendors.[hash].js`,
+          filename: `${baseConfig.externals.paths.assets}js/axios.[hash].js`,
         },
         react: {
-          test: /[\\/]node_modules[\\/](react(-dom|-router|-redux)?(-dom)?|redux(-thunk)?)[\\/]/,
+          test: /[\\/]node_modules[\\/](react(-dom|-router|-redux|-select|-chartjs-2)?(-dom)?|redux(-thunk)?)[\\/]/,
           priority: 20,
           reuseExistingChunk: true,
           filename: `${baseConfig.externals.paths.assets}js/react.[hash].js`,

@@ -4,7 +4,7 @@ const bodyParse = require('body-parser');
 const passport = require('passport');
 
 const authRoutes = require('./routes/auth');
-const mainRoutes = require('./routes/main');
+const cardsRoutes = require('./routes/cards');
 const keys = require('./database/keys');
 
 const app = express();
@@ -26,6 +26,6 @@ app.use(bodyParse.json());
 app.use(require('cors')());
 
 app.use('/api/auth', authRoutes);
-app.use('/api/main', mainRoutes);
+app.use('/api/cards', cardsRoutes);
 
 module.exports = app;

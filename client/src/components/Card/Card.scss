@@ -3,7 +3,7 @@
 .label {
   grid-area: 1 / 1 / span 1 / -1;
   font-size: 26px;
-  padding: 10px;
+  // padding: 10px;
   position: relative;
   .img {
     max-width: 30px;
@@ -52,10 +52,13 @@
   color: #1dbd52;
 }
 
-.price {
+.data {
+  grid-area: 3 / 1 / span 1 / -1;
   display: flex;
   align-items: center;
-  justify-content: center;
+}
+.price {
+  justify-content: flex-start;
   font-size: 17px;
   font-weight: 600;
 }

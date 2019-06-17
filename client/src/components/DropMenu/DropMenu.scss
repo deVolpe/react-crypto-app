@@ -16,10 +16,15 @@
   padding: 10px;
   background: #ffffff;
   z-index: 7;
+  transition: all 300ms ease;
+  transform: translateY(0);
 }
 
 .hide {
-  display: none;
+  transition: all 300ms ease;
+  transform: translateY(-100px);
+  opacity: 0;
+  z-index: -1;
 }
 
 @media (max-width: 479px) {

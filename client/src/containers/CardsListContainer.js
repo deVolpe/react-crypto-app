@@ -1,11 +1,10 @@
 import { connect } from 'react-redux';
 import CardsList from '../components/CardsList';
-import { getAllCryptoCards, deleteCard } from '../modules/actions/crypto';
+import { getAllCryptoCards, deleteCard } from '../modules/actions/cards';
 
 const mapStateToProps = state => ({
   cryptos: state.cryptos,
   filter: state.filter,
-  error: state.error,
 });
 
 export default connect(
