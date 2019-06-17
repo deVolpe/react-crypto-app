@@ -12,4 +12,4 @@ dist
 __tests__
 
 # Db config
-server/database/keys._dev.js
+
