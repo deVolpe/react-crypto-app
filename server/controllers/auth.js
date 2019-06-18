@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/User');
-const keys = require('../database/keys');
+const keys = require('../config/keys');
 const validateRegisterInput = require('./validators/register');
 const validateLoginInput = require('./validators/login');
 const errorHandler = require('../utils/errorHandler');

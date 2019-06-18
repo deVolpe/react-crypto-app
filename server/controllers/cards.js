@@ -1,19 +1,18 @@
 const { isEmpty } = require('lodash');
 
-const Crypto = require('../models/Card');
+const Card = require('../models/Card');
 
 module.exports = {
-  getAllCards(req, res) {
-    Crypto.find({
-      user: req.user.id,
-    })
-      .then((cards) => {
-        if (isEmpty(cards)) {
-          return res.status(404).json({ message: 'No cards yet' });
-        }
-        return res.json(cards);
-      })
-      .catch(console.error);
+  async getAllCards(req, res) {
+    try {
+      const cards = await Card.find({ user: req.user });
+      if (isEmpty(cards)) {
+        return res.status(401).json({ message: 'No cards yet' });
+      }
+      return res.json(cards);
+    } catch (err) {
+      errorHandler(res, err);
+    }
   },
 
   async createCard(req, res) {
@@ -24,16 +23,14 @@ module.exports = {
         exchange: req.body.exchange,
         user: req.user.id,
       };
-      const candidate = await Crypto.findOne(card);
+      const candidate = await Card.findOne(card);
 
       if (candidate) {
         return res.status(409).json({
           conflict: 'Card already exists',
         });
       }
-
-      const newCard = await Crypto.create(card);
-
+      const newCard = await Card.create(card);
       return res.json(newCard);
     } catch (err) {
       errorHandler(res, err);
@@ -41,7 +38,7 @@ module.exports = {
   },
 
   deleteCard(req, res) {
-    Crypto.findByIdAndRemove(req.body.id)
+    Card.findByIdAndRemove(req.body.id)
       .then(data => res.status(200).json(data._id))
       .catch(console.error);
   },

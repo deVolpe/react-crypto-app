@@ -14,7 +14,6 @@ export default (state = initialState, action) => {
       return { ...state, cards: action.payload };
 
     case SET_NEW_CARD:
-      console.log(action.payload);
       return { ...state, cards: [...state.cards, action.payload] };
 
     case DELETE_SELECTED_CARD:

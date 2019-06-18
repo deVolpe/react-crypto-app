@@ -18,6 +18,9 @@ export default class CardsList extends PureComponent {
     filter: PropTypes.shape({
       term: PropTypes.string,
     }).isRequired,
+    error: PropTypes.shape({
+      message: PropTypes.string,
+    }).isRequired,
     deleteCard: PropTypes.func.isRequired,
     getAllCryptoCards: PropTypes.func.isRequired,
   };
