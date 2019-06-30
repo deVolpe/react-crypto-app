@@ -1,26 +1,26 @@
 module.exports = {
   verbose: true,
-  rootDir: '../../',
   moduleNameMapper: {
     '\\.(png|jpe?g|gif|svg|woff2?|eot|(t|o)tf)$':
-      '<rootDir>/config/jest/__mocks__/fileMock.js',
-    '\\.(s?css)$': 'identity-oj-proxy',
+      '<rootDir>config/jest/__mocks__/fileMock.js',
+    '\\.(s?css)$': 'identity-obj-proxy',
   },
+  rootDir: '../../',
   roots: [
-    '<rootDir>/src/components/',
-    '<rootDir>/src/containers/',
-    '<rootDir>/src/hoc-components/',
-    '<rootDir>/src/modules/',
-    '<rootDir>/src/pages/',
-    '<rootDir>/src/service/',
-    '<rootDir>/src/utils/',
+    '<rootDir>src/components/',
   ],
   collectCoverageFrom: [
-    '<rootDir>/src/components/**/*.js',
-    '<rootDir>/src/containers/*.js',
-    '<rootDir>/src/hoc-components/**/*.js',
-    '<rootDir>/src/modules/**/*.js',
-    '<rootDir>/src/pages/**/*.js',
-    '<rootDir>/src/utils/*.js',
+    '<rootDir>src/components/**/*.js',
   ],
+  modulePathIgnorePatterns: ['<rootDir>build/', '<rootDir>node_modules/'],
+  coverageDirectory: '<rootDir>coverage/',
+  coveragePathIgnorePatterns: ['<rootDir>src/modules/store.js'],
+  coverageThreshold: {
+    global: {
+      branches: 89,
+      functions: 89,
+      lines: 89,
+      statements: 89,
+    },
+  },
 };

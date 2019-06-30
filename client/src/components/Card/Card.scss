@@ -17,7 +17,7 @@
     background: inherit;
     position: absolute;
     padding: 0;
-    right: 0.6rem;
+    right: 0.1rem;
     width: 10%;
     & svg {
       transform: scale(1);
@@ -32,6 +32,10 @@
       transition: transform 200ms ease;
     }
   }
+}
+
+.loading {
+  grid-area: 2 / 1 / span 1 / -1;
 }
 
 .index {
@@ -56,11 +60,11 @@
   grid-area: 3 / 1 / span 1 / -1;
   display: flex;
   align-items: center;
-}
-.price {
-  justify-content: flex-start;
-  font-size: 17px;
-  font-weight: 600;
+  .price {
+    justify-content: flex-start;
+    font-size: 17px;
+    font-weight: 600;
+  }
 }
 
 .counter {
@@ -84,15 +88,20 @@
       max-height: 15px;
     }
   }
+  .data {
+    justify-content: center;
+    grid-area: 2 / 2 / span 1 / -1;
+  }
   .price {
     font: {
       size: 18px;
       weight: 400;
     }
-    grid-column: 1 / -1;
-    .index {
-      font-size: 13px;
-    }
+  }
+  .index {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
   }
   .counter {
     grid-row-start: 4;

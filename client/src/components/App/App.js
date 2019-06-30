@@ -14,79 +14,79 @@ import Navbar from '../NavBar';
 import SearchPanel from '../../containers/SearchPanelContainer';
 import DropMenu from '../DropMenu';
 import CardsList from '../../containers/CardsListContainer';
-import PageError from '../../pages/PageError';
+// import PageError from '../../pages/PageError';
 import { ServiceContextProvider } from './ServiceContext';
 import CryptoCompareService from '../../services/cryptocompare-service';
 
 import styles from './App.scss';
 
-
-const service = new CryptoCompareService();
-
-const App = ({ auth }) => (
-  <Router>
-    <ServiceContextProvider value={service}>
-      <div className={styles.App}>
-        <Header>
-          <Logo auth={auth} />
-        </Header>
-        <Route
-          exact
-          path="/"
-          render={() => (auth.isAuthenticated ? (
-            <Redirect to="/main/cards" />
-          ) : (
-            <Redirect to="/auth/login" />
-          ))
-          }
-        />
-        <Route
-          path="/main"
-          render={({ match: { path } }) => (
-            <>
-              <Panel>
-                <Navbar />
-                <SearchPanel />
-                <DropMenu />
-              </Panel>
-              <Main>
+const App = ({ auth }) => {
+  const service = new CryptoCompareService();
+  return (
+    <Router>
+      <ServiceContextProvider value={service}>
+        <div className={styles.App}>
+          <Header>
+            <Logo auth={auth} />
+          </Header>
+          <Route
+            exact
+            path="/"
+            render={() => (auth.isAuthenticated ? (
+              <Redirect to="/main/cards" />
+            ) : (
+              <Redirect to="/auth/login" />
+            ))
+            }
+          />
+          <Route
+            path="/main"
+            render={({ match: { path } }) => (
+              <>
+                <Panel>
+                  <Navbar />
+                  <SearchPanel />
+                  <DropMenu />
+                </Panel>
+                <Main>
+                  <Route
+                    exact
+                    path={`${path}/cards`}
+                    render={() => <CardsList />}
+                  />
+                </Main>
+              </>
+            )}
+          />
+          <Route
+            path="/auth"
+            render={({ match: { path, url } }) => (
+              <Auth>
                 <Route
                   exact
-                  path={`${path}/cards`}
-                  render={() => (<CardsList />)}
+                  path={`${path}/login`}
+                  render={({ history: { push } }) => (
+                    <Login push={push} url={url} />
+                  )}
                 />
-              </Main>
-            </>
-          )}
-        />
-        <Route
-          path="/auth"
-          render={({ match: { path, url } }) => (
-            <Auth>
-              <Route
-                exact
-                path={`${path}/login`}
-                render={({ history: { push } }) => (
-                  <Login push={push} url={url} />
-                )}
-              />
-              <Route
-                exact
-                path={`${path}/register`}
-                render={({ history: { push } }) => (
-                  <Register push={push} url={url} />
-                )}
-              />
-            </Auth>
-          )}
-        />
-        <Footer>
-          <Logo auth={auth} />
-        </Footer>
-      </div>
-    </ServiceContextProvider>
-  </Router>
-);
+                <Route
+                  exact
+                  path={`${path}/register`}
+                  render={({ history: { push } }) => (
+                    <Register push={push} url={url} />
+                  )}
+                />
+              </Auth>
+            )}
+          />
+          <Footer>
+            <Logo auth={auth} />
+          </Footer>
+        </div>
+      </ServiceContextProvider>
+    </Router>
+  );
+};
 
 App.propTypes = {
   auth: PropTypes.shape({

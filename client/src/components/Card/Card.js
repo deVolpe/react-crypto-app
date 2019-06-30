@@ -4,6 +4,7 @@ import classnames from 'classnames/bind';
 import { round } from 'lodash';
 
 import getImgUrl from '../../utils/getImageUrl';
+import Spinner from '../Spinner';
 import CrossSVG from '../CrossSVG';
 import styles from './Card.scss';
 
@@ -34,11 +35,16 @@ export default class Card extends PureComponent {
     currIndex: 0.0,
     imgSrc: '',
     count: 1,
+    isLoad: true,
   };
 
 
   componentDidMount() {
-    this.loadData();
+    this.setState(({ isLoad }) => {
+      this.loadData();
+      return { isLoad: !isLoad };
+    });
+
     this.interval = setInterval(this.loadData, 5000);
   }
 
@@ -78,8 +84,13 @@ export default class Card extends PureComponent {
       currIndex,
       imgSrc,
       count,
+      isLoad,
     } = this.state;
     const { handleDeleteCard, render } = this.props;
+    const loading = <div className={styles.loading}><Spinner /></div>;
+    if (isLoad) {
+      return loading;
+    }
     return (
       <>
         <div className={styles.label}>

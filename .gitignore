@@ -9,7 +9,6 @@ node_modules
 # Build & test
 build
 dist
-__tests__
 
 # Db config
 server/config/keys._dev.js
