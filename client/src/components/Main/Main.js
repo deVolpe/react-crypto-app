@@ -1,19 +1,15 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
-import isEmpty from 'lodash/isEmpty';
 
-import NoContent from '../../pages/NoContent';
+import ErrorBoundary from '../../pages/ErrorBoundary';
 
 import styles from './Main.scss';
 
-const Main = memo(({ error: { message }, children }) => {
-  const outcome = !isEmpty(message) ? <NoContent message={message} /> : children;
-  return (
-    <main className={styles.main}>
-      {outcome}
-    </main>
-  );
-});
+const Main = memo(({ error: { message }, children }) => (
+  <main className={styles.main}>
+    <ErrorBoundary message={message}>{children}</ErrorBoundary>
+  </main>
+));
 
 Main.defaultProps = {
   children: null,

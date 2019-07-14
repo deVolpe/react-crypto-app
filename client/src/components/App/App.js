@@ -14,7 +14,6 @@ import Navbar from '../NavBar';
 import SearchPanel from '../../containers/SearchPanelContainer';
 import DropMenu from '../DropMenu';
 import CardsList from '../../containers/CardsListContainer';
-// import PageError from '../../pages/PageError';
 import { ServiceContextProvider } from './ServiceContext';
 import CryptoCompareService from '../../services/cryptocompare-service';
 

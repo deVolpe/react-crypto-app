@@ -12,8 +12,13 @@ module.exports = {
   collectCoverageFrom: [
     '<rootDir>src/components/**/*.js',
   ],
+  setupFilesAfterEnv: ['<rootDir>config/jest/jest.setup.js'],
+  transform: {
+    '^.+\\.jsx?$': 'babel-jest',
+  },
   modulePathIgnorePatterns: ['<rootDir>build/', '<rootDir>node_modules/'],
   coverageDirectory: '<rootDir>coverage/',
+  snapshotSerializers: ['enzyme-to-json/serializer'],
   coveragePathIgnorePatterns: ['<rootDir>src/modules/store.js'],
   coverageThreshold: {
     global: {

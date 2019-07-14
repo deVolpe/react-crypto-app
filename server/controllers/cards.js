@@ -5,7 +5,7 @@ const Card = require('../models/Card');
 module.exports = {
   async getAllCards(req, res) {
     try {
-      const cards = await Card.find({ user: req.user });
+      const cards = await Card.find({ user: req.user }).lean();
       if (isEmpty(cards)) {
         return res.status(401).json({ message: 'No cards yet' });
       }
@@ -23,7 +23,7 @@ module.exports = {
         exchange: req.body.exchange,
         user: req.user.id,
       };
-      const candidate = await Card.findOne(card);
+      const candidate = await Card.findOne(card).lean();
 
       if (candidate) {
         return res.status(409).json({
@@ -37,9 +37,14 @@ module.exports = {
     }
   },
 
-  deleteCard(req, res) {
-    Card.findByIdAndRemove(req.body.id)
-      .then(data => res.status(200).json(data._id))
-      .catch(console.error);
+  async deleteCard(req, res) {
+    try {
+      const del = await Card.findByIdAndRemove(req.body, {
+        new: true,
+      });
+      return res.json(del._id);
+    } catch (err) {
+      errorHandler(res, err);
+    }
   },
 };
