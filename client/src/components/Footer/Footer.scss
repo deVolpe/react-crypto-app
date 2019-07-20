@@ -1,5 +1,6 @@
 .Footer {
   grid-area: 4 / 1 / -1 / -1;
+
   .container {
     margin: 0 5vw;
     width: 90vw;
@@ -7,21 +8,25 @@
     align-items: center;
     position: relative;
   }
+
   .logo {
     transform: scale(0.8);
   }
+
   .about {
-    color: #ffffff;
+    color: #fff;
     text-decoration: underline;
     font-size: 12px;
     position: absolute;
     right: 0;
   }
+
   @media (max-width: 479px) {
     .logo {
       font-size: 25px;
       padding: 0;
     }
+
     .about {
       font-size: 10px;
       display: block;

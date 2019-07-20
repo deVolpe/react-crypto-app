@@ -16,7 +16,7 @@ describe('App', () => {
     const wrapper = shallow(
       <Provider store={store}>
         <App auth={auth} />
-      </Provider>
+      </Provider>,
     );
 
     expect(wrapper).toMatchSnapshot();
@@ -27,7 +27,7 @@ describe('App', () => {
     const wrapper = shallow(
       <Provider store={store}>
         <App auth={auth} />
-      </Provider>
+      </Provider>,
     );
     expect(wrapper).toMatchSnapshot();
   });

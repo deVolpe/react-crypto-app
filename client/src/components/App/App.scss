@@ -90,6 +90,7 @@ video {
   font: {
     family: 'Open Sans Regular', sans-serif;
   }
+
   vertical-align: baseline;
 }
 
@@ -122,16 +123,16 @@ q {
 }
 
 blockquote {
-  &:before,
-  &:after {
+  &::before,
+  &::after {
     content: '';
     content: none;
   }
 }
 
 q {
-  &:before,
-  &:after {
+  &::before,
+  &::after {
     content: '';
     content: none;
   }
@@ -166,11 +167,12 @@ a:active {
   display: flex;
   justify-content: center;
   align-content: center;
-  color: #ffffff;
+  color: #fff;
   text: {
     decoration: none;
     transform: uppercase;
   }
+
   cursor: pointer;
 }
 
@@ -183,6 +185,7 @@ a:active {
     template-columns: repeat(4, 1fr);
     template-rows: minmax(50px, 100px) 50px auto 80px;
   }
+
   background: $background;
 }
 

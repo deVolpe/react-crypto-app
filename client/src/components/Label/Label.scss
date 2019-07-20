@@ -16,6 +16,7 @@
 
 .normal {
   display: block;
+
   @include fontStyle(15px);
 }
 
@@ -23,9 +24,11 @@
   .label {
     line-height: 25px;
   }
+
   .lineBold {
     @include fontStyle(10px, 600);
   }
+
   .lineNormal {
     @include fontStyle(7px);
   }

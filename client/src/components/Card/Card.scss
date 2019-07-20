@@ -5,28 +5,34 @@
   font-size: 26px;
   // padding: 10px;
   position: relative;
+
   .img {
     max-width: 30px;
     max-height: 23px;
     margin-right: 0.3em;
   }
+
   .pair {
     display: inline-block;
   }
+
   .button {
     background: inherit;
     position: absolute;
     padding: 0;
     right: 0.1rem;
     width: 10%;
+
     & svg {
       transform: scale(1);
       transition: transform 200ms ease;
     }
+
     &:hover svg {
       transform: scale(1.2);
       transition: transform 200ms ease;
     }
+
     &:active svg {
       transform: scale(0.67);
       transition: transform 200ms ease;
@@ -43,11 +49,13 @@
   color: $index_color;
   display: inline-block;
   font-weight: 600;
+
   sub {
-    color: #bbbbbb;
+    color: #bbb;
     font-size: 10px;
   }
 }
+
 .indexDown {
   color: #bd221d;
 }
@@ -60,6 +68,7 @@
   grid-area: 3 / 1 / span 1 / -1;
   display: flex;
   align-items: center;
+
   .price {
     justify-content: flex-start;
     font-size: 17px;
@@ -84,28 +93,34 @@
 @media (max-width: 479px) {
   .label {
     font-size: 20px;
+
     .img {
       max-height: 15px;
     }
   }
+
   .data {
     justify-content: center;
     grid-area: 2 / 2 / span 1 / -1;
   }
+
   .price {
     font: {
       size: 18px;
       weight: 400;
     }
   }
+
   .index {
     display: flex;
     align-items: center;
     font-size: 13px;
   }
+
   .counter {
     grid-row-start: 4;
   }
+
   .input {
     width: 20vw;
   }

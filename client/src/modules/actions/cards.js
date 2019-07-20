@@ -32,7 +32,7 @@ export const deleteCard = id => (dispatch) => {
     .then((res) => {
       dispatch({
         type: DELETE_SELECTED_CARD,
-        payload: res.data,
+        payload: res.data._id,
       });
     })
     .catch((err) => {

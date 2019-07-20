@@ -1,6 +1,7 @@
 const { isEmpty } = require('lodash');
 
 const Card = require('../models/Card');
+const errorHandler = require('../utils/errorHandler');
 
 module.exports = {
   async getAllCards(req, res) {
@@ -23,7 +24,9 @@ module.exports = {
         exchange: req.body.exchange,
         user: req.user.id,
       };
-      const candidate = await Card.findOne(card).lean();
+      const candidate = await Card.findOne(card)
+        .lean()
+        .exec();
 
       if (candidate) {
         return res.status(409).json({
@@ -39,10 +42,12 @@ module.exports = {
 
   async deleteCard(req, res) {
     try {
-      const del = await Card.findByIdAndRemove(req.body, {
+      const doc = await Card.findByIdAndRemove(req.body.id, {
         new: true,
-      });
-      return res.json(del._id);
+      })
+        .lean()
+        .exec();
+      return res.json(doc).end();
     } catch (err) {
       errorHandler(res, err);
     }

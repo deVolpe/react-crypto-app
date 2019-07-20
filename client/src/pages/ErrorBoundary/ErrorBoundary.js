@@ -17,10 +17,8 @@ export default class ErrorBoundary extends PureComponent {
     hasError: false,
   };
 
-  componentDidMount() {
-    if (this.props.message) {
-      this.setState({ hasError: true });
-    }
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
   }
 
   render() {

@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const baseConfig = require('./webpack.base.conf');
 
@@ -27,7 +27,7 @@ const prodConfig = {
   optimization: {
     minimizer: [
       new OptimizeCssAssetsWebpackPlugin({}),
-      new UglifyJsPlugin({
+      new TerserPlugin({
         cache: true,
         parallel: true,
       }),
@@ -46,25 +46,33 @@ const prodConfig = {
           test: /[\\/]node_modules[\\/]/,
           priority: 5,
           reuseExistingChunk: true,
-          filename: `${baseConfig.externals.paths.assets}js/vendors.[chunkhash].js`,
+          filename: `${
+            baseConfig.externals.paths.assets
+          }js/vendors.[chunkhash].js`,
         },
         axios: {
           test: /[\\/]node_modules[\\/]axios[\\/]/,
           priority: 10,
           reuseExistingChunk: true,
-          filename: `${baseConfig.externals.paths.assets}js/axios.[chunkhash].js`,
+          filename: `${
+            baseConfig.externals.paths.assets
+          }js/axios.[chunkhash].js`,
         },
         react: {
           test: /[\\/]node_modules[\\/](react(-dom|-router|-redux|-select|-chartjs-2)?(-dom)?|redux(-thunk)?)|prop-types[\\/]/,
           priority: 20,
           reuseExistingChunk: true,
-          filename: `${baseConfig.externals.paths.assets}js/react.[chunkhash].js`,
+          filename: `${
+            baseConfig.externals.paths.assets
+          }js/react.[chunkhash].js`,
         },
         lodash: {
           test: /[\\/]node_modules[\\/]lodash[\\/]/,
           priority: 15,
           reuseExistingChunk: true,
-          filename: `${baseConfig.externals.paths.assets}js/lodash.[chunkhash].js`,
+          filename: `${
+            baseConfig.externals.paths.assets
+          }js/lodash.[chunkhash].js`,
         },
         default: {
           minChunks: 2,

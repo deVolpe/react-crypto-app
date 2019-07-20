@@ -12,13 +12,15 @@
   align-items: center;
   flex: 1;
   font-size: 14px;
+
   .link {
     display: inline-block;
     text-align: center;
     color: $style_color;
     position: relative;
     text-transform: capitalize;
-    &:after {
+
+    &::after {
       display: block;
       content: '';
       background-color: $style_color;
@@ -29,8 +31,9 @@
       transition: width 0.3s;
       transform: translateX(-50%);
     }
-    &:hover:after,
-    &:focus:after {
+
+    &:hover::after,
+    &:focus::after {
       width: 100%;
     }
   }
@@ -40,6 +43,7 @@
   .NavBar {
     grid-column: 1 / -1;
   }
+
   .list {
     font-size: 12px;
   }

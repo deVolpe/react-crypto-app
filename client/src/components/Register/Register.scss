@@ -8,8 +8,9 @@
 
 .button {
   text-transform: uppercase;
-  color: #ffffff;
+  color: #fff;
   background: $style_color;
+
   &:focus,
   &:active,
   &:hover {
@@ -21,6 +22,7 @@
   margin: 15px 0 0;
   color: $figcaption_style;
   font-size: 12px;
+
   .link {
     display: inline-block;
     color: $style_color;

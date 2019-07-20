@@ -13,13 +13,14 @@ const Main = memo(({ error: { message }, children }) => (
 
 Main.defaultProps = {
   children: null,
+  error: null,
 };
 
 Main.propTypes = {
   children: PropTypes.element,
   error: PropTypes.shape({
     message: PropTypes.string,
-  }).isRequired,
+  }),
 };
 
 export default Main;

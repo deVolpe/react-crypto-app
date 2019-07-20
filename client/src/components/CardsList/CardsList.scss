@@ -4,12 +4,12 @@
 }
 
 .card {
-  background: #ffffff;
+  background: #fff;
   margin: 0.8em;
-  padding:10px;
+  padding: 10px;
   min-width: 200px;
   min-height: 200px;
-  max-width: 480px;
+  max-width: 460px;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   display: grid;
   grid-template: 50px auto repeat(2, 30px) / 1fr 2fr;
@@ -20,10 +20,12 @@
     grid-template-rows: 50px 30px auto 30px;
     min-width: 250px;
   }
+
   .list {
     justify-content: center;
     padding: 0;
   }
+
   .loading {
     grid-area: 2 / 1 / span 2 / -1;
   }

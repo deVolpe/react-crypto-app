@@ -71,9 +71,7 @@ const App = ({ auth }) => {
                 <Route
                   exact
                   path={`${path}/register`}
-                  render={({ history: { push } }) => (
-                    <Register push={push} url={url} />
-                  )}
+                  render={({ history: { push } }) => <Register push={push} url={url} />}
                 />
               </Auth>
             )}
